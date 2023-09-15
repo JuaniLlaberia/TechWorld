@@ -2,8 +2,44 @@ const Job = require('../models/jobsModel');
 
 exports.getAllJobs = async (req, res) => {
   try {
-    //Get data from database
-    const jobs = await Job.find();
+    //Filtering fields from URL
+    const filteredObj = { ...req.query };
+    const fieldsToExclude = ['sort', 'select', 'page', 'limit', 'search'];
+    fieldsToExclude.forEach(el => delete filteredObj[el]);
+
+    let queryString = JSON.stringify(filteredObj);
+    queryString = queryString.replace(/gte|gt|lte|lt/, match => `$${match}`);
+
+    //Creating the QUERY
+    let query = Job.find({
+      ...JSON.parse(queryString),
+      //Using search param we can query for jobs that contain str in name
+      name: { $regex: req.query.search || '', $options: 'i' },
+    });
+
+    //Sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.replaceAll(',', ' ');
+      query.sort(sortBy);
+    }
+
+    //Select fields
+    if (req.query.select) {
+      const fields = req.query.select.replaceAll(',', ' ');
+      query.select(fields);
+    }
+
+    //Pagination
+    if (req.query.page) {
+      const page = Number(req.query.page) || 1;
+      const limit = req.query.limit || 10;
+      const skip = (page - 1) * limit;
+
+      query.skip(skip).limit(limit);
+    }
+
+    // Get data from database
+    const jobs = await query;
 
     //Return data
     res.status(200).json({
@@ -25,9 +61,8 @@ exports.getAllJobs = async (req, res) => {
 };
 
 exports.getJob = async (req, res) => {
-  const { id } = req.params;
   try {
-    const job = await Job.findById(id);
+    const job = await Job.findById(req.params.id);
 
     res.status(200).json({
       status: 'success',
@@ -70,9 +105,8 @@ exports.updateJob = async (req, res) => {
 };
 
 exports.deleteJob = async (req, res) => {
-  const { id } = req.params;
   try {
-    await Job.findByIdAndDelete(id);
+    await Job.findByIdAndDelete(req.params.id);
     res.status(200).json({ status: 'success', data: null });
   } catch (err) {
     res.status(400).json({

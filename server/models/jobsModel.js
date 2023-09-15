@@ -65,6 +65,11 @@ const jobsSchema = new mongoose.Schema({
   },
 });
 
+jobsSchema.pre(/^find/, function (next) {
+  this.select('-__v');
+  next();
+});
+
 const Job = mongoose.model('Job', jobsSchema);
 
 module.exports = Job;
