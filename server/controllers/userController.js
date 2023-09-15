@@ -37,8 +37,97 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {};
-exports.deleteUser = async (req, res) => {};
+exports.updateUser = async (req, res, next) => {
+  try {
+    if (req.body.password || req.body.passwordConfirm)
+      return next(new Error('Not allowed to update password in this endpoint'));
 
-exports.getMe = async (req, res) => {};
-exports.updateMe = async (req, res) => {};
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user: updatedUser,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'failed',
+      message: err,
+    });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'failed',
+      message: err,
+    });
+  }
+};
+
+//User interactions
+
+exports.getMe = (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: req.user,
+  });
+};
+
+exports.updateMe = async (req, res) => {
+  //Does not work for passwords (just for information)
+  try {
+    if (req.body.password || req.body.passwordConfirm)
+      throw new Error(
+        'This endpoint is not to update passwords (just user info).'
+      );
+
+    let filteredObj = { ...req.body };
+    const fieldsToRemove = ['_id', 'role', 'savedPosts', 'passwordChangedAt'];
+    fieldsToRemove.forEach(el => delete filteredObj[el]);
+
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredObj, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user: updatedUser,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'failed',
+      message: err.message,
+    });
+  }
+};
+
+exports.deleteMe = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user.id);
+
+    res.status(200).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'failed',
+      message: err.message,
+    });
+  }
+};
