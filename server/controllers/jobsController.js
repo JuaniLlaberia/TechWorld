@@ -73,7 +73,7 @@ exports.getJob = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: 'failed',
-      message: `No job with id: ${id}`,
+      message: `No job with id: ${req.params.id}`,
     });
   }
 };
@@ -111,7 +111,7 @@ exports.deleteJob = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'failed',
-      message: `No job with id: ${id}`,
+      message: `No job with id: ${req.params.id}`,
     });
   }
 };
