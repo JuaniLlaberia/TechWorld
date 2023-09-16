@@ -1,4 +1,5 @@
 const Job = require('../models/jobsModel');
+const User = require('../models/userModel');
 
 exports.getAllJobs = async (req, res) => {
   try {
@@ -115,5 +116,62 @@ exports.deleteJob = async (req, res) => {
       status: 'failed',
       message: `No job with id: ${req.params.id}`,
     });
+  }
+};
+
+//Save job in user favorite
+exports.saveJob = async (req, res, next) => {
+  const postToSave = req.params.id;
+
+  if (req.user.savedPosts.includes(postToSave))
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Post is already saved in this user.',
+    });
+
+  const allSavedPosts = [...req.user.savedPosts, postToSave];
+
+  await User.findByIdAndUpdate(req.user.id, { savedPosts: allSavedPosts });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Saved successfully.',
+  });
+};
+
+exports.unSaveJob = async (req, res) => {
+  try {
+    const newSavedPosts = req.user.savedPosts.filter(
+      job => job.toString('hex') !== req.params.id
+    );
+
+    await User.findByIdAndUpdate(req.user.id, { savedPosts: newSavedPosts });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Unsaved successfully.',
+    });
+  } catch (err) {
+    res.status(404).json({ status: 'failed', message: err });
+  }
+};
+
+//Get all post from a user
+exports.getJobsFromUser = async (req, res) => {
+  try {
+    const jobs = await Job.find({ user: req.params.id });
+    res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
+  } catch (err) {
+    res.status(404).json({ status: 'failed', message: err });
+  }
+};
+
+//Get all the jobs posted by me
+exports.getMyJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({ user: req.user.id });
+    res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
+  } catch (err) {
+    res.status(404).json({ status: 'failed', message: err });
   }
 };

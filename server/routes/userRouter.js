@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const jobsController = require('../controllers/jobsController');
 const authController = require('../controllers/authController');
 
 const router = express.Router();
@@ -20,6 +21,13 @@ router.post(
 router.post('/forgot-password', authController.sendResetPasswordToken);
 router.post('/reset-password/:token', authController.resetPassword);
 
+router.post('/save-post/:id', authController.protect, jobsController.saveJob);
+router.post(
+  '/unsave-post/:id',
+  authController.protect,
+  jobsController.unSaveJob
+);
+
 //Protected to auth - Should it be restricted? or do i want to be able to fetch the users
 router.route('/').get(authController.protect, userController.getUsers);
 
@@ -38,5 +46,7 @@ router
     authController.onlyAdmin,
     userController.deleteUser
   );
+
+router.route('/:id/jobs').get(jobsController.getJobsFromUser);
 
 module.exports = router;
