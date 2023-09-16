@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const { promisify } = require('util');
 const bcrpyt = require('bcrypt');
 
 const User = require('../models/userModel');
+const Jobs = require('../models/jobsModel');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -96,10 +98,114 @@ exports.protect = async (req, res, next) => {
   if (!user) return next(new Error('User does not exist anymore.'));
 
   if (decoded.iat < user.passwordChangedAt.getTime() / 1000)
-    return next(new Error('User does not exist anymore.'));
+    return next(new Error('Password has been changed. Logged in again.'));
 
   req.user = user;
   res.locals.user = user;
 
   next();
+};
+
+exports.postBelongsToUser = async (req, res, next) => {
+  //CHECK THIS IMPLEMENTATION
+  const jobPost = await Jobs.findById(req.params.id).populate('user', 'id');
+
+  if (req.user.role !== 'admin' && jobPost.user.id !== req.user.id) {
+    next(
+      new Error(
+        'This post does not belong to you. You can only delete your own jobs.'
+      )
+    );
+  }
+  next();
+};
+
+exports.onlyAdmin = (req, res, next) => {
+  if (req.user.role !== 'admin')
+    return next(new Error('This route is just for administrators.'));
+  next();
+};
+
+exports.sendResetPasswordToken = async (req, res, next) => {
+  //Check if user exist
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) return next(new Error('No user with this email'));
+  //Create a token
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  //Store token in DB
+  user.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+  user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  await user.save({ validateBeforeSave: false });
+
+  //Send token email
+
+  //Send token in res
+  res.status(200).json({
+    status: 'success',
+    resetToken, //IT WILL GO IN THE EMAIL
+  });
+};
+
+exports.resetPassword = async (req, res, next) => {
+  //Check if token is correct(we receive the non hash token in the url)
+  const token = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  //Find the user
+  const user = await User.findOne({
+    passwordResetToken: token,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  if (!user) return next(new Error('Invalid token or has expired.'));
+
+  //Update password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  await user.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: null,
+  });
+};
+
+exports.changePassword = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select('password');
+
+    if (!req.body.currentPassword)
+      throw new Error('Must input current password');
+
+    //Check that current password is correct
+    const crrPassword = await bcrpyt.compare(
+      req.body.currentPassword,
+      user.password
+    );
+
+    if (!crrPassword) throw new Error('Invalid current password.');
+
+    //Change password
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.passwordConfirm;
+
+    await user.save({ validateBeforeSave: true });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Password updated',
+    });
+  } catch (err) {
+    res.status(404).json({ status: 'failed', message: err.message });
+  }
 };

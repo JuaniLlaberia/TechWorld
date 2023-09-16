@@ -1,14 +1,26 @@
 const express = require('express');
 const jobsController = require('../controllers/jobsController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router.route('/').get(jobsController.getAllJobs).post(jobsController.createJob);
+router
+  .route('/')
+  .get(jobsController.getAllJobs)
+  .post(authController.protect, jobsController.createJob);
 
 router
   .route('/:id')
   .get(jobsController.getJob)
-  .patch(jobsController.updateJob)
-  .delete(jobsController.deleteJob);
+  .patch(
+    authController.protect,
+    authController.postBelongsToUser,
+    jobsController.updateJob
+  )
+  .delete(
+    authController.protect,
+    authController.postBelongsToUser,
+    jobsController.deleteJob
+  );
 
 module.exports = router;

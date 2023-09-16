@@ -80,7 +80,9 @@ exports.getJob = async (req, res) => {
 
 exports.createJob = async (req, res) => {
   try {
-    const job = await Job.create(req.body);
+    const newJob = { ...req.body, createdBy: req.user.id };
+    console.log(newJob);
+    const job = await Job.create(newJob);
     res.status(201).json({ status: 'success', data: { job } });
   } catch (err) {
     res.status(400).json({
