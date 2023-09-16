@@ -21,11 +21,11 @@ router.post(
 router.post('/forgot-password', authController.sendResetPasswordToken);
 router.post('/reset-password/:token', authController.resetPassword);
 
-router.post('/save-post/:id', authController.protect, jobsController.saveJob);
+router.post('/save-post/:id', authController.protect, userController.saveJob);
 router.post(
   '/unsave-post/:id',
   authController.protect,
-  jobsController.unSaveJob
+  userController.unSaveJob
 );
 
 //Protected to auth - Should it be restricted? or do i want to be able to fetch the users

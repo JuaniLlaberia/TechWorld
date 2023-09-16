@@ -131,3 +131,40 @@ exports.deleteMe = async (req, res) => {
     });
   }
 };
+
+//Save job in user favorite
+exports.saveJob = async (req, res, next) => {
+  const postToSave = req.params.id;
+
+  if (req.user.savedPosts.includes(postToSave))
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Post is already saved in this user.',
+    });
+
+  const allSavedPosts = [...req.user.savedPosts, postToSave];
+
+  await User.findByIdAndUpdate(req.user.id, { savedPosts: allSavedPosts });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Saved successfully.',
+  });
+};
+
+exports.unSaveJob = async (req, res) => {
+  try {
+    const newSavedPosts = req.user.savedPosts.filter(
+      job => job.toString('hex') !== req.params.id
+    );
+
+    await User.findByIdAndUpdate(req.user.id, { savedPosts: newSavedPosts });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Unsaved successfully.',
+    });
+  } catch (err) {
+    res.status(404).json({ status: 'failed', message: err });
+  }
+};
