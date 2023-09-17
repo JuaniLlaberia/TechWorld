@@ -5,6 +5,7 @@ const bcrpyt = require('bcrypt');
 
 const User = require('../models/userModel');
 const Jobs = require('../models/jobsModel');
+const Email = require('../utils/emails');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -40,6 +41,9 @@ const createSendToken = (user, statusCode, res) => {
 exports.signup = async (req, res) => {
   try {
     const user = await User.create(req.body);
+
+    new Email(user, `http://localhost:8000/me`).welcomeEmail();
+
     createSendToken(user, 201, res);
   } catch (err) {
     res.status(404).json({
@@ -143,6 +147,10 @@ exports.sendResetPasswordToken = async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //Send token email
+  new Email(
+    user,
+    `http://localhost:8000/reset-password/${resetToken}`
+  ).resetPasswordEmail();
 
   //Send token in res
   res.status(200).json({

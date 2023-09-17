@@ -14,7 +14,8 @@ exports.getUsers = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: 'failed',
-      message: 'There was a problem retrieving the data.',
+      // message: 'There was a problem retrieving the data.',
+      message: err.message,
     });
   }
 };
