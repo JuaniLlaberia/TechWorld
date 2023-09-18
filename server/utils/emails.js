@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const createWelcomeTemplate = require('../utils/emailTemplates/welcome');
 const createResetTemplate = require('../utils/emailTemplates/resetPassword');
+const createEmailConfirmTemplate = require('../utils/emailTemplates/confirmEmail');
 
 module.exports = class Email {
   constructor(user, url) {
@@ -46,6 +47,13 @@ module.exports = class Email {
 
     //Send email
     await this.newTransporter().sendMail(emailOptions);
+  }
+
+  verifyAccount() {
+    this.sendEmail(
+      'Welcome to the X Family!',
+      createEmailConfirmTemplate(this.url)
+    );
   }
 
   welcomeEmail() {

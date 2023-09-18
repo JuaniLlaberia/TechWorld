@@ -6,6 +6,7 @@ const bcrpyt = require('bcrypt');
 const User = require('../models/userModel');
 const Jobs = require('../models/jobsModel');
 const Email = require('../utils/emails');
+const Token = require('../models/tokenModel');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -40,25 +41,79 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.signup = async (req, res) => {
   try {
+    //Create and hash code
+    const token = crypto.randomBytes(16).toString('hex');
+
+    //Create user
     const user = await User.create(req.body);
 
-    new Email(user, `http://localhost:8000/me`).welcomeEmail();
+    //Create Token doc
+    await Token.create({
+      userId: user.id,
+      token,
+    });
 
-    createSendToken(user, 201, res);
+    //Send email with code //CHECK WHICH URL TO USE WHEN FRONT IS IMPLEMENTED
+    new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Email sent.',
+      token, //UNTIL FRONT IS IMPLEMENTED
+    });
   } catch (err) {
     res.status(404).json({
       status: 'failed',
-      message: err.message,
+      message: err.code === 11000 ? 'Email already in use.' : err.message,
     });
   }
+};
+
+exports.activateAccount = async (req, res) => {
+  //Get and unhash code
+  const token = await Token.findOne({
+    token: req.params.token,
+  });
+
+  //Doesn't match => Error
+  if (!token)
+    return res
+      .status(404)
+      .json({ status: 'failed', message: 'Wrong or expired token.' });
+
+  //Check if code matches with user
+  const user = await User.findById(token.userId);
+
+  //Doesn't exist => Error
+  if (!user)
+    return res
+      .status(404)
+      .json({ status: 'failed', message: 'The user no longer exist' });
+
+  //Correct => verify user
+  user.token = undefined;
+  user.verified = true;
+
+  await user.save({ validateBeforeSave: false });
+
+  //Send welcome email
+  new Email(user, `http://localhost:8000/me`).welcomeEmail();
+
+  //Auth user
+  createSendToken(user, 201, res);
+};
+
+exports.resendConfirmationEmail = (req, res) => {
+  //Resend the confirmation email
 };
 
 exports.login = async (req, res) => {
   try {
     //Check that user exist
-    const user = await User.findOne({ email: req.body.email }).select(
-      '+password'
-    );
+    const user = await User.findOne({
+      email: req.body.email,
+      verified: true,
+    }).select('+password');
     //Check that email and password are correct
     if (!user || !(await bcrpyt.compare(req.body.password, user.password)))
       throw new Error('Email or password are incorrect');
@@ -155,7 +210,7 @@ exports.sendResetPasswordToken = async (req, res, next) => {
   //Send token in res
   res.status(200).json({
     status: 'success',
-    resetToken, //IT WILL GO IN THE EMAIL
+    message: 'Token sent',
   });
 };
 

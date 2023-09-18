@@ -52,6 +52,13 @@ const userSchema = new mongoose.Schema({
   savedPosts: {
     type: [{ type: mongoose.Schema.ObjectId, ref: 'Job' }],
   },
+  token: String,
+  createdAt: { type: Date, default: Date.now() },
+  verified: {
+    type: Boolean,
+    default: false,
+    required: [true, 'This field is required'],
+  },
 });
 
 //Implement password encryption
