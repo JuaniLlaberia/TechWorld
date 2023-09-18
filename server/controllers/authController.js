@@ -3,10 +3,12 @@ const crypto = require('crypto');
 const { promisify } = require('util');
 const bcrpyt = require('bcrypt');
 
+const catchErrorAsync = require('../utils/catchErrorAsync');
 const User = require('../models/userModel');
 const Jobs = require('../models/jobsModel');
 const Email = require('../utils/emails');
 const Token = require('../models/tokenModel');
+const CustomError = require('../utils/error');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -39,56 +41,43 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
-exports.signup = async (req, res) => {
-  try {
-    //Create and hash code
-    const token = crypto.randomBytes(16).toString('hex');
+exports.signup = catchErrorAsync(async (req, res) => {
+  //Create and hash code
+  const token = crypto.randomBytes(16).toString('hex');
 
-    //Create user
-    const user = await User.create(req.body);
+  //Create user
+  const user = await User.create(req.body);
 
-    //Create Token doc
-    await Token.create({
-      userId: user.id,
-      token,
-    });
+  //Create Token doc
+  await Token.create({
+    userId: user.id,
+    token,
+  });
 
-    //Send email with code //CHECK WHICH URL TO USE WHEN FRONT IS IMPLEMENTED
-    new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
+  //Send email with code //CHECK WHICH URL TO USE WHEN FRONT IS IMPLEMENTED
+  new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
 
-    res.status(200).json({
-      status: 'success',
-      message: 'Email sent.',
-      token, //UNTIL FRONT IS IMPLEMENTED
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'failed',
-      message: err.code === 11000 ? 'Email already in use.' : err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    message: 'Email sent.',
+    token, //UNTIL FRONT IS IMPLEMENTED
+  });
+});
 
-exports.activateAccount = async (req, res) => {
+exports.activateAccount = catchErrorAsync(async (req, res, next) => {
   //Get and unhash code
   const token = await Token.findOne({
     token: req.params.token,
   });
 
   //Doesn't match => Error
-  if (!token)
-    return res
-      .status(404)
-      .json({ status: 'failed', message: 'Wrong or expired token.' });
+  if (!token) return next(new CustomError('Wrong or expired token', 401));
 
   //Check if code matches with user
   const user = await User.findById(token.userId);
 
   //Doesn't exist => Error
-  if (!user)
-    return res
-      .status(404)
-      .json({ status: 'failed', message: 'The user no longer exist' });
+  if (!user) return next(new CustomError('The user no longer exist', 404));
 
   //Correct => verify user
   user.verified = true;
@@ -100,33 +89,59 @@ exports.activateAccount = async (req, res) => {
 
   //Auth user or make them login?
   createSendToken(user, 201, res);
-};
+});
 
-exports.resendConfirmationEmail = (req, res) => {
-  //Resend the confirmation email
-};
+exports.resendConfirmationEmail = catchErrorAsync(async (req, res, next) => {
+  if (!req.body.email)
+    return next(new CustomError('Missing email address.', 400));
 
-exports.login = async (req, res) => {
-  try {
-    //Check that user exist
-    const user = await User.findOne({
-      email: req.body.email,
-    }).select('+password');
-    //Check that email and password are correct
-    if (!user || !(await bcrpyt.compare(req.body.password, user.password)))
-      throw new Error('Email or password are incorrect');
+  //Check if the user exist or not
+  const user = await User.findOne({ email: req.body.email });
 
-    if (user.verified === false)
-      throw new Error(
-        //Automatically re send confirm email? or render a button  in the front to give you the option
-        'Account needs verification (confirm your email or resend email).'
-      );
+  if (!user)
+    return next(
+      new CustomError('This email is not registered. You can sing up.', 404)
+    );
 
-    createSendToken(user, 201, res);
-  } catch (err) {
-    res.status(404).json({ status: 'failed', message: err.message });
-  }
-};
+  if (user.verified)
+    return next(
+      new CustomError('This account has alerady been verified.', 404)
+    );
+
+  await Token.deleteMany({ userId: user.id });
+
+  const token = crypto.randomBytes(16).toString('hex');
+
+  await Token.create({
+    userId: user.id,
+    token,
+  });
+
+  new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
+
+  res.status(200).json({ status: 'success', message: 'Token sent to email.' });
+});
+
+exports.login = catchErrorAsync(async (req, res, next) => {
+  //Check that user exist
+  const user = await User.findOne({
+    email: req.body.email,
+  }).select('+password');
+
+  //Check that email and password are correct
+  if (!user || !(await bcrpyt.compare(req.body.password, user.password)))
+    return next(new CustomError('Email or password are incorrect', 404));
+
+  if (user.verified === false)
+    return next(
+      new CustomError(
+        'Account needs verification (confirm your email or resend email).',
+        404
+      )
+    );
+
+  createSendToken(user, 201, res);
+});
 
 exports.logout = (req, res) => {
   res.cookie('jwt', 'null', {
@@ -139,7 +154,7 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.protect = async (req, res, next) => {
+exports.protect = catchErrorAsync(async (req, res, next) => {
   let token;
 
   if (
@@ -151,49 +166,56 @@ exports.protect = async (req, res, next) => {
 
   if (!token)
     return next(
-      new Error('You are not logged in. Please log in to get access.')
+      new CustomError(
+        'You are not logged in. Please log in to get access.',
+        401
+      )
     );
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   const user = await User.findById(decoded.id);
 
-  if (!user) return next(new Error('User does not exist anymore.'));
+  if (!user) return next(new CustomError('User does not exist anymore.', 404));
 
   if (decoded.iat < user.passwordChangedAt.getTime() / 1000)
-    return next(new Error('Password has been changed. Logged in again.'));
+    return next(
+      new CustomError('Password has been changed. Logged in again.', 401)
+    );
 
   req.user = user;
   res.locals.user = user;
 
   next();
-};
+});
 
-exports.postBelongsToUser = async (req, res, next) => {
+exports.postBelongsToUser = catchErrorAsync(async (req, res, next) => {
   //CHECK THIS IMPLEMENTATION
   const jobPost = await Jobs.findById(req.params.id).populate('user', 'id');
 
   if (req.user.role !== 'admin' && jobPost.user.id !== req.user.id) {
     next(
-      new Error(
-        'This post does not belong to you. You can only delete your own jobs.'
+      new CustomError(
+        'This post does not belong to you. You can only delete your own jobs.',
+        403
       )
     );
   }
-  next();
-};
 
-exports.onlyAdmin = (req, res, next) => {
+  next();
+});
+
+exports.onlyAdmin = catchErrorAsync((req, res, next) => {
   if (req.user.role !== 'admin')
-    return next(new Error('This route is just for administrators.'));
+    return next(new CustomError('This route is just for administrators.', 401));
   next();
-};
+});
 
-exports.sendResetPasswordToken = async (req, res, next) => {
+exports.sendResetPasswordToken = catchErrorAsync(async (req, res, next) => {
   //Check if user exist
   const user = await User.findOne({ email: req.body.email });
 
-  if (!user) return next(new Error('No user with this email'));
+  if (!user) return next(new CustomError('No user with this email', 404));
   //Create a token
   const resetToken = crypto.randomBytes(32).toString('hex');
   //Store token in DB
@@ -216,9 +238,9 @@ exports.sendResetPasswordToken = async (req, res, next) => {
     status: 'success',
     message: 'Token sent',
   });
-};
+});
 
-exports.resetPassword = async (req, res, next) => {
+exports.resetPassword = catchErrorAsync(async (req, res, next) => {
   //Check if token is correct(we receive the non hash token in the url)
   const token = crypto
     .createHash('sha256')
@@ -231,7 +253,7 @@ exports.resetPassword = async (req, res, next) => {
     passwordResetExpires: { $gt: Date.now() },
   });
 
-  if (!user) return next(new Error('Invalid token or has expired.'));
+  if (!user) return next(new CustomError('Invalid token or has expired.', 401));
 
   //Update password
   user.password = req.body.password;
@@ -245,34 +267,31 @@ exports.resetPassword = async (req, res, next) => {
     status: 'success',
     data: null,
   });
-};
+});
 
-exports.changePassword = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.user.id).select('password');
+exports.changePassword = catchErrorAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select('password');
 
-    if (!req.body.currentPassword)
-      throw new Error('Must input current password');
+  if (!req.body.currentPassword)
+    return next(new CustomError('Must input current password', 400));
 
-    //Check that current password is correct
-    const crrPassword = await bcrpyt.compare(
-      req.body.currentPassword,
-      user.password
-    );
+  //Check that current password is correct
+  const crrPassword = await bcrpyt.compare(
+    req.body.currentPassword,
+    user.password
+  );
 
-    if (!crrPassword) throw new Error('Invalid current password.');
+  if (!crrPassword)
+    return next(new CustomError('Invalid current password', 404));
 
-    //Change password
-    user.password = req.body.password;
-    user.passwordConfirm = req.body.passwordConfirm;
+  //Change password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
 
-    await user.save({ validateBeforeSave: true });
+  await user.save({ validateBeforeSave: true });
 
-    res.status(200).json({
-      status: 'success',
-      message: 'Password updated',
-    });
-  } catch (err) {
-    res.status(404).json({ status: 'failed', message: err.message });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    message: 'Password updated',
+  });
+});

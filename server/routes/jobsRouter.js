@@ -5,6 +5,7 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.get('/my-jobs', authController.protect, jobsController.getMyJobs);
+router.get('/by-area', jobsController.getJobsArea);
 
 router
   .route('/')

@@ -1,19 +1,33 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const userController = require('../controllers/userController');
 const jobsController = require('../controllers/jobsController');
 const authController = require('../controllers/authController');
+
+//Limiting email confirmation resend to 1 per minute.
+const emailLimiter = rateLimit({
+  max: 1,
+  windowMs: 60 * 1000,
+  message:
+    'You can only re-send the email confirmation every 60 seconds. Please wait and try again!',
+});
 
 const router = express.Router();
 
 router.post('/signup', authController.signup);
 router.post('/verify/:token', authController.activateAccount);
+router.post(
+  '/resend-token',
+  emailLimiter,
+  authController.resendConfirmationEmail
+);
 router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 
 router.patch('/update-me', authController.protect, userController.updateMe);
 router.get('/me', authController.protect, userController.getMe);
 router.delete('/delete-me', authController.protect, userController.deleteMe);
-router.post(
+router.patch(
   '/update-my-password',
   authController.protect,
   authController.changePassword

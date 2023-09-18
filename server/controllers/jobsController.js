@@ -1,139 +1,128 @@
 const Job = require('../models/jobsModel');
+const catchErrorAsync = require('../utils/catchErrorAsync');
+const CustomError = require('../utils/error');
 
-exports.getAllJobs = async (req, res) => {
-  try {
-    //Filtering fields from URL
-    const filteredObj = { ...req.query };
-    const fieldsToExclude = ['sort', 'select', 'page', 'limit', 'search'];
-    fieldsToExclude.forEach(el => delete filteredObj[el]);
+exports.getAllJobs = catchErrorAsync(async (req, res) => {
+  //Filtering fields from URL
+  const filteredObj = { ...req.query };
+  const fieldsToExclude = [
+    'sort',
+    'select',
+    'page',
+    'limit',
+    'search',
+    'location',
+  ];
+  fieldsToExclude.forEach(el => delete filteredObj[el]);
 
-    let queryString = JSON.stringify(filteredObj);
-    queryString = queryString.replace(/gte|gt|lte|lt/, match => `$${match}`);
+  let queryString = JSON.stringify(filteredObj);
+  queryString = queryString.replace(/gte|gt|lte|lt/, match => `$${match}`);
 
-    //Creating the QUERY
-    let query = Job.find({
-      ...JSON.parse(queryString),
-      //Using search param we can query for jobs that contain str in name
-      name: { $regex: req.query.search || '', $options: 'i' },
-    });
+  //Creating the QUERY
+  let query = Job.find({
+    ...JSON.parse(queryString),
+    //Using search param we can query for jobs that contain str in name
+    name: { $regex: req.query.search || '', $options: 'i' },
+    location: { $regex: req.query.location || '', $options: 'i' },
+  });
 
-    //Sorting
-    if (req.query.sort) {
-      const sortBy = req.query.sort.replaceAll(',', ' ');
-      query.sort(sortBy);
-    }
-
-    //Select fields
-    if (req.query.select) {
-      const fields = req.query.select.replaceAll(',', ' ');
-      query.select(fields);
-    }
-
-    //Pagination
-    if (req.query.page) {
-      const page = Number(req.query.page) || 1;
-      const limit = req.query.limit || 10;
-      const skip = (page - 1) * limit;
-
-      query.skip(skip).limit(limit);
-    }
-
-    // Get data from database
-    const jobs = await query;
-
-    //Return data
-    res.status(200).json({
-      status: 'success',
-      count: jobs.length,
-      data: {
-        jobs,
-      },
-    });
-  } catch (err) {
-    if (process.env.NODE_ENV === 'development') console.log(err);
-
-    //Return error
-    res.status(404).json({
-      status: 'failed',
-      message: 'There was a problem retrieving the data.',
-    });
+  //Sorting
+  if (req.query.sort) {
+    const sortBy = req.query.sort.replaceAll(',', ' ');
+    query.sort(sortBy);
   }
-};
 
-exports.getJob = async (req, res) => {
-  try {
-    const job = await Job.findById(req.params.id);
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        job,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'failed',
-      message: `No job with id: ${req.params.id}`,
-    });
+  //Select fields
+  if (req.query.select) {
+    const fields = req.query.select.replaceAll(',', ' ');
+    query.select(fields);
   }
-};
 
-exports.createJob = async (req, res) => {
-  try {
-    const newJob = { ...req.body, createdBy: req.user.id };
-    console.log(newJob);
-    const job = await Job.create(newJob);
-    res.status(201).json({ status: 'success', data: { job } });
-  } catch (err) {
-    res.status(400).json({
-      message: err,
-    });
+  //Pagination
+  if (req.query.page) {
+    const page = Number(req.query.page) || 1;
+    const limit = req.query.limit || 10;
+    const skip = (page - 1) * limit;
+
+    query.skip(skip).limit(limit);
   }
-};
 
-exports.updateJob = async (req, res) => {
-  try {
-    const job = await Job.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+  // Get data from database
+  const jobs = await query;
 
-    res.status(200).json({ status: 'success', data: { job } });
-  } catch (err) {
-    res.status(400).json({
-      message: err,
-    });
-  }
-};
+  //Return data
+  res.status(200).json({
+    status: 'success',
+    count: jobs.length,
+    data: {
+      jobs,
+    },
+  });
+});
 
-exports.deleteJob = async (req, res) => {
-  try {
-    await Job.findByIdAndDelete(req.params.id);
-    res.status(200).json({ status: 'success', data: null });
-  } catch (err) {
-    res.status(400).json({
-      status: 'failed',
-      message: `No job with id: ${req.params.id}`,
-    });
-  }
-};
+exports.getJobsArea = catchErrorAsync(async (req, res, next) => {
+  const { distance, latlng } = req.query;
+  const [lat, lng] = latlng?.split(',');
+  const radius = distance / 6378.1;
+
+  if (!lat || !lng)
+    return next(
+      new CustomError('Please provide latitude and longitude (lat,lng).', 400)
+    );
+
+  const jobs = await Job.find({
+    locationMap: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+  });
+
+  res.status(200).json({
+    status: 'success',
+    count: jobs.length,
+    data: {
+      jobs,
+    },
+  });
+});
+
+exports.getJob = catchErrorAsync(async (req, res) => {
+  const job = await Job.findById(req.params.id);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      job,
+    },
+  });
+});
+
+exports.createJob = catchErrorAsync(async (req, res) => {
+  const newJob = { ...req.body, createdBy: req.user.id };
+
+  const job = await Job.create(newJob);
+  res.status(201).json({ status: 'success', data: { job } });
+});
+
+exports.updateJob = catchErrorAsync(async (req, res) => {
+  const job = await Job.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ status: 'success', data: { job } });
+});
+
+exports.deleteJob = catchErrorAsync(async (req, res) => {
+  await Job.findByIdAndDelete(req.params.id);
+  res.status(200).json({ status: 'success', data: null });
+});
 
 //Get all post from a user
-exports.getJobsFromUser = async (req, res) => {
-  try {
-    const jobs = await Job.find({ user: req.params.id });
-    res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
-  } catch (err) {
-    res.status(404).json({ status: 'failed', message: err });
-  }
-};
+exports.getJobsFromUser = catchErrorAsync(async (req, res) => {
+  const jobs = await Job.find({ user: req.params.id });
+  res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
+});
 
 //Get all the jobs posted by me
-exports.getMyJobs = async (req, res) => {
-  try {
-    const jobs = await Job.find({ user: req.user.id });
-    res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
-  } catch (err) {
-    res.status(404).json({ status: 'failed', message: err });
-  }
-};
+exports.getMyJobs = catchErrorAsync(async (req, res) => {
+  const jobs = await Job.find({ user: req.user.id });
+  res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
+});
