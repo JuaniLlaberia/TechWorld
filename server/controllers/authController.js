@@ -102,8 +102,35 @@ exports.activateAccount = async (req, res) => {
   createSendToken(user, 201, res);
 };
 
-exports.resendConfirmationEmail = (req, res) => {
-  //Resend the confirmation email
+exports.resendConfirmationEmail = async (req, res) => {
+  try {
+    if (!req.body.email) throw new Error('Missing email address.');
+    //Check if the user exist or not
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user)
+      throw new Error('This email is not registered. You can sing up.');
+
+    if (user.verified)
+      throw new Error('This account has alerady been verified.');
+
+    await Token.deleteMany({ userId: user.id });
+
+    const token = crypto.randomBytes(16).toString('hex');
+
+    await Token.create({
+      userId: user.id,
+      token,
+    });
+
+    new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
+
+    res
+      .status(200)
+      .json({ status: 'success', message: 'Token sent to email.' });
+  } catch (err) {
+    res.status(404).json({ status: 'failed', message: err.message });
+  }
 };
 
 exports.login = async (req, res) => {
