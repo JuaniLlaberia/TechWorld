@@ -50,10 +50,7 @@ module.exports = class Email {
   }
 
   verifyAccount() {
-    this.sendEmail(
-      'Welcome to the X Family!',
-      createEmailConfirmTemplate(this.url)
-    );
+    this.sendEmail('Confirm your email.', createEmailConfirmTemplate(this.url));
   }
 
   welcomeEmail() {

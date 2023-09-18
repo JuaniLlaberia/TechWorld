@@ -91,7 +91,6 @@ exports.activateAccount = async (req, res) => {
       .json({ status: 'failed', message: 'The user no longer exist' });
 
   //Correct => verify user
-  user.token = undefined;
   user.verified = true;
 
   await user.save({ validateBeforeSave: false });
@@ -99,7 +98,7 @@ exports.activateAccount = async (req, res) => {
   //Send welcome email
   new Email(user, `http://localhost:8000/me`).welcomeEmail();
 
-  //Auth user
+  //Auth user or make them login?
   createSendToken(user, 201, res);
 };
 
@@ -112,11 +111,16 @@ exports.login = async (req, res) => {
     //Check that user exist
     const user = await User.findOne({
       email: req.body.email,
-      verified: true,
     }).select('+password');
     //Check that email and password are correct
     if (!user || !(await bcrpyt.compare(req.body.password, user.password)))
       throw new Error('Email or password are incorrect');
+
+    if (user.verified === false)
+      throw new Error(
+        //Automatically re send confirm email? or render a button  in the front to give you the option
+        'Account needs verification (confirm your email or resend email).'
+      );
 
     createSendToken(user, 201, res);
   } catch (err) {
