@@ -42,6 +42,10 @@ const jobsSchema = new mongoose.Schema({
     maxLength: [200, 'Must include less than 200 characters.'],
   },
   location: {
+    type: String,
+    required: [true, 'A job must have a location'],
+  },
+  locationMap: {
     type: {
       type: String,
       enum: ['Point'],

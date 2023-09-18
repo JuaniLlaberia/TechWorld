@@ -4,7 +4,14 @@ exports.getAllJobs = async (req, res) => {
   try {
     //Filtering fields from URL
     const filteredObj = { ...req.query };
-    const fieldsToExclude = ['sort', 'select', 'page', 'limit', 'search'];
+    const fieldsToExclude = [
+      'sort',
+      'select',
+      'page',
+      'limit',
+      'search',
+      'location',
+    ];
     fieldsToExclude.forEach(el => delete filteredObj[el]);
 
     let queryString = JSON.stringify(filteredObj);
@@ -15,6 +22,7 @@ exports.getAllJobs = async (req, res) => {
       ...JSON.parse(queryString),
       //Using search param we can query for jobs that contain str in name
       name: { $regex: req.query.search || '', $options: 'i' },
+      location: { $regex: req.query.location || '', $options: 'i' },
     });
 
     //Sorting
@@ -57,6 +65,32 @@ exports.getAllJobs = async (req, res) => {
       status: 'failed',
       message: 'There was a problem retrieving the data.',
     });
+  }
+};
+
+exports.getJobsArea = async (req, res, next) => {
+  console.log(req.query);
+  const { distance, latlng } = req.query;
+  const [lat, lng] = latlng.split(',');
+  const radius = distance / 6378.1;
+
+  try {
+    if (!lat || !lng)
+      throw new Error('Please provide latitude and longitude (lat,lng).');
+
+    const jobs = await Job.find({
+      locationMap: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      count: jobs.length,
+      data: {
+        jobs,
+      },
+    });
+  } catch (err) {
+    res.json({ status: 'failed', message: err.message });
   }
 };
 
