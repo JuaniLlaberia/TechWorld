@@ -22,7 +22,9 @@ exports.getUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select(
+      '_id fullName image profession email'
+    );
 
     res.status(200).json({
       status: 'success',
