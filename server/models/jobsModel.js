@@ -73,6 +73,10 @@ const jobsSchema = new mongoose.Schema({
   },
 });
 
+jobsSchema.index({ name: 1 });
+jobsSchema.index({ level: 1, type: 1 });
+// jobsSchema.index({ locationMap: '2dsphere' });
+
 jobsSchema.pre(/^find/, function (next) {
   this.select('-__v');
   next();
