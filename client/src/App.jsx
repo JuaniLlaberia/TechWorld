@@ -6,8 +6,15 @@ import Job from './pages/Job';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
+// import SignUp from './pages/SignUp';
+// import Login from './pages/Login';
+// import AuthForm from './pages/AuthForm';
+import ConfirmEmail from './pages/ConfirmEmail';
+import AuthLayout from './pages/AuthLayout';
+import { LoginForm } from './features/auth/LoginForm';
+import { SignupForm } from './features/auth/SignupForm';
+import { ForgotPassword } from './features/auth/ForgotPassword';
+import { ResetPassword } from './features/auth/ResetPassword';
 
 const router = createBrowserRouter([
   {
@@ -36,12 +43,29 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <SignUp />,
-    path: '/signup',
-  },
-  {
-    element: <Login />,
-    path: '/login',
+    element: <AuthLayout />,
+    children: [
+      {
+        element: <SignupForm />,
+        path: '/signup',
+      },
+      {
+        element: <LoginForm />,
+        path: '/login',
+      },
+      {
+        element: <ConfirmEmail />,
+        path: '/confirm-email',
+      },
+      {
+        element: <ForgotPassword />,
+        path: '/forgot-password',
+      },
+      {
+        element: <ResetPassword />,
+        path: '/reset-password/:token',
+      },
+    ],
   },
 ]);
 

@@ -232,7 +232,7 @@ exports.sendResetPasswordToken = catchErrorAsync(async (req, res, next) => {
   //Send token email
   new Email(
     user,
-    `http://localhost:8000/reset-password/${resetToken}`
+    `http://localhost:5173/reset-password/${resetToken}`
   ).resetPasswordEmail();
 
   //Send token in res
