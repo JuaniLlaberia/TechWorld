@@ -26,7 +26,7 @@ const createSendToken = (user, statusCode, res) => {
     httpOnly: true,
   };
 
-  if (process.env === 'production') cookieOptions.secure = true;
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
   res.cookie('jwt', token, cookieOptions);
 
@@ -161,7 +161,7 @@ exports.protect = catchErrorAsync(async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
-    token = req.headers.authorization.split(' ').at(1);
+    token = req.headers.authorization.split(' ')[1];
   } else if (req.cookies.jwt) token = req.cookies.jwt;
 
   if (!token)
@@ -175,6 +175,8 @@ exports.protect = catchErrorAsync(async (req, res, next) => {
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   const user = await User.findById(decoded.id);
+
+  console.log(user);
 
   if (!user) return next(new CustomError('User does not exist anymore.', 404));
 
@@ -230,7 +232,7 @@ exports.sendResetPasswordToken = catchErrorAsync(async (req, res, next) => {
   //Send token email
   new Email(
     user,
-    `http://localhost:8000/reset-password/${resetToken}`
+    `http://localhost:5173/reset-password/${resetToken}`
   ).resetPasswordEmail();
 
   //Send token in res

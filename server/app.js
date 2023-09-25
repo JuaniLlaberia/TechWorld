@@ -5,22 +5,24 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const CustomError = require('./utils/error');
 const handleError = require('./controllers/errorController');
 const jobsRouter = require('./routes/jobsRouter');
 const userRouter = require('./routes/userRouter');
+
 const app = express();
+app.use(cookieParser());
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
-//In case we want to make our API completly private just for our web
-// app.use(cors({
-//   origin: 'FRONT URL'
-// }));
-
-app.use(cors());
-app.options('', cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  })
+);
 
 app.use(helmet());
 
@@ -29,8 +31,6 @@ app.use(
     limit: '10kb',
   })
 );
-
-//ADD A RATE LIMIT ???
 
 app.use(mongoSanitize());
 
