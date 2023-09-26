@@ -10,6 +10,7 @@ export const login = async (email, password) => {
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
+  return data;
 };
 
 export const signup = async values => {
@@ -78,6 +79,16 @@ export const verifyEmail = async token => {
       credentials: 'include',
     }
   );
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message);
+};
+
+export const logout = async () => {
+  const response = await fetch(`http://localhost:8000/api/users/logout`, {
+    method: 'POST',
+    credentials: 'include',
+  });
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);

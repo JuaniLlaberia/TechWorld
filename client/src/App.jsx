@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './pages/Home';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppLayout from './pages/AppLayout';
 import Job from './pages/Job';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -14,6 +15,7 @@ import { ForgotPassword } from './features/auth/ForgotPassword';
 import { ResetPassword } from './features/auth/ResetPassword';
 import { AccountVerification } from './features/auth/AccountVerification';
 import { ResendEmail } from './features/auth/ResendEmail';
+import ProtectedRoutes from './features/auth/ProtectedRoutes';
 
 const router = createBrowserRouter([
   {
@@ -24,20 +26,25 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/search',
-        element: <Search />,
-      },
-      {
-        path: '/notifications',
-        element: <Job />,
-      },
-      {
-        path: '/me',
-        element: <Profile />,
-      },
-      {
-        path: '/job/:id',
-        element: <Job />,
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: '/search',
+            element: <Search />,
+          },
+          {
+            path: '/notifications',
+            element: <Job />,
+          },
+          {
+            path: '/me',
+            element: <Profile />,
+          },
+          {
+            path: '/job/:id',
+            element: <Job />,
+          },
+        ],
       },
     ],
   },
@@ -83,6 +90,7 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
       <RouterProvider router={router} />
       <Toaster
         position='bottom-center'
