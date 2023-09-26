@@ -24,9 +24,11 @@ export const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className=' h-[70vh] w-[50vw] min-w-[300px] rounded-lg flex flex-col p-4'
+      className='h-[70vh] w-[50vw] max-w-[650px] min-w-[300px] rounded-lg flex flex-col p-4'
     >
-      <h1 className='text-light-1 font-bold text-xl'>Log in to TechWorld</h1>
+      <h1 className='text-light-1 font-bold text-xl 2xl:text-[2.5rem] 2xl:mb-7'>
+        Log in to TechWorld
+      </h1>
       <InputWrapper
         label='Email address'
         error={errors.email?.message}
@@ -61,10 +63,19 @@ export const LoginForm = () => {
           'Log In'
         )}
       </Button>
-      <p className='text-light-3 mt-2'>
-        Problems logging in?{' '}
+      <p className='text-light-3 mt-2 xl:text-xl'>
+        Forgot password?{' '}
         <Link
-          to='/'
+          to='/forgot-password'
+          className='text-light-1 font-semibold underline'
+        >
+          Click here
+        </Link>
+      </p>
+      <p className='text-light-3 mt-2 xl:text-xl'>
+        Need email verification?{' '}
+        <Link
+          to='/resend-verification'
           className='text-light-1 font-semibold underline'
         >
           Click here

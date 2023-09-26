@@ -2,15 +2,14 @@ import { ClipLoader } from 'react-spinners';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
+import test from '../../../public/test.png';
+
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useSignup } from '../../hooks/useSignup';
-import ConfirmEmailPopup from './ConfirmEmailPopup';
-import { useState } from 'react';
 
 export const SignupForm = () => {
-  const [verification, setVerification] = useState(false);
   const {
     register,
     handleSubmit,
@@ -28,16 +27,17 @@ export const SignupForm = () => {
   }) => {
     const newUser = { email, fullName, password, passwordConfirm, profession };
     signup(newUser);
-    setVerification(true);
   };
 
   return (
-    <>
+    <div className='xl:flex gap-24'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='h-[80vh] w-[50vw] min-w-[300px] rounded-lg flex flex-col p-4'
+        className=' w-[50vw] max-w-[650px] min-w-[300px] rounded-lg flex flex-col p-4'
       >
-        <h1 className='text-light-1 font-bold text-xl'>Sign up to TechWorld</h1>
+        <h1 className='text-light-1 font-bold text-xl 2xl:text-4xl 2xl:mb-7'>
+          Sign up to TechWorld
+        </h1>
         <InputWrapper
           label='Email address'
           error={errors.email?.message}
@@ -111,17 +111,20 @@ export const SignupForm = () => {
             'Create account'
           )}
         </Button>
-        <p className='text-light-3 mt-2'>
+        <p className='text-light-3 mt-2 xl:text-xl'>
           Have an account?{' '}
           <Link
-            to='/'
+            to='/login'
             className='text-light-1 font-semibold underline'
           >
             Log in
           </Link>
         </p>
       </form>
-      {verification ? <ConfirmEmailPopup /> : null}
-    </>
+      <img
+        className='hidden w-[600px] min-w-[400px]  xl:block'
+        src={test}
+      />
+    </div>
   );
 };

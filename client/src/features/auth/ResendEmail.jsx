@@ -24,9 +24,9 @@ export const ResendEmail = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className=' h-[70vh] w-[50vw] min-w-[300px] rounded-lg flex flex-col p-4'
+      className=' h-[70vh] w-[50vw] min-w-[300px] max-w-[650px] rounded-lg flex flex-col p-4'
     >
-      <h1 className='text-light-1 font-bold text-xl'>
+      <h1 className='text-light-1 font-bold text-xl 2xl:text-4xl 2xl:mb-7'>
         Send verification email
       </h1>
       <InputWrapper
@@ -51,7 +51,7 @@ export const ResendEmail = () => {
           'Send email'
         )}
       </Button>
-      <p className='text-light-3 mt-2'>
+      <p className='text-light-3 mt-2 xl:text-xl'>
         Already registered?{' '}
         <Link
           to='/login'

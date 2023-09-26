@@ -6,10 +6,7 @@ import Job from './pages/Job';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
-// import SignUp from './pages/SignUp';
-// import Login from './pages/Login';
-// import AuthForm from './pages/AuthForm';
-import ConfirmEmail from './features/auth/ConfirmEmailPopup';
+
 import AuthLayout from './pages/AuthLayout';
 import { LoginForm } from './features/auth/LoginForm';
 import { SignupForm } from './features/auth/SignupForm';
@@ -89,16 +86,17 @@ const App = () => {
       <RouterProvider router={router} />
       <Toaster
         position='bottom-center'
-        gutter={10}
+        containerStyle={{ margin: '2px' }}
+        gutter={12}
         toastOptions={{
           duration: 4000,
           style: {
-            background: 'black',
-            color: 'white',
-            minWidth: '250px',
-            padding: '.75rem 1rem',
-            fontSize: '1rem',
+            fontSize: '16px',
+            maxWidth: '500px',
+            padding: '16px 24px',
+            backgroundColor: 'black',
             fontWeight: '500',
+            color: 'white',
           },
         }}
       />

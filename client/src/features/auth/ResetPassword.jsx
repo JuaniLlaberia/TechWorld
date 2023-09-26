@@ -23,9 +23,11 @@ export const ResetPassword = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className=' h-[70vh] w-[50vw] min-w-[300px] rounded-lg flex flex-col p-4'
+      className=' h-[70vh] w-[50vw] max-w-[650px] min-w-[300px] rounded-lg flex flex-col p-4'
     >
-      <h1 className='text-light-1 font-bold text-xl'>Create new password</h1>
+      <h1 className='text-light-1 font-bold text-xl 2xl:text-4xl 2xl:mb-7'>
+        Create new password
+      </h1>
       <InputWrapper
         label='Password'
         error={errors.password?.message}
