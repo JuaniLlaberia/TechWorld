@@ -9,12 +9,14 @@ import Profile from './pages/Profile';
 // import SignUp from './pages/SignUp';
 // import Login from './pages/Login';
 // import AuthForm from './pages/AuthForm';
-import ConfirmEmail from './pages/ConfirmEmail';
+import ConfirmEmail from './features/auth/ConfirmEmailPopup';
 import AuthLayout from './pages/AuthLayout';
 import { LoginForm } from './features/auth/LoginForm';
 import { SignupForm } from './features/auth/SignupForm';
 import { ForgotPassword } from './features/auth/ForgotPassword';
 import { ResetPassword } from './features/auth/ResetPassword';
+import { AccountVerification } from './features/auth/AccountVerification';
+import { ResendEmail } from './features/auth/ResendEmail';
 
 const router = createBrowserRouter([
   {
@@ -54,8 +56,12 @@ const router = createBrowserRouter([
         path: '/login',
       },
       {
-        element: <ConfirmEmail />,
-        path: '/confirm-email',
+        element: <AccountVerification />,
+        path: '/verify-email/:token',
+      },
+      {
+        element: <ResendEmail />,
+        path: '/resend-verification',
       },
       {
         element: <ForgotPassword />,

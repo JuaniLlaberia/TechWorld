@@ -55,7 +55,10 @@ exports.signup = catchErrorAsync(async (req, res) => {
   });
 
   //Send email with code //CHECK WHICH URL TO USE WHEN FRONT IS IMPLEMENTED
-  new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
+  new Email(
+    user,
+    `http://localhost:5173/verify-email/${token}`
+  ).verifyAccount();
 
   res.status(200).json({
     status: 'success',
@@ -85,7 +88,7 @@ exports.activateAccount = catchErrorAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //Send welcome email
-  new Email(user, `http://localhost:8000/me`).welcomeEmail();
+  new Email(user, `http://localhost:5173/me`).welcomeEmail();
 
   //Auth user or make them login?
   createSendToken(user, 201, res);
@@ -117,7 +120,10 @@ exports.resendConfirmationEmail = catchErrorAsync(async (req, res, next) => {
     token,
   });
 
-  new Email(user, `http://localhost:8000/verify/${token}`).verifyAccount();
+  new Email(
+    user,
+    `http://localhost:5173/verify-email/${token}`
+  ).verifyAccount();
 
   res.status(200).json({ status: 'success', message: 'Token sent to email.' });
 });

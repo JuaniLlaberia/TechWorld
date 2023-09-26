@@ -56,3 +56,29 @@ export const resetPassword = async (password, passwordConfirm, token) => {
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
 };
+
+export const resendConfEmail = async email => {
+  const response = await fetch(`http://localhost:8000/api/users/resend-token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message);
+};
+
+export const verifyEmail = async token => {
+  const response = await fetch(
+    `http://localhost:8000/api/users/verify/${token}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+    }
+  );
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message);
+};
