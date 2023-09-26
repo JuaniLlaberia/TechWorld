@@ -1,9 +1,14 @@
 import { NavLink } from 'react-router-dom';
 
-const NavItem = ({ icon, path }) => {
+const NavItem = ({ icon, path, text }) => {
   return (
     <li className='text-light-2 relative'>
-      <NavLink to={path}>{icon}</NavLink>
+      <NavLink
+        to={path}
+        className='text-3xl lg:text-4xl 2xl:flex 2xl:items-center 2xl:gap-2'
+      >
+        {icon} <span className='hidden text-2xl 2xl:block'>{text}</span>
+      </NavLink>
     </li>
   );
 };
