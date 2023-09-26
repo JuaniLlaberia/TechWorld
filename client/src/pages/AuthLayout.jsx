@@ -6,7 +6,7 @@ const AuthLayout = () => {
     <main className='bg-dark-1 h-[100vh] flex justify-center items-center'>
       <Link
         to='/'
-        className='text-light-1 text-3xl absolute left-2 top-2'
+        className='text-light-1 text-3xl absolute left-2 top-2 lg:text-4xl'
       >
         <HiOutlineXMark />
       </Link>

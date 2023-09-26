@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
-import { useForgotPassword } from '../../hooks/useForgotPassword';
+import { useResendConf } from '../../hooks/useResendConf';
 
-export const ForgotPassword = () => {
+export const ResendEmail = () => {
   const {
     register,
     handleSubmit,
@@ -15,10 +15,10 @@ export const ForgotPassword = () => {
     reset,
   } = useForm();
 
-  const { sendForgot, isLoading } = useForgotPassword();
+  const { sendEmail, isLoading } = useResendConf();
 
   const onSubmit = ({ email }) => {
-    sendForgot(email, { onSettled: () => reset() });
+    sendEmail(email, { onSettled: () => reset() });
   };
 
   return (
@@ -26,8 +26,8 @@ export const ForgotPassword = () => {
       onSubmit={handleSubmit(onSubmit)}
       className=' h-[70vh] w-[50vw] min-w-[300px] max-w-[650px] rounded-lg flex flex-col p-4'
     >
-      <h1 className='text-light-1 font-bold text-xl 2xl:text-4xl 2xl:mb-4'>
-        Forgot password
+      <h1 className='text-light-1 font-bold text-xl 2xl:text-4xl 2xl:mb-7'>
+        Send verification email
       </h1>
       <InputWrapper
         label='Email address'
