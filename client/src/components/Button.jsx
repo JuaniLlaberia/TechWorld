@@ -1,7 +1,7 @@
 const Button = ({ children, ...props }) => {
   return (
     <button
-      className='bg-light-1 rounded-md font-semibold py-2 mt-4 xl:text-xl 2xl:text-2xl 2xl:py-3'
+      className='bg-light-1 text-dark-1 min-w-[100px] rounded-md font-semibold py-2 mt-4 xl:text-xl 2xl:text-2xl 2xl:py-3'
       {...props}
     >
       {children}
