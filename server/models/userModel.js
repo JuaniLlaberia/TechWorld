@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const bcrpyt = require('bcrypt');
 
+const experienceSchema = new mongoose.Schema({
+  position: String,
+  from: Date,
+  until: Date,
+  company: String,
+  reference: String,
+});
+
 const userSchema = new mongoose.Schema({
   fullName: {
     type: String,
@@ -24,7 +32,8 @@ const userSchema = new mongoose.Schema({
       message: 'Please input a valid email address.',
     },
   },
-  phone: {},
+  skills: [String],
+  experience: [experienceSchema],
   password: {
     type: String,
     required: [true, 'User must have a password'],

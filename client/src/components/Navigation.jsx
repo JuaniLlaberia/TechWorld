@@ -12,16 +12,6 @@ const items = [
   { icon: <HiOutlineMagnifyingGlass />, path: '/search', text: 'Search' },
   { icon: <HiOutlinePlusCircle />, path: '/new', text: 'Add job' },
   { icon: <HiOutlineBell />, path: '/notifications', text: 'Notifications' },
-  {
-    icon: (
-      <img
-        src={defaultUserImg}
-        className='w-8 rounded-full'
-      />
-    ),
-    path: '/me',
-    text: 'My profile',
-  },
 ];
 
 const Navigation = () => {
@@ -37,6 +27,16 @@ const Navigation = () => {
             text={item.text}
           />
         ))}
+        <NavItem
+          icon={
+            <img
+              src={defaultUserImg}
+              className='w-8 rounded-full'
+            />
+          }
+          path='/me'
+          text='My profile'
+        />
       </ul>
     </nav>
   );

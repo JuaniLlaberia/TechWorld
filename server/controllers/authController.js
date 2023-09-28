@@ -182,8 +182,6 @@ exports.protect = catchErrorAsync(async (req, res, next) => {
 
   const user = await User.findById(decoded.id);
 
-  console.log(user);
-
   if (!user) return next(new CustomError('User does not exist anymore.', 404));
 
   if (decoded.iat < user.passwordChangedAt.getTime() / 1000)
