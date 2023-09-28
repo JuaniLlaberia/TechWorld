@@ -5,6 +5,7 @@ export const useGetMe = () => {
   const { data: user, isLoading } = useQuery({
     queryFn: getMe,
     queryKey: ['user'],
+    staleTime: 100000,
   });
 
   return { user, isLoading };
