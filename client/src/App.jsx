@@ -16,6 +16,7 @@ import { ResetPassword } from './features/auth/ResetPassword';
 import { AccountVerification } from './features/auth/AccountVerification';
 import { ResendEmail } from './features/auth/ResendEmail';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
+import { NotFound } from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
         path: '/reset-password/:token',
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]);
 
