@@ -41,7 +41,7 @@ const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
         />
         <button
           onClick={handleAddItem}
-          className='absolute right-0 bottom-[50%] translate-y-[50%] bg-[#58575775] p-2.5 rounded-sm text-lg border-l-[1px] border-light-3'
+          className='absolute right-0 bottom-[50%] translate-y-[50%] bg-[#58575775] p-2.5 rounded-sm text-lg border-l-[1px] border-light-3 2xl:p-5'
         >
           <HiOutlinePlus />
         </button>

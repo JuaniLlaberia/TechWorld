@@ -123,7 +123,9 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
               />
             </InputWrapper>
           </div>
-          <p className='text-light-3 text-sm'>(Empty 'Until' means present)</p>
+          <p className='text-light-3 text-sm lg:text-lg'>
+            (Empty 'Until' means present)
+          </p>
           <InputWrapper
             error={errors?.url?.message}
             label='Reference'
