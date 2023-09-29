@@ -26,25 +26,31 @@ const Profile = () => {
       <ProfileCard position='horizontal'>
         <img
           src={defaultUserImg}
-          className='rounded-full w-28'
+          className='rounded-full w-28 lg:w-36'
         />
         <div>
-          <h1 className='text-light-1 text-xl font-bold'>{fullName}</h1>
-          <h2 className='text-light-2 text-base font-semibold'>{profession}</h2>
+          <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
+            {fullName}
+          </h1>
+          <h2 className='text-light-2 text-base font-semibold lg:text-xl'>
+            {profession}
+          </h2>
         </div>
         <Modal.Open opens='personal-info-modal'>
           <EditBtn />
         </Modal.Open>
       </ProfileCard>
       <ProfileCard>
-        <h3 className='text-light-2 font-semibold mb-2'>About</h3>
-        <p className='text-light-1 text-sm text-justify'>{description}</p>
+        <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>About</h3>
+        <p className='text-light-1 text-sm text-justify lg:text-xl'>
+          {description}
+        </p>
         <Modal.Open opens='about-modal'>
           <EditBtn />
         </Modal.Open>
       </ProfileCard>
       <ProfileCard>
-        <h3 className='text-light-2 font-semibold mb-2'>
+        <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>
           Experience & Projects
         </h3>
         <ItemsList
@@ -57,7 +63,7 @@ const Profile = () => {
           )}
         />
         <Modal.Open opens='experience-modal-view'>
-          <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0'>
+          <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0 lg:text-xl lg:py-3'>
             View more
           </button>
         </Modal.Open>
@@ -66,7 +72,7 @@ const Profile = () => {
         </Modal.Open>
       </ProfileCard>
       <ProfileCard>
-        <h3 className='text-light-2 font-semibold mb-2'>Skills</h3>
+        <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>Skills</h3>
         <ItemsList
           items={skills.slice(0, 5)}
           render={(el, i) => (
@@ -78,7 +84,7 @@ const Profile = () => {
           )}
         />
         <Modal.Open opens='skills-modal'>
-          <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0'>
+          <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0 lg:text-xl lg:py-3'>
             View more
           </button>
         </Modal.Open>

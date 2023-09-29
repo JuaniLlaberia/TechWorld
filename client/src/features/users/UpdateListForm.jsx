@@ -30,7 +30,9 @@ const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
 
   return (
     <>
-      <h1 className='text-light-2 font-semibold mb-3'>Your skills</h1>
+      <h1 className='text-light-2 font-semibold mb-3 lg:text-xl'>
+        Your skills
+      </h1>
       <div className='relative mb-3'>
         <Input
           placeholder='Add new skills'

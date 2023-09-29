@@ -13,7 +13,7 @@ export default {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
   safelist: [
     'dark-1',
     'dark-2',

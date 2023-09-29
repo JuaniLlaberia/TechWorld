@@ -25,11 +25,13 @@ const UpdateProfileForm = ({ onClose, current, image }) => {
       onSubmit={handleSubmit(onSubmit)}
       className='p-1'
     >
-      <h1 className='text-light-2 font-semibold mb-3'>Personal information</h1>
+      <h1 className='text-light-2 font-semibold mb-3 lg:text-2xl'>
+        Personal information
+      </h1>
       <label htmlFor='profile-image'>
         <img
           src={image}
-          className='rounded-full w-24 m-auto border-[1px] border-light-2'
+          className='rounded-full w-24 m-auto border-[1px] border-light-2 lg:w-40'
         />
       </label>
       <Input
