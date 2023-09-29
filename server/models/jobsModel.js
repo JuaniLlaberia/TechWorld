@@ -15,18 +15,17 @@ const jobsSchema = new mongoose.Schema({
   level: {
     type: String,
     required: [true, 'Must include the level of the job.'],
-    enum: [
-      'Intership',
-      'Entry-level',
-      'Mid-level',
-      'Senior-level',
-      'Executive',
-    ],
+    enum: ['Entry-level', 'Mid-level', 'Senior-level', 'Executive'],
   },
   type: {
     type: String,
     required: [true, 'Must include a type.'],
-    enum: ['Full-time', 'Part-time', 'Remote'],
+    enum: ['Full-time', 'Part-time', 'Intership'],
+  },
+  workPlace: {
+    type: String,
+    required: [true, 'Must include a work place.'],
+    enum: ['On-site', 'Remote', 'Hybrid'],
   },
   salaryMin: {
     type: Number,

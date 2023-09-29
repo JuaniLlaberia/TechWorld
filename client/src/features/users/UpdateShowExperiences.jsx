@@ -38,7 +38,7 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   if (type === 'view')
     return (
       <>
-        <h1 className='text-light-2 font-semibold mb-3'>
+        <h1 className='text-light-2 font-semibold mb-3 lg:text-xl'>
           All your experiences
         </h1>
         <ItemsList
@@ -62,7 +62,7 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   if (type === 'form')
     return (
       <>
-        <h1 className='text-light-2 font-semibold mb-3'>
+        <h1 className='text-light-2 font-semibold mb-3 lg:text-xl'>
           Add more experiences
         </h1>
         <form
@@ -123,7 +123,9 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
               />
             </InputWrapper>
           </div>
-          <p className='text-light-3 text-sm'>(Empty 'Until' means present)</p>
+          <p className='text-light-3 text-sm lg:text-lg'>
+            (Empty 'Until' means present)
+          </p>
           <InputWrapper
             error={errors?.url?.message}
             label='Reference'

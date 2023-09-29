@@ -30,7 +30,9 @@ const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
 
   return (
     <>
-      <h1 className='text-light-2 font-semibold mb-3'>Your skills</h1>
+      <h1 className='text-light-2 font-semibold mb-3 lg:text-xl'>
+        Your skills
+      </h1>
       <div className='relative mb-3'>
         <Input
           placeholder='Add new skills'
@@ -39,7 +41,7 @@ const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
         />
         <button
           onClick={handleAddItem}
-          className='absolute right-0 bottom-[50%] translate-y-[50%] bg-[#58575775] p-2.5 rounded-sm text-lg border-l-[1px] border-light-3'
+          className='absolute right-0 bottom-[50%] translate-y-[50%] bg-[#58575775] p-2.5 rounded-sm text-lg border-l-[1px] border-light-3 2xl:p-5'
         >
           <HiOutlinePlus />
         </button>

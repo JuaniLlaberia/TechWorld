@@ -1,8 +1,8 @@
-import { useGetJobs } from '../hooks/useGetJobs';
-import JobItem from './JobItem';
+import { useGetJobs } from '../../hooks/useGetJobs';
+import JobItem from '../../components/JobItem';
 import testImg from '/default.jpg';
 
-const JobList = () => {
+const JobPreviewList = () => {
   const { jobs, isLoading } = useGetJobs();
 
   if (isLoading) return <h1>Is Loading</h1>;
@@ -23,4 +23,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default JobPreviewList;

@@ -29,10 +29,10 @@ const Window = ({ children, windowName }) => {
 
   return createPortal(
     <>
-      <div className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] min-w-[300px] max-w-[650px] pt-6 p-3 rounded-sm min-h-[100px] z-50 shadow-md shadow-[#222121dc]'>
+      <div className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[300px] max-w-[650px] pt-6 p-3 rounded-sm min-h-[100px] z-50 shadow-md shadow-[#222121dc]'>
         <button
           onClick={close}
-          className='absolute right-2 top-2 text-xl'
+          className='absolute right-2 top-2 text-xl lg:text-3xl'
         >
           <HiOutlineXMark />
         </button>
