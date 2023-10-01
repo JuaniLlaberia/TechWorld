@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
-import { useLogin } from '../../hooks/useLogin';
+import { useLogin } from './useLogin';
 
 export const LoginForm = () => {
   const {

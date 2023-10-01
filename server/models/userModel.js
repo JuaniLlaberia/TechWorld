@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Must input a profession'],
   },
+  location: String,
   role: {
     type: String,
     default: 'user',

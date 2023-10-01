@@ -17,6 +17,8 @@ import { AccountVerification } from './features/auth/AccountVerification';
 import { ResendEmail } from './features/auth/ResendEmail';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import { NotFound } from './pages/NotFound';
+import { AuthProvider } from './context/AuthContext.jsx';
+import JobsAll from './features/jobs/JobsAll';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +29,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/jobs',
-        element: <Job />,
+        path: '/jobs/all',
+        element: <JobsAll />,
       },
       {
         element: <ProtectedRoutes />,
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
           },
           {
             path: '/job/:id',
+            element: <Job />,
+          },
+          {
+            path: '/jobs',
             element: <Job />,
           },
         ],
@@ -100,23 +106,25 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
-      <RouterProvider router={router} />
-      <Toaster
-        position='bottom-center'
-        containerStyle={{ margin: '2px' }}
-        gutter={12}
-        toastOptions={{
-          duration: 4000,
-          style: {
-            fontSize: '16px',
-            maxWidth: '500px',
-            padding: '16px 24px',
-            backgroundColor: 'black',
-            fontWeight: '500',
-            color: 'white',
-          },
-        }}
-      />
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <Toaster
+          position='bottom-center'
+          containerStyle={{ margin: '2px' }}
+          gutter={12}
+          toastOptions={{
+            duration: 4000,
+            style: {
+              fontSize: '16px',
+              maxWidth: '500px',
+              padding: '16px 24px',
+              backgroundColor: 'black',
+              fontWeight: '500',
+              color: 'white',
+            },
+          }}
+        />
+      </AuthProvider>
     </QueryClientProvider>
   );
 };

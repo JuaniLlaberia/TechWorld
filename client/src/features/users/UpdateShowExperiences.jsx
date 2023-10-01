@@ -5,7 +5,7 @@ import SaveBtn from '../../components/SaveBtn';
 import InputWrapper from '../../components/InputWrapper';
 import Input from '../../components/Input';
 import ExperienceItem from './ExperienceItem';
-import { useUpdateMe } from '../../hooks/useUpdateMe';
+import { useUpdateMe } from './useUpdateMe';
 
 const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   const { updateProfile, isUpdating } = useUpdateMe();

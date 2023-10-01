@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { resetPassword as resetPasswordAPI } from '../features/auth/authApi';
+import { resetPassword as resetPasswordAPI } from '../../api/authApi';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 

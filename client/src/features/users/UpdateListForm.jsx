@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { HiOutlinePlus, HiOutlineXMark } from 'react-icons/hi2';
-import { useUpdateMe } from '../../hooks/useUpdateMe';
+import { HiOutlinePlus } from 'react-icons/hi2';
+import { useUpdateMe } from './useUpdateMe';
 import Input from '../../components/Input';
 import ItemsList from '../../components/ItemsList';
 import SaveBtn from '../../components/SaveBtn';

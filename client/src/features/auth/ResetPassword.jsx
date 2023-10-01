@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
-import { useResetPassword } from '../../hooks/useResetPassword';
+import { useResetPassword } from './useResetPassword';
 
 export const ResetPassword = () => {
   const {

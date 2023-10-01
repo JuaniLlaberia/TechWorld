@@ -7,7 +7,7 @@ import test from '../../../public/test.png';
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
-import { useSignup } from '../../hooks/useSignup';
+import { useSignup } from './useSignup';
 
 export const SignupForm = () => {
   const {

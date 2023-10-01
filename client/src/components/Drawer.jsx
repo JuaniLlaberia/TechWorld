@@ -36,7 +36,7 @@ const Body = ({ children, title, windowName }) => {
   return createPortal(
     <>
       <div
-        className={`fixed z-10 bottom-0 left-[50%] translate-x-[-50%] p-3 pt-4 bg-light-1 w-full rounded-t-lg ${
+        className={`fixed z-50 bottom-0 left-[50%] translate-x-[-50%] p-3 pt-4 bg-light-1 w-full rounded-t-lg ${
           isOpen === windowName ? 'translate-y-0' : 'translate-y-full'
         } transition-all ease-in-out duration-300 max-w-[1024px]`}
       >
