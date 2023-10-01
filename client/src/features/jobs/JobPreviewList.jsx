@@ -1,6 +1,6 @@
-import { useGetJobs } from '../../hooks/useGetJobs';
-import JobItem from '../../components/JobItem';
-import testImg from '/default.jpg';
+import { useGetJobs } from './useGetJobs';
+import JobList from './JobList';
+import { Link } from 'react-router-dom';
 
 const JobPreviewList = () => {
   const { jobs, isLoading } = useGetJobs();
@@ -8,18 +8,15 @@ const JobPreviewList = () => {
   if (isLoading) return <h1>Is Loading</h1>;
 
   return (
-    <ul>
-      {jobs.data.jobs.map(job => (
-        <JobItem
-          key={job._id}
-          id={job._id}
-          img={testImg}
-          title={job.name}
-          location={job.location}
-          company='X Company'
-        />
-      ))}
-    </ul>
+    <section className='bg-dark-2 p-2 rounded-md'>
+      <JobList jobs={jobs.data.jobs.slice(0, 5)} />
+      <Link
+        to='/jobs/all'
+        className='text-light-2 flex justify-center py-1.5 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3'
+      >
+        View more
+      </Link>
+    </section>
   );
 };
 
