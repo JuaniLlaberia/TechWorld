@@ -1,31 +1,31 @@
-import { useGetJobs } from '../../hooks/useGetJobs';
-import JobItem from '../../components/JobItem';
-import testImg from '/default.jpg';
+import JobItem from './JobItem';
+import { Link } from 'react-router-dom';
 
-const JobList = () => {
-  const { jobs, isLoading } = useGetJobs();
-
-  if (isLoading) return <h1>Is Loading</h1>;
-
+const JobList = ({ jobs }) => {
   return (
     <>
-      <h2 className='text-light-2 my-2'>
-        Found <span className='text-light-1 font-semibold'>{jobs.count}</span>{' '}
-        jobs related
-      </h2>
-      <ul>
-        {jobs.data.jobs.map(job => (
-          <JobItem
-            key={job._id}
-            id={job._id}
-            img={testImg}
-            title={job.name}
-            location={job.location}
-            company='X Company'
-          />
-        ))}
-      </ul>
-      <button>View more</button>
+      {jobs?.length > 0 ? (
+        <ul className='last-of-type:border-0'>
+          {jobs.map(job => (
+            <JobItem
+              item={job}
+              key={job._id}
+            />
+          ))}
+        </ul>
+      ) : (
+        <section>
+          <h2 className='text-light-1 mt-4'>
+            Could not find any related job based on your search.{' '}
+            <Link
+              to='/jobs/all'
+              className='font-semibold underline'
+            >
+              See more jobs
+            </Link>
+          </h2>
+        </section>
+      )}
     </>
   );
 };

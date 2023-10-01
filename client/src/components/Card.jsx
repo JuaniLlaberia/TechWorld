@@ -1,4 +1,4 @@
-const ProfileCard = ({ children, position }) => {
+const Card = ({ children, position }) => {
   return (
     <section
       className={`relative ${
@@ -10,4 +10,4 @@ const ProfileCard = ({ children, position }) => {
   );
 };
 
-export default ProfileCard;
+export default Card;

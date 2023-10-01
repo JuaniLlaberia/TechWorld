@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { resendConfEmail } from '../features/auth/authApi';
+import { resendConfEmail } from '../../api/authApi';
 import toast from 'react-hot-toast';
 
 export const useResendConf = () => {

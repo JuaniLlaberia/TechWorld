@@ -44,7 +44,7 @@ const Body = ({ children, id }) => {
 
   return (
     <div
-      className={`h-0 overflow-hidden text-dark-1 transition-all ${
+      className={`h-0 overflow-hidden text-dark-1 transition-all duration-400 ${
         open === id ? 'py-1.5 border-b-[1px] border-dark-1-border h-auto' : ''
       }`}
     >
