@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useUpdateMe } from '../../hooks/useUpdateMe';
+import { useUpdateMe } from './useUpdateMe';
 import SaveBtn from '../../components/SaveBtn';
 
 const UpdateDescForm = ({ onClose, current }) => {

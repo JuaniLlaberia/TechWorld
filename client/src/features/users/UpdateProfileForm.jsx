@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useUpdateMe } from '../../hooks/useUpdateMe';
+import { useUpdateMe } from './useUpdateMe';
 
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
@@ -67,6 +67,23 @@ const UpdateProfileForm = ({ onClose, current, image }) => {
           type='text'
           register={register('profession', {
             required: `What's your profession?`,
+            minLength: {
+              value: 5,
+              message: 'Min. 5 characters',
+            },
+          })}
+        />
+      </InputWrapper>
+      <InputWrapper
+        id='location'
+        label='Based on'
+        error={errors?.profession?.message}
+      >
+        <Input
+          id='location'
+          type='text'
+          register={register('location', {
+            required: `Where are you based?`,
             minLength: {
               value: 5,
               message: 'Min. 5 characters',

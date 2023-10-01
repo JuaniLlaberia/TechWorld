@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useVerifyEmail } from '../../hooks/useVerifyEmail';
+import { useVerifyEmail } from './useVerifyEmail';
 import { Link, useParams } from 'react-router-dom';
 import { HiOutlineExclamationTriangle } from 'react-icons/hi2';
 import Button from '../../components/Button';
