@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getJobs } from '../../api/jobApi';
 
 export const useGetJobs = (searchQuery, locationQuery) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const experience = searchParams.get('level') || 'All';
   const jobType = searchParams.get('type') || 'All';
@@ -20,6 +20,7 @@ export const useGetJobs = (searchQuery, locationQuery) => {
     queryFn: () => getJobs(experience, jobType, place, query, page, location),
     queryKey: ['jobs', experience, jobType, place, query, page, location],
     keepPreviousData: true,
+    refetchOnWindowFocus: false,
   });
 
   return { jobs, isLoading, error };
