@@ -38,6 +38,10 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
     query.select(fields);
   }
 
+  if (req.query.limit) {
+    query.limit(req.query.limit);
+  }
+
   //Pagination
   if (req.query.page) {
     const page = Number(req.query.page) || 1;

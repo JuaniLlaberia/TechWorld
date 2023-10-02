@@ -32,3 +32,13 @@ export const getJobs = async (
   const jobs = await data.json();
   return jobs;
 };
+
+export const getJob = async () => {};
+
+export const searchJobs = async query => {
+  const data = await fetch(
+    `http://localhost:8000/api/jobs?search=${query}&limit=5`
+  );
+  const jobs = await data.json();
+  return jobs;
+};
