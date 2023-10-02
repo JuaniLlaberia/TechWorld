@@ -20,6 +20,7 @@ import { NotFound } from './pages/NotFound';
 import { AuthProvider } from './context/AuthContext.jsx';
 import JobsAll from './features/jobs/JobsAll';
 import SearchJobs from './features/jobs/SearchJobs';
+import SearchUsers from './features/users/SearchUsers';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
           {
             path: '/jobs-search',
             element: <SearchJobs />,
+          },
+          {
+            path: '/users-search',
+            element: <SearchUsers />,
           },
           {
             path: '/notifications',

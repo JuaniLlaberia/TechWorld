@@ -21,3 +21,15 @@ export const updateMe = async newData => {
   const user = await data.json();
   return user;
 };
+
+export const getUser = async () => {};
+
+export const getUsersByProfession = async (profession, limit) => {
+  const data = await fetch(
+    `http://localhost:8000/api/users?search=${profession}&limit=${limit}`,
+    { credentials: 'include' }
+  );
+  const users = await data.json();
+
+  return users;
+};

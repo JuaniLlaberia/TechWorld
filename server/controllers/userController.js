@@ -3,7 +3,11 @@ const catchErrorAsync = require('../utils/catchErrorAsync');
 const CustomError = require('../utils/error');
 
 exports.getUsers = catchErrorAsync(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find({
+    profession: { $regex: req.query.search || '', $options: 'i' },
+  })
+    .limit(req.query.limit || 10)
+    .select('_id profession fullName image location');
 
   res.status(200).json({
     status: 'success',
