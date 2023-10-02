@@ -50,9 +50,7 @@ const Profile = () => {
       </Card>
       <Card>
         <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>About</h3>
-        <p className='text-light-1 text-sm text-justify lg:text-xl'>
-          {description}
-        </p>
+        <p className='text-light-1 text-sm lg:text-xl'>{description}</p>
         <Modal.Open opens='about-modal'>
           <EditBtn />
         </Modal.Open>
