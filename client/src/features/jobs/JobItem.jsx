@@ -13,12 +13,16 @@ const JobItem = ({ item }) => {
       >
         <img
           src={defaultUserImg}
-          className='w-20 rounded-full mb-2'
+          className='w-20 rounded-full mb-2 xl:w-24'
         />
         <div className=' w-full'>
-          <h3 className='text-lg font-semibold break-keep'>{name}</h3>
-          <h4 className='text-light-2'>{company}</h4>
-          <h4 className='text-light-2 text-sm'>{location}</h4>
+          <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem]'>
+            {name}
+          </h3>
+          <h4 className='text-light-2 lg:text-lg'>{company}</h4>
+          <h4 className='text-light-2 text-sm lg:text-base xl:text-lg'>
+            {location}
+          </h4>
         </div>
       </Link>
       <button className='absolute right-0 bottom-6 z-10 text-light-1'>

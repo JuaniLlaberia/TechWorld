@@ -3,7 +3,7 @@ import { searchJobs } from '../../api/jobApi';
 import { useSearchParams } from 'react-router-dom';
 
 export const useSearchJobs = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const query = searchParams.get('searchQuery');
 
   const {

@@ -8,7 +8,7 @@ const JobPreviewList = () => {
   if (isLoading) return <h1>Is Loading</h1>;
 
   return (
-    <section className='bg-dark-2 p-2 rounded-md'>
+    <section className='bg-dark-2 p-2 rounded-md '>
       <JobList jobs={jobs.data.jobs.slice(0, 5)} />
       <Link
         to='/jobs/all'
