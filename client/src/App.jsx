@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'sonner';
 import Home from './pages/Home';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppLayout from './pages/AppLayout';
@@ -118,23 +118,12 @@ const App = () => {
       <ReactQueryDevtools />
       <AuthProvider>
         <RouterProvider router={router} />
-        <Toaster
-          position='bottom-center'
-          containerStyle={{ margin: '2px' }}
-          gutter={12}
-          toastOptions={{
-            duration: 4000,
-            style: {
-              fontSize: '16px',
-              maxWidth: '500px',
-              padding: '16px 24px',
-              backgroundColor: 'black',
-              fontWeight: '500',
-              color: 'white',
-            },
-          }}
-        />
       </AuthProvider>
+      <Toaster
+        position='bottom-center'
+        richColors
+        closeButton
+      />
     </QueryClientProvider>
   );
 };
