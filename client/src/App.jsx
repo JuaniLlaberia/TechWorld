@@ -21,6 +21,8 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import JobsAll from './features/jobs/JobsAll';
 import SearchJobs from './features/jobs/SearchJobs';
 import SearchUsers from './features/users/SearchUsers';
+import { JobPost } from './pages/JobPost';
+import { UserProfile } from './pages/UserProfile';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           {
+            path: '/me',
+            element: <Profile />,
+          },
+          {
             path: '/search',
             element: <Search />,
           },
@@ -50,19 +56,19 @@ const router = createBrowserRouter([
             element: <SearchUsers />,
           },
           {
-            path: '/notifications',
-            element: <Job />,
-          },
-          {
-            path: '/me',
-            element: <Profile />,
-          },
-          {
             path: '/job/:id',
-            element: <Job />,
+            element: <JobPost />,
           },
           {
             path: '/jobs',
+            element: <Job />,
+          },
+          {
+            path: '/user/:id',
+            element: <UserProfile />,
+          },
+          {
+            path: '/notifications',
             element: <Job />,
           },
         ],

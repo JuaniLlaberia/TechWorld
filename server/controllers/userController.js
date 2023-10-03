@@ -20,7 +20,7 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
 
 exports.getUser = catchErrorAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id).select(
-    '_id fullName image profession email'
+    '_id fullName image profession email skills experience location description'
   );
 
   res.status(200).json({
