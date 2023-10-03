@@ -13,8 +13,6 @@ const RecommendedJobs = () => {
     user?.data?.location || ''
   );
 
-  if (isLoading) return <h1>Is Loading</h1>;
-
   return (
     <>
       <h1 className='text-light-1 text-xl font-semibold mt-3'>
@@ -34,14 +32,19 @@ const RecommendedJobs = () => {
         </FilterBtn>
       </section>
       <section>
-        <h2 className='text-light-2 my-2'>
-          Found{' '}
-          <span className='text-light-1 font-semibold'>
-            {jobs?.data?.jobs.length}
-          </span>{' '}
-          jobs related
-        </h2>
-        <JobList jobs={jobs?.data?.jobs} />
+        {!isLoading ? (
+          <h2 className='text-light-2 my-2'>
+            Found{' '}
+            <span className='text-light-1 font-semibold'>
+              {jobs?.data?.jobs.length}
+            </span>{' '}
+            jobs related
+          </h2>
+        ) : null}
+        <JobList
+          isLoading={isLoading}
+          jobs={jobs?.data?.jobs}
+        />
       </section>
     </>
   );

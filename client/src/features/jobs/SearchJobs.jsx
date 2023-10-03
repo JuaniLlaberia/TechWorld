@@ -9,8 +9,6 @@ const SearchJobs = () => {
   const [searchParams] = useSearchParams();
   const { jobs, isLoading } = useGetJobs(searchParams.get('search') || '');
 
-  if (isLoading) return <h1>Is Loading</h1>;
-
   return (
     <>
       <h1 className='text-light-1 text-xl font-semibold mt-3'>
@@ -34,7 +32,10 @@ const SearchJobs = () => {
           </span>{' '}
           jobs related
         </h2>
-        <JobList jobs={jobs?.data?.jobs} />
+        <JobList
+          isLoading={isLoading}
+          jobs={jobs?.data?.jobs}
+        />
       </section>
     </>
   );

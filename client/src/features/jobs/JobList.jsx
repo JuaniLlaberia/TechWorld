@@ -1,7 +1,10 @@
+import ItemSkeleton from '../../components/ItemSkeleton';
 import JobItem from './JobItem';
 import { Link } from 'react-router-dom';
 
-const JobList = ({ jobs }) => {
+const JobList = ({ jobs, isLoading }) => {
+  if (isLoading) return <ItemSkeleton amount={5} />;
+
   return (
     <>
       {jobs?.length > 0 ? (

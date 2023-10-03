@@ -1,6 +1,9 @@
+import ItemSkeleton from '../../components/ItemSkeleton';
 import UserItem from './UserItem';
 
-const UserList = ({ users }) => {
+const UserList = ({ users, isLoading }) => {
+  if (isLoading) return <ItemSkeleton amount={5} />;
+
   return (
     <>
       {users?.length > 0 ? (

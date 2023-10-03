@@ -7,8 +7,6 @@ import { useGetJobs } from './useGetJobs';
 const JobsAll = () => {
   const { jobs, isLoading } = useGetJobs();
 
-  if (isLoading) return <h1>Is Loading</h1>;
-
   return (
     <>
       <section className='flex justify-between items-end mb-5'>
@@ -32,7 +30,10 @@ const JobsAll = () => {
           </span>{' '}
           positions
         </h2>
-        <JobList jobs={jobs?.data?.jobs} />
+        <JobList
+          isLoading={isLoading}
+          jobs={jobs?.data?.jobs}
+        />
       </section>
     </>
   );

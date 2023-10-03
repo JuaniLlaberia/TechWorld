@@ -6,6 +6,7 @@ import { useSearchJobs } from '../features/jobs/useSearchJobs';
 import JobList from '../features/jobs/JobList';
 import { GetUsersByProfession } from '../features/users/useGetusersByProfession';
 import UserList from '../features/users/UserList';
+import ItemSkeleton from '../components/ItemSkeleton';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,9 +52,7 @@ const Search = () => {
         </button>
       </form>
 
-      {isRefetching || isRefetchingUsers ? (
-        <p className='text-light-1'>Loading...</p>
-      ) : null}
+      {isRefetching || isRefetchingUsers ? <ItemSkeleton amount={5} /> : null}
 
       {jobs && !isRefetching ? (
         <Card>

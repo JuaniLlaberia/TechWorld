@@ -6,8 +6,6 @@ const SearchUsers = () => {
   const [searchParams] = useSearchParams();
   const { users, isLoading } = useGetUsers();
 
-  if (isLoading) return <h1 className='text-light-1'>Is Loading</h1>;
-
   return (
     <>
       <h1 className='text-light-1 text-xl font-semibold mt-2 mb-6'>
@@ -21,7 +19,10 @@ const SearchUsers = () => {
         users
       </h2>
       <section>
-        <UserList users={users?.data?.users} />
+        <UserList
+          isLoading={isLoading}
+          users={users?.data?.users}
+        />
       </section>
     </>
   );
