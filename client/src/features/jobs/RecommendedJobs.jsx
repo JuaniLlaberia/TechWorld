@@ -1,5 +1,6 @@
 import Drawer from '../../components/Drawer';
 import FilterBtn from '../../components/FilterBtn';
+import Pagination from '../../components/Pagination';
 import { useAuthContext } from '../../context/AuthContext';
 import JobFilters from './JobFilters';
 import JobList from './JobList';
@@ -12,8 +13,6 @@ const RecommendedJobs = () => {
     user?.data?.profession.split(' ')[0] || '',
     user?.data?.location || ''
   );
-
-  if (isLoading) return <h1>Is Loading</h1>;
 
   return (
     <>
@@ -34,15 +33,12 @@ const RecommendedJobs = () => {
         </FilterBtn>
       </section>
       <section>
-        <h2 className='text-light-2 my-2'>
-          Found{' '}
-          <span className='text-light-1 font-semibold'>
-            {jobs?.data?.jobs.length}
-          </span>{' '}
-          jobs related
-        </h2>
-        <JobList jobs={jobs?.data?.jobs} />
+        <JobList
+          isLoading={isLoading}
+          jobs={jobs?.data?.jobs}
+        />
       </section>
+      <Pagination totalDocs={jobs?.count} />
     </>
   );
 };

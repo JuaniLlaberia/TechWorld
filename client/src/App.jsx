@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'sonner';
 import Home from './pages/Home';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppLayout from './pages/AppLayout';
@@ -21,6 +21,9 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import JobsAll from './features/jobs/JobsAll';
 import SearchJobs from './features/jobs/SearchJobs';
 import SearchUsers from './features/users/SearchUsers';
+import { JobPost } from './pages/JobPost';
+import { UserProfile } from './pages/UserProfile';
+import New from './pages/New';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,14 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           {
+            path: '/new',
+            element: <New />,
+          },
+          {
+            path: '/me',
+            element: <Profile />,
+          },
+          {
             path: '/search',
             element: <Search />,
           },
@@ -50,19 +61,19 @@ const router = createBrowserRouter([
             element: <SearchUsers />,
           },
           {
-            path: '/notifications',
-            element: <Job />,
-          },
-          {
-            path: '/me',
-            element: <Profile />,
-          },
-          {
             path: '/job/:id',
-            element: <Job />,
+            element: <JobPost />,
           },
           {
             path: '/jobs',
+            element: <Job />,
+          },
+          {
+            path: '/user/:id',
+            element: <UserProfile />,
+          },
+          {
+            path: '/notifications',
             element: <Job />,
           },
         ],
@@ -118,23 +129,12 @@ const App = () => {
       <ReactQueryDevtools />
       <AuthProvider>
         <RouterProvider router={router} />
-        <Toaster
-          position='bottom-center'
-          containerStyle={{ margin: '2px' }}
-          gutter={12}
-          toastOptions={{
-            duration: 4000,
-            style: {
-              fontSize: '16px',
-              maxWidth: '500px',
-              padding: '16px 24px',
-              backgroundColor: 'black',
-              fontWeight: '500',
-              color: 'white',
-            },
-          }}
-        />
       </AuthProvider>
+      <Toaster
+        position='bottom-center'
+        richColors
+        closeButton
+      />
     </QueryClientProvider>
   );
 };

@@ -33,7 +33,11 @@ export const getJobs = async (
   return jobs;
 };
 
-export const getJob = async () => {};
+export const getJob = async id => {
+  const data = await fetch(`http://localhost:8000/api/jobs/${id}`);
+  const job = await data.json();
+  return job;
+};
 
 export const searchJobs = async query => {
   const data = await fetch(

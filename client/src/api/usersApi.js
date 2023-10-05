@@ -22,11 +22,18 @@ export const updateMe = async newData => {
   return user;
 };
 
-export const getUser = async () => {};
+export const getUser = async id => {
+  const data = await fetch(`http://localhost:8000/api/users/${id}`, {
+    credentials: 'include',
+  });
+  const user = await data.json();
 
-export const getUsersByProfession = async (profession, limit) => {
+  return user;
+};
+
+export const getUsersByProfession = async (profession, limit, page) => {
   const data = await fetch(
-    `http://localhost:8000/api/users?search=${profession}&limit=${limit}`,
+    `http://localhost:8000/api/users?search=${profession}&limit=${limit}&page=${page}`,
     { credentials: 'include' }
   );
   const users = await data.json();

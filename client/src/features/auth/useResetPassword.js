@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { resetPassword as resetPasswordAPI } from '../../api/authApi';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export const useResetPassword = () => {

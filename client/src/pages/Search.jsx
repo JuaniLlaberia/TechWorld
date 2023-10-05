@@ -6,6 +6,7 @@ import { useSearchJobs } from '../features/jobs/useSearchJobs';
 import JobList from '../features/jobs/JobList';
 import { GetUsersByProfession } from '../features/users/useGetusersByProfession';
 import UserList from '../features/users/UserList';
+import ItemSkeleton from '../components/ItemSkeleton';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,24 +37,21 @@ const Search = () => {
   return (
     <>
       <form
-        className='flex justify-center items-center gap-3 mb-5'
+        className='flex justify-center items-center mb-5 w-full relative h-10'
         onSubmit={handleSearch}
       >
         <input
           defaultValue={searchParams.get('searchQuery')}
           placeholder='Search'
           ref={inputRef}
-          className='w-full max-w-[400px] py-1 px-2 rounded-md text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl'
+          className='w-full max-w-[400px] h-10 py-2 px-4 rounded-l-full text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl'
         />
-        <button className='bg-light-1 text-xl text-dark-1 flex items-center gap-2 px-3 py-1.5 rounded-md lg:text-base xl:text-lg 2xl:text-2xl'>
+        <button className='h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-full lg:text-base xl:text-lg 2xl:text-2xl'>
           <HiOutlineMagnifyingGlass />
-          <span className='hidden lg:block lg:text-lg xl:text-xl'>Search</span>
         </button>
       </form>
 
-      {isRefetching || isRefetchingUsers ? (
-        <p className='text-light-1'>Loading...</p>
-      ) : null}
+      {isRefetching || isRefetchingUsers ? <ItemSkeleton amount={5} /> : null}
 
       {jobs && !isRefetching ? (
         <Card>

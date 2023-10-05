@@ -45,19 +45,24 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   //Pagination
   if (req.query.page) {
     const page = Number(req.query.page) || 1;
-    const limit = req.query.limit || 10;
+    const limit = req.query.limit || 5;
     const skip = (page - 1) * limit;
 
     query.skip(skip).limit(limit);
   }
 
   // Get data from database
-  const jobs = await query;
+  const totalJobs = await Job.countDocuments({
+    name: { $regex: req.query.search || '', $options: 'i' },
+    location: { $regex: req.query.location || '', $options: 'i' },
+  });
+
+  const jobs = await query.populate('user', 'fullName');
 
   //Return data
   res.status(200).json({
     status: 'success',
-    count: jobs.length,
+    count: totalJobs,
     data: {
       jobs,
     },
@@ -88,7 +93,7 @@ exports.getJobsArea = catchErrorAsync(async (req, res, next) => {
 });
 
 exports.getJob = catchErrorAsync(async (req, res) => {
-  const job = await Job.findById(req.params.id);
+  const job = await Job.findById(req.params.id).populate('user', 'fullName');
 
   res.status(200).json({
     status: 'success',
