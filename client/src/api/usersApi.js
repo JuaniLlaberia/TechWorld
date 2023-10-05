@@ -31,9 +31,9 @@ export const getUser = async id => {
   return user;
 };
 
-export const getUsersByProfession = async (profession, limit) => {
+export const getUsersByProfession = async (profession, limit, page) => {
   const data = await fetch(
-    `http://localhost:8000/api/users?search=${profession}&limit=${limit}`,
+    `http://localhost:8000/api/users?search=${profession}&limit=${limit}&page=${page}`,
     { credentials: 'include' }
   );
   const users = await data.json();

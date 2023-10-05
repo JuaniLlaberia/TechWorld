@@ -4,11 +4,13 @@ import { getUsersByProfession } from '../../api/usersApi';
 
 export const useGetUsers = () => {
   const [searchParams] = useSearchParams();
+
   const query = searchParams.get('searchQuery');
+  const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
 
   const { data: users, isLoading } = useQuery({
-    queryFn: () => getUsersByProfession(query, ''),
-    queryKey: [`users`, query],
+    queryFn: () => getUsersByProfession(query, '', page),
+    queryKey: [`users`, query, page],
   });
 
   return { users, isLoading };

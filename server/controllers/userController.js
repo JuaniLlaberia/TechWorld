@@ -3,15 +3,27 @@ const catchErrorAsync = require('../utils/catchErrorAsync');
 const CustomError = require('../utils/error');
 
 exports.getUsers = catchErrorAsync(async (req, res) => {
-  const users = await User.find({
+  let query = User.find({
     profession: { $regex: req.query.search || '', $options: 'i' },
-  })
-    .limit(req.query.limit || 10)
-    .select('_id profession fullName image location');
+  });
+
+  if (req.query.page) {
+    const page = Number(req.query.page) || 1;
+    const limit = req.query.limit || 5;
+    const skip = (page - 1) * limit;
+
+    query.skip(skip).limit(limit);
+  }
+
+  const totalUsers = await User.countDocuments({
+    profession: { $regex: req.query.search || '', $options: 'i' },
+  });
+
+  const users = await query.select('_id profession fullName image location');
 
   res.status(200).json({
     status: 'success',
-    count: users.length,
+    count: totalUsers,
     data: {
       users,
     },
