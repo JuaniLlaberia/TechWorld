@@ -11,6 +11,8 @@ export const UserProfile = () => {
   const { user, isLoading } = useGetUser();
   if (isLoading) return <ProfileSkeleton />;
 
+  /// CLEAN THIS COMPONENT ASAP
+
   const {
     fullName,
     profession,
