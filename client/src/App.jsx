@@ -23,6 +23,7 @@ import SearchJobs from './features/jobs/SearchJobs';
 import SearchUsers from './features/users/SearchUsers';
 import { JobPost } from './pages/JobPost';
 import { UserProfile } from './pages/UserProfile';
+import New from './pages/New';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         element: <ProtectedRoutes />,
         children: [
+          {
+            path: '/new',
+            element: <New />,
+          },
           {
             path: '/me',
             element: <Profile />,

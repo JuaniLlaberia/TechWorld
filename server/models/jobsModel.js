@@ -34,12 +34,6 @@ const jobsSchema = new mongoose.Schema({
   salaryMax: {
     type: Number,
   },
-  summary: {
-    type: String,
-    required: [true, 'Must include a job summary.'],
-    minLength: [20, 'Must include at least 20 characters.'],
-    maxLength: [200, 'Must include less than 200 characters.'],
-  },
   location: {
     type: String,
     required: [true, 'A job must have a location'],
@@ -48,14 +42,13 @@ const jobsSchema = new mongoose.Schema({
     type: {
       type: String,
       enum: ['Point'],
-      // required: true,
     },
     coordinates: {
       type: [Number],
-      // required: true,
     },
   },
   description: {
+    required: [true, 'Must include a job description.'],
     type: String,
   },
   expirationDate: {
@@ -74,7 +67,6 @@ const jobsSchema = new mongoose.Schema({
 
 jobsSchema.index({ name: 1 });
 jobsSchema.index({ level: 1, type: 1 });
-// jobsSchema.index({ locationMap: '2dsphere' });
 
 jobsSchema.pre(/^find/, function (next) {
   this.select('-__v');
