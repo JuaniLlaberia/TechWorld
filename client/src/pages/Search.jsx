@@ -59,7 +59,9 @@ const Search = () => {
           <JobList jobs={jobs.data.jobs} />
           {jobs.count > 0 ? (
             <Link
-              to={`/jobs-search?searchQuery=${inputRef?.current?.value}`}
+              to={`/jobs-search?searchQuery=${
+                inputRef?.current?.value || searchParams.get('searchQuery')
+              }`}
               className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3'
             >
               View more
@@ -74,7 +76,9 @@ const Search = () => {
           <UserList users={users.data.users} />
           {users.count > 0 ? (
             <Link
-              to={`/users-search?searchQuery=${inputRef?.current?.value}`}
+              to={`/users-search?searchQuery=${
+                inputRef?.current?.value || searchParams.get('searchQuery')
+              }`}
               className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3'
             >
               View more
