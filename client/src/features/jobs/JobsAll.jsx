@@ -6,7 +6,7 @@ import JobList from './JobList';
 import { useGetJobs } from './useGetJobs';
 
 const JobsAll = () => {
-  const { jobs, isLoading } = useGetJobs();
+  const { jobs, isLoading } = useGetJobs('', '', true);
 
   return (
     <>
@@ -15,19 +15,13 @@ const JobsAll = () => {
           All positions
         </h1>
         <FilterBtn>
-          <Drawer.Body
-            title='Filter & Sort'
-            windowName='filters-jobs'
-          >
+          <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
             <JobFilters />
           </Drawer.Body>
         </FilterBtn>
       </section>
       <section>
-        <JobList
-          isLoading={isLoading}
-          jobs={jobs?.data?.jobs}
-        />
+        <JobList isLoading={isLoading} jobs={jobs?.data?.jobs} />
       </section>
       <Pagination totalDocs={jobs?.count} />
     </>

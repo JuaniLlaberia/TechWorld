@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import { getJobs } from '../../api/jobApi';
+import { useAuthContext } from '../../context/AuthContext';
 
-export const useGetJobs = (searchQuery, locationQuery) => {
+export const useGetJobs = (searchQuery, locationQuery, showPosts) => {
   const [searchParams] = useSearchParams();
+  const { isAuth } = useAuthContext();
 
   const experience = searchParams.get('level') || 'All';
   const jobType = searchParams.get('type') || 'All';
@@ -21,6 +23,7 @@ export const useGetJobs = (searchQuery, locationQuery) => {
     queryKey: ['jobs', experience, jobType, place, query, page, location],
     keepPreviousData: true,
     refetchOnWindowFocus: false,
+    enabled: showPosts || isAuth,
   });
 
   return { jobs, isLoading, error };

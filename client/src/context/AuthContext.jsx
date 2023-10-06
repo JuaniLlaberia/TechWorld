@@ -6,23 +6,22 @@ import { createPortal } from 'react-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const { isLoading, user: test } = useGetMe();
+  const { isLoading, user: crrUser } = useGetMe();
 
   if (isLoading)
     return createPortal(
       <section className='bg-dark-1 fixed top-0 h-full w-full flex justify-center items-center'>
-        <ClipLoader
-          size={60}
-          color='white'
-        />
+        <ClipLoader size={60} color='white' />
       </section>,
       document.body
     );
 
-  const user = test.status ? test : { status: 'success', data: test };
+  const user = crrUser.status ? crrUser : { status: 'success', data: crrUser };
 
   return (
-    <AuthContext.Provider value={{ isLoading, user }}>
+    <AuthContext.Provider
+      value={{ isLoading, user, isAuth: user.status === 'success' }}
+    >
       {children}
     </AuthContext.Provider>
   );
