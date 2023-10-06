@@ -20,21 +20,11 @@ const Navigation = () => {
       <h1 className='hidden text-center mb-16 lg:block'>LOGO</h1>
       <ul className='flex justify-between px-8 items-center h-full text-white lg:flex-col lg:justify-center lg:gap-8 lg:h-fit 2xl:items-start'>
         {items.map((item, i) => (
-          <NavItem
-            key={i}
-            icon={item.icon}
-            path={item.path}
-            text={item.text}
-          />
+          <NavItem key={i} icon={item.icon} path={item.path} text={item.text} />
         ))}
         <NavItem
-          icon={
-            <img
-              src={defaultUserImg}
-              className='w-8 rounded-full'
-            />
-          }
-          path='/me'
+          icon={<img src={defaultUserImg} className='w-8 rounded-full' />}
+          path='/me/information'
           text='My profile'
         />
       </ul>
