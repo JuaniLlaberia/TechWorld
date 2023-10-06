@@ -46,3 +46,35 @@ export const searchJobs = async query => {
   const jobs = await data.json();
   return jobs;
 };
+
+export const saveJob = async id => {
+  const response = await fetch(
+    `http://localhost:8000/api/users/save-post/${id}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+    }
+  );
+
+  return response;
+};
+
+export const unSaveJob = async id => {
+  const response = await fetch(
+    `http://localhost:8000/api/users/unsave-post/${id}`,
+    {
+      method: 'POST',
+      credentials: 'include',
+    }
+  );
+
+  return response;
+};
+
+export const getMyJobs = async () => {
+  const data = await fetch(`http://localhost:8000/api/jobs/my-jobs`, {
+    credentials: 'include',
+  });
+  const jobs = await data.json();
+  return jobs;
+};
