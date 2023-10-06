@@ -132,6 +132,6 @@ exports.getJobsFromUser = catchErrorAsync(async (req, res) => {
 
 //Get all the jobs posted by me
 exports.getMyJobs = catchErrorAsync(async (req, res) => {
-  const jobs = await Job.find({ user: req.user.id });
+  const jobs = await Job.find({ user: req.user.id }).select('name');
   res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
 });
