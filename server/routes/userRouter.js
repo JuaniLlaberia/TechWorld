@@ -42,6 +42,7 @@ router.post(
   authController.protect,
   userController.unSaveJob
 );
+router.get('/saved-posts', authController.protect, userController.getSavedJobs);
 
 //Protected to auth - Should it be restricted? or do i want to be able to fetch the users
 router.route('/').get(authController.protect, userController.getUsers);

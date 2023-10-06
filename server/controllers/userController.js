@@ -144,3 +144,18 @@ exports.unSaveJob = catchErrorAsync(async (req, res) => {
     message: 'Unsaved successfully.',
   });
 });
+
+exports.getSavedJobs = catchErrorAsync(async (req, res) => {
+  const user = await User.findById(req.user.id)
+    .select('savedPosts')
+    .populate({
+      path: 'savedPosts',
+      select: 'name user location workPlace',
+      populate: { path: 'user', select: 'fullName image' },
+    });
+
+  res.status(200).json({
+    status: 'success',
+    data: user,
+  });
+});
