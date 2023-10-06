@@ -5,3 +5,17 @@
 .active {
   color: rgb(250, 247, 247);
 }
+
+#profile-nav .active {
+  color: rgb(250, 247, 247);
+}
+
+#profile-nav .active::after {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color: rgb(250, 247, 247);
+  position: absolute;
+  left: 0;
+  bottom: -52%;
+}

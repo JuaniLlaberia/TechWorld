@@ -40,3 +40,13 @@ export const getUsersByProfession = async (profession, limit, page) => {
 
   return users;
 };
+
+export const getMySaved = async () => {
+  const data = await fetch('http://localhost:8000/api/users/saved-posts', {
+    credentials: 'include',
+  });
+
+  const users = await data.json();
+
+  return users;
+};

@@ -24,6 +24,9 @@ import SearchUsers from './features/users/SearchUsers';
 import { JobPost } from './pages/JobPost';
 import { UserProfile } from './pages/UserProfile';
 import New from './pages/New';
+import ProfilePosts from './features/users/ProfilePosts';
+import ProfileSaved from './features/users/ProfileSaved';
+import ProfileInfo from './features/users/ProfileInfo';
 
 const router = createBrowserRouter([
   {
@@ -45,8 +48,18 @@ const router = createBrowserRouter([
             element: <New />,
           },
           {
-            path: '/me',
             element: <Profile />,
+            children: [
+              {
+                path: '/me/information',
+                element: <ProfileInfo />,
+              },
+              {
+                path: '/me/my-jobs',
+                element: <ProfilePosts />,
+              },
+              { path: '/me/saved', element: <ProfileSaved /> },
+            ],
           },
           {
             path: '/search',
@@ -130,11 +143,7 @@ const App = () => {
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
-      <Toaster
-        position='bottom-center'
-        richColors
-        closeButton
-      />
+      <Toaster position='bottom-center' richColors closeButton />
     </QueryClientProvider>
   );
 };
