@@ -24,21 +24,16 @@ const JobFilters = ({ onClose }) => {
     searchParams.set('level', experience);
     searchParams.set('type', type);
     searchParams.set('place', place);
+    searchParams.set('page', 1);
 
     onClose();
     setSearchParams(searchParams);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col'
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
       <Accordion>
-        <Accordion.Opener
-          title='Experience level'
-          opens='level'
-        />
+        <Accordion.Opener title='Experience level' opens='level' />
         <Accordion.Body id='level'>
           <fieldset id='experience'>
             {filterExperience.map(el => (
@@ -51,10 +46,7 @@ const JobFilters = ({ onClose }) => {
             ))}
           </fieldset>
         </Accordion.Body>
-        <Accordion.Opener
-          title='Job type'
-          opens='type'
-        />
+        <Accordion.Opener title='Job type' opens='type' />
         <Accordion.Body id='type'>
           <fieldset id='type'>
             {filterJobType.map(el => (
@@ -67,10 +59,7 @@ const JobFilters = ({ onClose }) => {
             ))}
           </fieldset>
         </Accordion.Body>
-        <Accordion.Opener
-          title='Work place'
-          opens='date'
-        />
+        <Accordion.Opener title='Work place' opens='date' />
         <Accordion.Body id='date'>
           <fieldset id='place'>
             {filterJobPlace.map(el => (
