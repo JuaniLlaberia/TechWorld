@@ -24,19 +24,13 @@ const RecommendedJobs = () => {
       </p>
       <section className='flex justify-end'>
         <FilterBtn>
-          <Drawer.Body
-            title='Filter & Sort'
-            windowName='filters-jobs'
-          >
+          <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
             <JobFilters />
           </Drawer.Body>
         </FilterBtn>
       </section>
       <section>
-        <JobList
-          isLoading={isLoading}
-          jobs={jobs?.data?.jobs}
-        />
+        <JobList isLoading={isLoading} jobs={jobs?.data?.jobs} />
       </section>
       <Pagination totalDocs={jobs?.count} />
     </>
