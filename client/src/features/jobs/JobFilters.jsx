@@ -24,7 +24,7 @@ const JobFilters = ({ onClose }) => {
     searchParams.set('level', experience);
     searchParams.set('type', type);
     searchParams.set('place', place);
-    searchParams.set('page', 1);
+    // searchParams.set('page', 1);
 
     onClose();
     setSearchParams(searchParams);
