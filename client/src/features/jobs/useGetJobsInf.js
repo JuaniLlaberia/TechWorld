@@ -26,8 +26,8 @@ export const useGetJobsInf = (searchQuery, locationQuery, showPosts) => {
           query,
           location,
         }),
-      maxPages: 2,
       refetchOnWindowFocus: false,
+      cacheTime: 0,
       getNextPageParam: (lastPage, pages) =>
         pages.length < lastPage.pages ? pages.length + 1 : null,
       enabled: showPosts || isAuth,
