@@ -6,7 +6,7 @@ const JobItem = ({ item }) => {
   const { _id, name, user, location, workPlace } = item;
 
   return (
-    <li className='relative border-b-[1px] border-dark-1-border last:border-0'>
+    <li className='relative border-b-[1px] border-light-3 last:border-0'>
       <Link
         to={`/job/${_id}`}
         className='text-light-1 flex flex-col gap-4 py-2 w-full'

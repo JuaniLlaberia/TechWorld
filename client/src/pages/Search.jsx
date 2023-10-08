@@ -1,12 +1,12 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { useRef } from 'react';
-import Card from '../components/Card';
 import { HiOutlineMagnifyingGlass } from 'react-icons/hi2';
-import { useSearchJobs } from '../features/jobs/useSearchJobs';
+import Card from '../components/Card';
 import JobList from '../features/jobs/JobList';
-import { GetUsersByProfession } from '../features/users/useGetusersByProfession';
 import UserList from '../features/users/UserList';
 import ItemSkeleton from '../components/ItemSkeleton';
+import { useSearchJobs } from '../features/jobs/useSearchJobs';
+import { GetUsersByProfession } from '../features/users/useGetusersByProfession';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
