@@ -1,14 +1,15 @@
 import { useSearchParams } from 'react-router-dom';
 import Drawer from '../../components/Drawer';
 import FilterBtn from '../../components/FilterBtn';
-import Pagination from '../../components/Pagination';
 import JobFilters from './JobFilters';
-import JobList from './JobList';
-import { useGetJobs } from './useGetJobs';
+import { useGetJobsInf } from './useGetJobsInf';
+import JobListInfinite from './JobListInfinite';
+import Button from '../../components/Button';
 
 const SearchJobs = () => {
   const [searchParams] = useSearchParams();
-  const { jobs, isLoading } = useGetJobs(searchParams.get('searchQuery') || '');
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
+    useGetJobsInf(searchParams.get('searchQuery') || '', '', true);
 
   return (
     <>
@@ -17,21 +18,23 @@ const SearchJobs = () => {
       </h1>
       <section className='flex justify-end'>
         <FilterBtn>
-          <Drawer.Body
-            title='Filter & Sort'
-            windowName='filters-jobs'
-          >
+          <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
             <JobFilters />
           </Drawer.Body>
         </FilterBtn>
       </section>
       <section>
-        <JobList
-          isLoading={isLoading}
-          jobs={jobs?.data?.jobs}
+        <JobListInfinite
+          status={status}
+          data={data}
+          isFetchingNextPage={isFetchingNextPage}
         />
       </section>
-      <Pagination totalDocs={jobs?.count} />
+      {hasNextPage && !isFetchingNextPage && (
+        <Button full={true} onClick={fetchNextPage}>
+          See more
+        </Button>
+      )}
     </>
   );
 };

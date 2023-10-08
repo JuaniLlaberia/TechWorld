@@ -18,7 +18,7 @@ import { ResendEmail } from './features/auth/ResendEmail';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import { NotFound } from './pages/NotFound';
 import { AuthProvider } from './context/AuthContext.jsx';
-import JobsAll from './features/jobs/JobsAll';
+import JobsAllInf from './features/jobs/JobsAllInf';
 import SearchJobs from './features/jobs/SearchJobs';
 import SearchUsers from './features/users/SearchUsers';
 import { JobPost } from './pages/JobPost';
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/jobs/all',
-        element: <JobsAll />,
+        element: <JobsAllInf />,
       },
       {
         element: <ProtectedRoutes />,

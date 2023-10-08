@@ -1,12 +1,12 @@
-export const getJobs = async (
+export const getJobs = async ({
   experience,
   jobType,
   place,
   query,
   page,
-  location
-) => {
-  let baseUrl = `http://localhost:8000/api/jobs?page=${page}&`;
+  location,
+}) => {
+  let baseUrl = `http://localhost:8000/api/jobs?`;
 
   if (query) {
     baseUrl = baseUrl + `search=${query}&`;
@@ -27,6 +27,8 @@ export const getJobs = async (
   if (place && place !== 'All') {
     baseUrl = baseUrl + `workPlace=${place}&`;
   }
+
+  baseUrl = baseUrl + `page=${page}`;
 
   const data = await fetch(baseUrl);
   const jobs = await data.json();

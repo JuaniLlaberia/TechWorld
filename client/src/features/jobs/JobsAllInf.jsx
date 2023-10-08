@@ -1,12 +1,13 @@
 import Drawer from '../../components/Drawer';
 import FilterBtn from '../../components/FilterBtn';
-import Pagination from '../../components/Pagination';
 import JobFilters from './JobFilters';
-import JobList from './JobList';
-import { useGetJobs } from './useGetJobs';
+import { useGetJobsInf } from './useGetJobsInf';
+import Button from '../../components/Button';
+import JobListInfinite from './JobListInfinite';
 
 const JobsAll = () => {
-  const { jobs, isLoading } = useGetJobs('', '', true);
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
+    useGetJobsInf('', '', true);
 
   return (
     <>
@@ -20,10 +21,16 @@ const JobsAll = () => {
           </Drawer.Body>
         </FilterBtn>
       </section>
-      <section>
-        <JobList isLoading={isLoading} jobs={jobs?.data?.jobs} />
-      </section>
-      <Pagination totalDocs={jobs?.count} />
+      <JobListInfinite
+        status={status}
+        data={data}
+        isFetchingNextPage={isFetchingNextPage}
+      />
+      {hasNextPage && !isFetchingNextPage && (
+        <Button full={true} onClick={fetchNextPage}>
+          See more
+        </Button>
+      )}
     </>
   );
 };

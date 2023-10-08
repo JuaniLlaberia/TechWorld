@@ -1,18 +1,19 @@
+import Button from '../../components/Button';
 import Drawer from '../../components/Drawer';
 import FilterBtn from '../../components/FilterBtn';
-import Pagination from '../../components/Pagination';
 import { useAuthContext } from '../../context/AuthContext';
 import JobFilters from './JobFilters';
-import JobList from './JobList';
-import { useGetJobs } from './useGetJobs';
+import JobListInfinite from './JobListInfinite';
+import { useGetJobsInf } from './useGetJobsInf';
 
 const RecommendedJobs = () => {
   const { user } = useAuthContext();
 
-  const { jobs, isLoading } = useGetJobs(
-    user?.data?.profession.split(' ')[0] || '',
-    user?.data?.location || ''
-  );
+  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
+    useGetJobsInf(
+      user?.data?.profession.split(' ')[0] || '',
+      user?.data?.location || ''
+    );
 
   return (
     <>
@@ -30,9 +31,17 @@ const RecommendedJobs = () => {
         </FilterBtn>
       </section>
       <section>
-        <JobList isLoading={isLoading} jobs={jobs?.data?.jobs} />
+        <JobListInfinite
+          status={status}
+          data={data}
+          isFetchingNextPage={isFetchingNextPage}
+        />
       </section>
-      <Pagination totalDocs={jobs?.count} />
+      {hasNextPage && !isFetchingNextPage && (
+        <Button full={true} onClick={fetchNextPage}>
+          See more
+        </Button>
+      )}
     </>
   );
 };
