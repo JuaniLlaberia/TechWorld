@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import UserList from './UserList';
 import { useGetUsers } from './useGetUsers';
-import Pagination from '../../components/Pagination';
 
 const SearchUsers = () => {
   const [searchParams] = useSearchParams();
@@ -13,12 +12,8 @@ const SearchUsers = () => {
         All users related to '{searchParams.get('searchQuery')}'
       </h1>
       <section>
-        <UserList
-          isLoading={isLoading}
-          users={users?.data?.users}
-        />
+        <UserList isLoading={isLoading} users={users?.data?.users} />
       </section>
-      <Pagination totalDocs={users?.count} />
     </>
   );
 };
