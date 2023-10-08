@@ -24,6 +24,7 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
   res.status(200).json({
     status: 'success',
     count: totalUsers,
+    pages: Math.ceil(totalUsers / 5),
     data: {
       users,
     },
