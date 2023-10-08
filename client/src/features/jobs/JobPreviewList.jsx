@@ -1,15 +1,18 @@
+import { Link } from 'react-router-dom';
 import { useGetJobs } from './useGetJobs';
 import JobList from './JobList';
-import { Link } from 'react-router-dom';
 
-const JobPreviewList = () => {
-  const { jobs, isLoading } = useGetJobs('', '', true);
+const JobPreviewList = ({ query, showAmount = 5, link }) => {
+  const { jobs, isLoading } = useGetJobs(query);
 
   return (
     <section className='bg-dark-2 p-2 rounded-md '>
-      <JobList isLoading={isLoading} jobs={jobs?.data?.jobs.slice(0, 5)} />
+      <JobList
+        isLoading={isLoading}
+        jobs={jobs?.data?.jobs.slice(0, showAmount)}
+      />
       <Link
-        to='/jobs/all'
+        to={link || '/jobs/all'}
         className='text-light-2 flex justify-center py-1.5 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3'
       >
         View more
