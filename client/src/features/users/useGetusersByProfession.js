@@ -11,7 +11,7 @@ export const GetUsersByProfession = () => {
     isRefetching,
     refetch,
   } = useQuery({
-    queryFn: () => getUsersByProfession(query, 3),
+    queryFn: () => getUsersByProfession({ profession: query, limit: 3 }),
     queryKey: [`users-search`, query],
     enabled: !!query,
     staleTime: 300000,
