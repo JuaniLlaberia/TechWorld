@@ -52,10 +52,7 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   }
 
   // Get data from database
-  const totalJobs = await Job.countDocuments({
-    name: { $regex: req.query.search || '', $options: 'i' },
-    location: { $regex: req.query.location || '', $options: 'i' },
-  });
+  const totalJobs = await Job.countDocuments(query._conditions);
 
   const jobs = await query.populate('user', 'fullName');
 
@@ -63,6 +60,7 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   res.status(200).json({
     status: 'success',
     count: totalJobs,
+    pages: Math.ceil(totalJobs / 5),
     data: {
       jobs,
     },
