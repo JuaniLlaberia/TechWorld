@@ -11,6 +11,7 @@ import {
   filterJobType,
 } from '../../utils/filters';
 import { useCreateJob } from './useCreateJob';
+import { useAuthContext } from '../../context/AuthContext';
 
 const JobsForm = () => {
   const {
@@ -19,6 +20,7 @@ const JobsForm = () => {
     formState: { errors },
   } = useForm();
   const { createJob, isCreating } = useCreateJob();
+  const { user } = useAuthContext();
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -33,6 +35,7 @@ const JobsForm = () => {
       description: data.description,
       applicationUs: isChecked,
       companyUrl: data.url,
+      user: user?.data._id,
     });
   };
 
