@@ -2,14 +2,16 @@ import { useSearchParams } from 'react-router-dom';
 import Drawer from '../../components/Drawer';
 import FilterBtn from '../../components/FilterBtn';
 import JobFilters from './JobFilters';
-import { useGetJobsInf } from './useGetJobsInf';
 import JobListInfinite from './JobListInfinite';
-import Button from '../../components/Button';
+import { useGetJobsInf } from './useGetJobsInf';
 
 const SearchJobs = () => {
   const [searchParams] = useSearchParams();
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
-    useGetJobsInf(searchParams.get('searchQuery') || '', '', true);
+  const queryData = useGetJobsInf(
+    searchParams.get('searchQuery') || '',
+    '',
+    true
+  );
 
   return (
     <>
@@ -18,23 +20,17 @@ const SearchJobs = () => {
       </h1>
       <section className='flex justify-end'>
         <FilterBtn>
-          <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
+          <Drawer.Body
+            title='Filter & Sort'
+            windowName='filters-jobs'
+          >
             <JobFilters />
           </Drawer.Body>
         </FilterBtn>
       </section>
       <section>
-        <JobListInfinite
-          status={status}
-          data={data}
-          isFetchingNextPage={isFetchingNextPage}
-        />
+        <JobListInfinite queryData={queryData} />
       </section>
-      {hasNextPage && !isFetchingNextPage && (
-        <Button full={true} onClick={fetchNextPage}>
-          See more
-        </Button>
-      )}
     </>
   );
 };

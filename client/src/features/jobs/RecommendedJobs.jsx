@@ -1,4 +1,3 @@
-import Button from '../../components/Button';
 import Drawer from '../../components/Drawer';
 import FilterBtn from '../../components/FilterBtn';
 import { useAuthContext } from '../../context/AuthContext';
@@ -9,11 +8,10 @@ import { useGetJobsInf } from './useGetJobsInf';
 const RecommendedJobs = () => {
   const { user } = useAuthContext();
 
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
-    useGetJobsInf(
-      user?.data?.profession.split(' ')[0] || '',
-      user?.data?.location || ''
-    );
+  const queryData = useGetJobsInf(
+    user?.data?.profession.split(' ')[0] || '',
+    user?.data?.location || ''
+  );
 
   return (
     <>
@@ -25,23 +23,17 @@ const RecommendedJobs = () => {
       </p>
       <section className='flex justify-end'>
         <FilterBtn>
-          <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
+          <Drawer.Body
+            title='Filter & Sort'
+            windowName='filters-jobs'
+          >
             <JobFilters />
           </Drawer.Body>
         </FilterBtn>
       </section>
       <section>
-        <JobListInfinite
-          status={status}
-          data={data}
-          isFetchingNextPage={isFetchingNextPage}
-        />
+        <JobListInfinite queryData={queryData} />
       </section>
-      {hasNextPage && !isFetchingNextPage && (
-        <Button full={true} onClick={fetchNextPage}>
-          See more
-        </Button>
-      )}
     </>
   );
 };
