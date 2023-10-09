@@ -11,6 +11,7 @@ export const useGetJob = () => {
     queryFn: () => getJob(id),
     queryKey: ['job', id],
 
+    refetchOnWindowFocus: false,
     enabled: isAuth,
   });
 
