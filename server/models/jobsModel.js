@@ -27,13 +27,6 @@ const jobsSchema = new mongoose.Schema({
     required: [true, 'Must include a work place.'],
     enum: ['On-site', 'Remote', 'Hybrid'],
   },
-  salaryMin: {
-    type: Number,
-    min: [1, 'Salary must be at least 1'],
-  },
-  salaryMax: {
-    type: Number,
-  },
   location: {
     type: String,
     required: [true, 'A job must have a location'],
