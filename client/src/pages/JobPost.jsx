@@ -14,8 +14,18 @@ export const JobPost = () => {
 
   if (isLoading) return <PostSkeleton />;
 
-  const { _id, name, level, location, description, type, workPlace, user } =
-    job.data.job;
+  const {
+    _id,
+    name,
+    level,
+    location,
+    description,
+    type,
+    workPlace,
+    user,
+    applicationUs,
+    companyUrl,
+  } = job.data.job;
 
   return (
     <>
@@ -38,9 +48,13 @@ export const JobPost = () => {
         </div>
 
         <div className='flex justify-end items-center gap-3 my-3 mt-6'>
-          <button className='bg-light-1 text-dark-1 py-1 px-4 rounded-md font-semibold lg:text-xl lg:py-2 lg:px-6'>
+          <Link
+            // target='_blank'
+            to={applicationUs ? `/apply/${_id}` : companyUrl}
+            className='bg-light-1 text-dark-1 py-1 px-4 rounded-md font-semibold lg:text-xl lg:py-2 lg:px-6'
+          >
             Apply now
-          </button>
+          </Link>
           <SavePost id={_id} />
         </div>
 
