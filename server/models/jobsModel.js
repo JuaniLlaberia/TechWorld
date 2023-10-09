@@ -44,10 +44,11 @@ const jobsSchema = new mongoose.Schema({
     required: [true, 'Must include a job description.'],
     type: String,
   },
-  expirationDate: {
-    type: Date,
-    required: [true, 'Must include an expiration date.'],
+  applicationUs: {
+    type: Boolean,
+    default: true,
   },
+  companyUrl: String,
   createAt: {
     type: Date,
     default: Date.now(),
