@@ -27,6 +27,7 @@ import New from './pages/New';
 import ProfilePosts from './features/users/ProfilePosts';
 import ProfileSaved from './features/users/ProfileSaved';
 import ProfileInfo from './features/users/ProfileInfo';
+import Apply from './pages/Apply';
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
           {
             path: '/jobs',
             element: <Job />,
+          },
+          {
+            path: '/apply/:jobId',
+            element: <Apply />,
           },
           {
             path: '/user/:id',
@@ -143,7 +148,11 @@ const App = () => {
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
-      <Toaster position='bottom-center' richColors closeButton />
+      <Toaster
+        position='bottom-center'
+        richColors
+        closeButton
+      />
     </QueryClientProvider>
   );
 };

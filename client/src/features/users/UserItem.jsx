@@ -5,7 +5,7 @@ const UserItem = ({ item }) => {
   const { _id, fullName, image, profession, location } = item;
 
   return (
-    <li className='relative border-b-[1px] border-dark-1-border last:border-0'>
+    <li className='relative border-b-[1px] border-dark-1-border last:border-0 py-2'>
       <Link
         to={`/user/${_id}`}
         className='text-light-1 flex gap-4 py-2'

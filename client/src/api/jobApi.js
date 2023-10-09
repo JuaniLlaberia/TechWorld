@@ -80,3 +80,19 @@ export const getMyJobs = async () => {
   const jobs = await data.json();
   return jobs;
 };
+
+export const newJob = async body => {
+  const response = await fetch('http://localhost:8000/api/jobs', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));
+
+  return data;
+};

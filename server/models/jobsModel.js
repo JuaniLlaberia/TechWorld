@@ -27,13 +27,6 @@ const jobsSchema = new mongoose.Schema({
     required: [true, 'Must include a work place.'],
     enum: ['On-site', 'Remote', 'Hybrid'],
   },
-  salaryMin: {
-    type: Number,
-    min: [1, 'Salary must be at least 1'],
-  },
-  salaryMax: {
-    type: Number,
-  },
   location: {
     type: String,
     required: [true, 'A job must have a location'],
@@ -51,10 +44,11 @@ const jobsSchema = new mongoose.Schema({
     required: [true, 'Must include a job description.'],
     type: String,
   },
-  expirationDate: {
-    type: Date,
-    required: [true, 'Must include an expiration date.'],
+  applicationUs: {
+    type: Boolean,
+    default: true,
   },
+  companyUrl: String,
   createAt: {
     type: Date,
     default: Date.now(),
