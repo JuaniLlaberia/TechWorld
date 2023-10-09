@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import defaultUserImg from '/default.jpg';
-import SavePost from '../../components/SavePost';
 
 const JobItem = ({ item }) => {
   const { _id, name, user, location, workPlace } = item;
@@ -20,13 +19,15 @@ const JobItem = ({ item }) => {
           </h4>
         </div>
         <div className='flex items-center gap-2 mb-1'>
-          <img src={defaultUserImg} className='w-8 h-8 rounded-full xl:w-10' />
+          <img
+            src={defaultUserImg}
+            className='w-8 h-8 rounded-full xl:w-10'
+          />
           <h4 className='text-light-2 text-sm font-semibold lg:text-base'>
             {user?.fullName}
           </h4>
         </div>
       </Link>
-      {/* <SavePost id={_id} /> */}
     </li>
   );
 };
