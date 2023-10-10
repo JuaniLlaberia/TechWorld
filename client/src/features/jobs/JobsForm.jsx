@@ -40,7 +40,13 @@ const JobsForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='pt-4 pb-8 px-5 rounded-md bg-dark-2 mt-2 border border-dark-1-border'
+    >
+      <h1 className='text-light-1 text-xl font-semibold mt-2 xl:text-2xl'>
+        Create a new job
+      </h1>
       <InputWrapper
         error={errors?.name?.message}
         label='Position title'
@@ -159,13 +165,14 @@ const JobsForm = () => {
         />
       </InputWrapper>
 
-      <div className='flex gap-3 mb-1'>
-        <p className='text-light-1'>Custom application form?</p>
+      <div className='flex gap-3 mb-1 items-center'>
+        <p className='text-light-1 xl:text-xl'>Custom application form?</p>
         <input
           value={isChecked}
           checked={isChecked}
           onChange={() => setIsChecked(prev => !prev)}
           type='checkbox'
+          className='w-6 h-6 rounded-lg'
         />
       </div>
       {isChecked && (
@@ -183,6 +190,7 @@ const JobsForm = () => {
           />
         </InputWrapper>
       )}
+      <br />
       <Button full={true}>
         {isCreating ? <ClipLoader size={20} /> : 'Post'}
       </Button>
