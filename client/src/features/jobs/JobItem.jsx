@@ -5,7 +5,7 @@ const JobItem = ({ item }) => {
   const { _id, name, user, location, workPlace } = item;
 
   return (
-    <li className='relative border-b-[1px] border-light-3 last:border-0'>
+    <li className='relative border-b-[1px] border-light-3 last:border-0 xl:py-3'>
       <Link
         to={`/job/${_id}`}
         className='text-light-1 flex flex-col gap-4 py-2 w-full'
@@ -21,7 +21,7 @@ const JobItem = ({ item }) => {
         <div className='flex items-center gap-2 mb-1'>
           <img
             src={defaultUserImg}
-            className='w-8 h-8 rounded-full xl:w-10'
+            className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
           />
           <h4 className='text-light-2 text-sm font-semibold lg:text-base'>
             {user?.fullName}

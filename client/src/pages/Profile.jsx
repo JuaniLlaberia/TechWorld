@@ -19,7 +19,10 @@ const Profile = () => {
   return (
     <Modal>
       <Card position='horizontal'>
-        <img src={defaultUserImg} className='rounded-full w-28 lg:w-36' />
+        <img
+          src={defaultUserImg}
+          className='rounded-full w-28 lg:w-36'
+        />
         <div>
           <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
             {fullName}
@@ -35,7 +38,10 @@ const Profile = () => {
       </Card>
       <ProfileTabs />
       <Outlet />
-      <Modal.Window windowName='personal-info-modal'>
+      <Modal.Window
+        windowName='personal-info-modal'
+        title='Personal information'
+      >
         <UpdateProfileForm
           current={{ fullName, profession, location }}
           image={defaultUserImg}
