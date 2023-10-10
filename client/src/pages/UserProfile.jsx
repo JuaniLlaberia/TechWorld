@@ -6,6 +6,7 @@ import ExperienceItem from '../features/users/ExperienceItem';
 import ItemsList from '../components/ItemsList';
 import { SkillItem } from '../features/users/SkillItem';
 import ProfileSkeleton from '../components/ProfileSkeleton';
+import BackBtn from '../components/BackBtn';
 
 export const UserProfile = () => {
   const { user, isLoading } = useGetUser();
@@ -25,6 +26,7 @@ export const UserProfile = () => {
 
   return (
     <Modal>
+      <BackBtn />
       <Card position='horizontal'>
         <img
           src={defaultUserImg}
