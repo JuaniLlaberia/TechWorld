@@ -13,10 +13,14 @@ const JobListInfinite = ({ queryData }) => {
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
     queryData;
 
+  useEffect(() => {
+    if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
+  }, [inView]);
+
   if (data?.pages[0].count < 1)
     return (
       <section>
-        <h2 className='text-light-1 mt-4'>
+        <h2 className='text-light-1 mt-4 xl:text-xl'>
           Could not find any related job.{' '}
           <Link
             to='/jobs/all'
@@ -28,17 +32,15 @@ const JobListInfinite = ({ queryData }) => {
       </section>
     );
 
-  useEffect(() => {
-    if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
-  }, [inView]);
-
   return (
     <>
       {status === 'loading' ? (
         <ItemSkeleton amount={5} />
       ) : (
         <>
-          <h2 className='text-light-2'>Found {data?.pages[0].count} results</h2>
+          <h2 className='text-light-2 xl:text-lg'>
+            Found {data?.pages[0].count} results
+          </h2>
           <ul>
             {data?.pages.map((page, i) => (
               <React.Fragment key={i}>
