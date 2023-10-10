@@ -34,7 +34,12 @@ const ProfileInfo = () => {
         </h3>
         <ItemsList
           items={experience.slice(0, 3)}
-          render={el => <ExperienceItem el={el} key={el._id} />}
+          render={el => (
+            <ExperienceItem
+              el={el}
+              key={el._id}
+            />
+          )}
         />
         <Modal.Open opens='experience-modal-view'>
           <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0 lg:text-xl lg:py-3'>
@@ -49,7 +54,13 @@ const ProfileInfo = () => {
         <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>Skills</h3>
         <ItemsList
           items={skills.slice(0, 5)}
-          render={(el, i) => <SkillItem el={el} i={i} key={`${el}-${i}`} />}
+          render={(el, i) => (
+            <SkillItem
+              el={el}
+              i={i}
+              key={`${el}-${i}`}
+            />
+          )}
         />
         <Modal.Open opens='skills-modal'>
           <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0 lg:text-xl lg:py-3'>
@@ -61,16 +72,36 @@ const ProfileInfo = () => {
         </Modal.Open>
       </Card>
 
-      <Modal.Window windowName='about-modal'>
+      <Modal.Window
+        windowName='about-modal'
+        title='Tell us about you'
+      >
         <UpdateDescForm current={description} />
       </Modal.Window>
-      <Modal.Window windowName='experience-modal-form'>
-        <UpdateShowExperiences current={experience} type='form' />
+      <Modal.Window
+        windowName='experience-modal-form'
+        title='Add more experiences
+        '
+      >
+        <UpdateShowExperiences
+          current={experience}
+          type='form'
+        />
       </Modal.Window>
-      <Modal.Window windowName='experience-modal-view'>
-        <UpdateShowExperiences current={experience} type='view' />
+      <Modal.Window
+        windowName='experience-modal-view'
+        title='All your experiences
+        '
+      >
+        <UpdateShowExperiences
+          current={experience}
+          type='view'
+        />
       </Modal.Window>
-      <Modal.Window windowName='skills-modal'>
+      <Modal.Window
+        windowName='skills-modal'
+        title='Your skills'
+      >
         <UpdateListForm current={skills} />
       </Modal.Window>
     </>
