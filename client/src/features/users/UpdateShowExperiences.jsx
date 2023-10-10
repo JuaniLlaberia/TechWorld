@@ -5,6 +5,7 @@ import SaveBtn from '../../components/SaveBtn';
 import InputWrapper from '../../components/InputWrapper';
 import Input from '../../components/Input';
 import ExperienceItem from './ExperienceItem';
+import Calendar from '../../components/Calendar';
 import { useUpdateMe } from './useUpdateMe';
 
 const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
@@ -16,13 +17,17 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   } = useForm();
   const [items, setItems] = useState(current);
 
+  //Handle state from custom calendar
+  const [from, setFrom] = useState('');
+  const [until, setUntil] = useState('');
+
   const handleRemoveItem = value => {
     const filteredList = [...items].filter(el => el !== value);
     setItems(filteredList);
   };
 
   const handleSubmitAdd = data => {
-    const experiences = [...current, data];
+    const experiences = [...current, { ...data, from, until }];
     updateProfile({ experience: experiences });
     onClose();
   };
@@ -32,15 +37,10 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
     onClose();
   };
 
-  const maxDate = new Date().toISOString().split('T')[0];
-
   //RENDER LIST
   if (type === 'view')
     return (
       <>
-        <h1 className='text-light-2 font-semibold mb-3 lg:text-xl'>
-          All your experiences
-        </h1>
         <ItemsList
           items={items}
           render={el => (
@@ -62,9 +62,6 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   if (type === 'form')
     return (
       <>
-        <h1 className='text-light-2 font-semibold mb-3 lg:text-xl'>
-          Add more experiences
-        </h1>
         <form
           className='flex flex-col'
           onSubmit={handleSubmit(handleSubmitAdd)}
@@ -95,19 +92,15 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
               })}
             />
           </InputWrapper>
-          <div className='flex gap-4'>
+          <div className='md:grid md:grid-cols-2 md:gap-2'>
             <InputWrapper
               error={errors?.from?.message}
               label='From'
               id='from'
             >
-              <Input
+              <Calendar
                 id='from'
-                type='date'
-                max={maxDate}
-                register={register('from', {
-                  required: 'Start date',
-                })}
+                handleChange={selected => setFrom(selected)}
               />
             </InputWrapper>
             <InputWrapper
@@ -115,11 +108,9 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
               label='Until'
               id='until'
             >
-              <Input
+              <Calendar
                 id='until'
-                type='date'
-                max={maxDate}
-                register={register('until')}
+                handleChange={selected => setUntil(selected)}
               />
             </InputWrapper>
           </div>
@@ -127,7 +118,7 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
             (Empty 'Until' means present)
           </p>
           <InputWrapper
-            error={errors?.url?.message}
+            error={errors?.reference?.message}
             label='Reference'
             id='url'
           >
