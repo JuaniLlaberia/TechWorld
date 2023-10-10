@@ -96,3 +96,15 @@ export const newJob = async body => {
 
   return data;
 };
+
+export const deleteJob = async id => {
+  const response = await fetch(`http://localhost:8000/api/jobs/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));
+
+  return data;
+};
