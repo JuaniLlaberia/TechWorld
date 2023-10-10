@@ -37,17 +37,18 @@ const Search = () => {
   return (
     <>
       <form
-        className='flex justify-center items-center mb-5 w-full relative h-10'
+        className='flex justify-center items-center mb-6 w-full relative h-10 xl:h-14 xl:mt-2'
         onSubmit={handleSearch}
       >
         <input
           defaultValue={searchParams.get('searchQuery')}
           placeholder='Search'
           ref={inputRef}
-          className='w-full max-w-[400px] h-10 py-2 px-4 rounded-l-full text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl'
+          className='w-full max-w-[600px] h-10 py-2 px-4 rounded-l-full text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl xl:h-14'
         />
-        <button className='h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-full lg:text-base xl:text-lg 2xl:text-2xl'>
-          <HiOutlineMagnifyingGlass />
+        <button className='flex items-center gap-2 h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-full lg:text-base xl:text-lg 2xl:text-2xl xl:h-14 xl:px-6'>
+          <HiOutlineMagnifyingGlass />{' '}
+          <span className='hidden xl:block'>Search</span>
         </button>
       </form>
 
@@ -55,14 +56,14 @@ const Search = () => {
 
       {jobs && !isRefetching ? (
         <Card>
-          <h2 className='text-light-2 font-semibold mb-4'>Jobs</h2>
+          <h2 className='text-light-2 font-semibold mb-4 xl:text-2xl'>Jobs</h2>
           <JobList jobs={jobs.data.jobs} />
           {jobs.count > 0 ? (
             <Link
               to={`/jobs-search?searchQuery=${
                 inputRef?.current?.value || searchParams.get('searchQuery')
               }`}
-              className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3'
+              className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3 2xl:text-2xl'
             >
               View more
             </Link>
@@ -72,14 +73,16 @@ const Search = () => {
 
       {users && !isRefetchingUsers ? (
         <Card>
-          <h2 className='text-light-2 font-semibold mb-4'>People</h2>
+          <h2 className='text-light-2 font-semibold mb-4 xl:text-2xl'>
+            People
+          </h2>
           <UserList users={users.data.users} />
           {users.count > 0 ? (
             <Link
               to={`/users-search?searchQuery=${
                 inputRef?.current?.value || searchParams.get('searchQuery')
               }`}
-              className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3'
+              className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3 2xl:text-2xl'
             >
               View more
             </Link>
