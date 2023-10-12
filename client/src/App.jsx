@@ -28,6 +28,7 @@ import ProfilePosts from './features/users/ProfilePosts';
 import ProfileSaved from './features/users/ProfileSaved';
 import ProfileInfo from './features/users/ProfileInfo';
 import Apply from './pages/Apply';
+import JobListSideBySide from './features/jobs/JobListSideBySide';
 
 const router = createBrowserRouter([
   {
@@ -80,7 +81,8 @@ const router = createBrowserRouter([
           },
           {
             path: '/jobs',
-            element: <Job />,
+            // element: <Job />,
+            element: <JobListSideBySide />,
           },
           {
             path: '/apply/:jobId',
