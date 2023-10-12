@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
@@ -6,8 +6,10 @@ import ItemSkeleton from '../../components/ItemSkeleton';
 import JobItem from './JobItem';
 
 const JobListInfinite = ({ queryData }) => {
+  const listRef = useRef();
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0,
+    root: listRef.current,
   });
 
   const { data, fetchNextPage, isFetchingNextPage, hasNextPage, status } =
@@ -38,10 +40,10 @@ const JobListInfinite = ({ queryData }) => {
         <ItemSkeleton amount={5} />
       ) : (
         <>
-          <h2 className='text-light-2 xl:text-lg'>
-            Found {data?.pages[0].count} results
-          </h2>
-          <ul>
+          <ul
+            className='overflow-y-scroll h-[75vh] md:h-[90vh]'
+            ref={listRef}
+          >
             {data?.pages.map((page, i) => (
               <React.Fragment key={i}>
                 {page.data.jobs.map(job => (
@@ -52,16 +54,19 @@ const JobListInfinite = ({ queryData }) => {
                 ))}
               </React.Fragment>
             ))}
+            <div
+              ref={ref}
+              className='h-1'
+            ></div>
+            {isFetchingNextPage && (
+              <div className='flex justify-center items-center'>
+                <ClipLoader
+                  color='white'
+                  size={30}
+                />
+              </div>
+            )}
           </ul>
-          <div ref={ref}></div>
-          {isFetchingNextPage && (
-            <div className='flex justify-center items-center'>
-              <ClipLoader
-                color='white'
-                size={30}
-              />
-            </div>
-          )}
         </>
       )}
     </>
