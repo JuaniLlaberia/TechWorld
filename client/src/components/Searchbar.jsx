@@ -21,11 +21,11 @@ export const Searchbar = () => {
       <input
         ref={inputRef}
         placeholder='Search for you ideal job...'
-        className='w-full max-w-[600px] h-10 py-2 pl-10 rounded-md text-light-1 bg-transparent border-[1px] border-dark-1-border focus:border-light-3 placeholder:text-light-3 xl:text-lg 2xl:text-xl xl:h-14'
-      ></input>
+        className='w-full h-10 py-2 pl-12 rounded-md text-light-1 bg-transparent border-[1px] border-dark-1-border focus:border-light-3 placeholder:text-light-3 xl:text-lg 2xl:text-xl xl:h-14'
+      />
       <HiOutlineMagnifyingGlass
-        className='absolute text-light-3 left-2'
-        size={23}
+        className='absolute text-light-3 left-4'
+        size={25}
       />
     </form>
   );
