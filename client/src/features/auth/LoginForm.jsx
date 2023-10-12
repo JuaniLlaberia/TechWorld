@@ -45,6 +45,12 @@ export const LoginForm = () => {
         error={errors.password?.message}
         id='password'
       >
+        <Link
+          className='text-secondary-1 mt-2 xl:text-xl absolute top-[-5%] right-2'
+          to='/forgot-password'
+        >
+          Forgot?
+        </Link>
         <Input
           type='password'
           id='password'
@@ -53,6 +59,7 @@ export const LoginForm = () => {
           })}
         />
       </InputWrapper>
+      <br />
       <Button>
         {isLoading ? (
           <ClipLoader
@@ -63,20 +70,12 @@ export const LoginForm = () => {
           'Log In'
         )}
       </Button>
-      <p className='text-light-3 mt-2 xl:text-xl'>
-        Forgot password?{' '}
+
+      <p className='text-light-3 text-center mt-2 xl:text-xl'>
+        Dont't have an account?{' '}
         <Link
-          to='/forgot-password'
-          className='text-light-1 font-semibold underline'
-        >
-          Click here
-        </Link>
-      </p>
-      <p className='text-light-3 mt-2 xl:text-xl'>
-        Need email verification?{' '}
-        <Link
-          to='/resend-verification'
-          className='text-light-1 font-semibold underline'
+          to='/signup'
+          className='text-secondary-1 font-semibold underline'
         >
           Click here
         </Link>
