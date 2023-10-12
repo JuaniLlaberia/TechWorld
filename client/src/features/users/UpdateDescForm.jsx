@@ -23,7 +23,7 @@ const UpdateDescForm = ({ onClose, current }) => {
         placeholder='Description'
         {...register('description')}
         maxLength={500}
-        className='w-full bg-[transparent] border-[1px] border-dark-1-border min-h-[100px] max-h-[300px] outline-none p-1 placeholder:text-sm rounded-md lg:text-xl lg:h-[500px]'
+        className='w-full bg-[transparent] resize-y border-[1px] border-dark-1-border min-h-[100px] max-h-[300px] outline-none p-1 placeholder:text-sm rounded-md lg:text-xl lg:h-[500px]'
       />
       <SaveBtn isUpdating={isUpdating} />
     </form>
