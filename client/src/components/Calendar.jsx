@@ -31,7 +31,7 @@ const options = {
       </span>
     ),
   },
-  datepickerClassNames: 'top-12 left-[50%] translate-x-[-50%]',
+  datepickerClassNames: 'top-[-300%] left-[50%] translate-x-[-50%]',
   defaultDate: false,
   language: 'en',
 };

@@ -20,16 +20,15 @@ export const Drawer = ({ children }) => {
   );
 };
 
-const Opener = ({ label, opens }) => {
+const Opener = ({ opens }) => {
   const { open } = useContext(DrawerContext);
 
   return (
     <button
       onClick={() => open(opens)}
-      className='bg-light-1 text-dark-1 text-lg p-1 rounded-md lg:text-2xl lg:px-6 lg:py-2 lg:flex lg:items-center lg:gap-2'
+      className='bg-light-1 text-dark-1 text-lg p-1 rounded-md lg:text-xl xl:text-2xl'
     >
       <HiOutlineAdjustmentsHorizontal size={30} />
-      <span className='hidden lg:block lg:font-semibold'>{label}</span>
     </button>
   );
 };

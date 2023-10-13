@@ -2,15 +2,22 @@ import {
   HiBriefcase,
   HiBuildingOffice2,
   HiCalendarDays,
+  HiOutlineArrowLeft,
 } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
-import PostSkeleton from '../components/PostSkeleton';
-import BackBtn from '../components/BackBtn';
-import { useGetJob } from '../features/jobs/useGetJob';
+import { Link, useSearchParams } from 'react-router-dom';
+import PostSkeleton from '../../components/PostSkeleton';
 import defaultUserImg from '/default.jpg';
-import SavePost from '../components/SavePost';
+import SavePost from '../../components/SavePost';
+import { useGetJob } from './useGetJob';
 
 export const JobPost = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleClose = () => {
+    searchParams.set('currentJobId', '');
+    setSearchParams(searchParams);
+  };
+
   const { job, isLoading } = useGetJob();
 
   if (isLoading) return <PostSkeleton />;
@@ -29,9 +36,15 @@ export const JobPost = () => {
   } = job.data.job;
 
   return (
-    <>
-      <BackBtn />
-      <section className='py-2 px-4 rounded-md pt-2'>
+    <section className='p-2 md:rounded-r-md'>
+      <button
+        className='text-light-1 block pb-2 bg-transparent md:hidden'
+        onClick={handleClose}
+      >
+        <HiOutlineArrowLeft size={25} />
+      </button>
+
+      <section className='py-2 px-4 rounded-md overflow-y-scroll pb-16 h-[90vh] md:pb-2'>
         <h1 className='text-light-1 text-2xl font-semibold mb-1 xl:text-4xl'>
           {name}
         </h1>
@@ -89,6 +102,6 @@ export const JobPost = () => {
         </h4>
         <p className='text-light-1 xl:text-xl'>{description}</p>
       </section>
-    </>
+    </section>
   );
 };

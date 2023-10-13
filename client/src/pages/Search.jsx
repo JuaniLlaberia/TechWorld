@@ -1,10 +1,10 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useRef } from 'react';
 import { HiOutlineMagnifyingGlass } from 'react-icons/hi2';
-import Card from '../components/Card';
-import JobList from '../features/jobs/JobList';
+import JobPrevList from '../features/jobs/JobPrevList';
 import UserList from '../features/users/UserList';
 import ItemSkeleton from '../components/ItemSkeleton';
+import SearchCard from '../components/SearchCard';
 import { useSearchJobs } from '../features/jobs/useSearchJobs';
 import { GetUsersByProfession } from '../features/users/useGetusersByProfession';
 
@@ -35,7 +35,7 @@ const Search = () => {
   };
 
   return (
-    <>
+    <section className='pb-20'>
       <form
         className='flex justify-center items-center mb-6 w-full relative h-10 xl:h-14 xl:mt-2'
         onSubmit={handleSearch}
@@ -55,41 +55,33 @@ const Search = () => {
       {isRefetching || isRefetchingUsers ? <ItemSkeleton amount={5} /> : null}
 
       {jobs && !isRefetching ? (
-        <Card>
-          <h2 className='text-light-2 font-semibold mb-4 xl:text-2xl'>Jobs</h2>
-          <JobList jobs={jobs.data.jobs} />
-          {jobs.count > 0 ? (
-            <Link
-              to={`/jobs-search?searchQuery=${
-                inputRef?.current?.value || searchParams.get('searchQuery')
-              }`}
-              className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3 2xl:text-2xl'
-            >
-              View more
-            </Link>
-          ) : null}
-        </Card>
+        <SearchCard
+          title='Jobs'
+          link={`/jobs-search?searchQuery=${
+            inputRef?.current?.value || searchParams.get('searchQuery')
+          }`}
+        >
+          <JobPrevList
+            isLoading={isRefetching}
+            jobs={jobs?.data?.jobs}
+            itemsLink={`/jobs-search?searchQuery=${searchParams.get(
+              'searchQuery'
+            )}&currentJobId=`}
+          />
+        </SearchCard>
       ) : null}
 
       {users && !isRefetchingUsers ? (
-        <Card>
-          <h2 className='text-light-2 font-semibold mb-4 xl:text-2xl'>
-            People
-          </h2>
+        <SearchCard
+          title='People'
+          link={`/users-search?searchQuery=${
+            inputRef?.current?.value || searchParams.get('searchQuery')
+          }`}
+        >
           <UserList users={users.data.users} />
-          {users.count > 0 ? (
-            <Link
-              to={`/users-search?searchQuery=${
-                inputRef?.current?.value || searchParams.get('searchQuery')
-              }`}
-              className='text-light-2 flex justify-center pt-4 border-t-[1px] border-dark-1-border lg:text-xl lg:py-3 2xl:text-2xl'
-            >
-              View more
-            </Link>
-          ) : null}
-        </Card>
+        </SearchCard>
       ) : null}
-    </>
+    </section>
   );
 };
 
