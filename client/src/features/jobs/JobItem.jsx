@@ -9,12 +9,14 @@ const JobItem = ({ item }) => {
     setSearchParams(searchParams);
   };
 
-  const { name, user, location, workPlace } = item;
+  const { _id, name, user, location, workPlace } = item;
 
   return (
     <li
       onClick={handleClick}
-      className='relative border-b-[1px] text-light-1 flex flex-col gap-4 w-full px-3 py-4 border-dark-1-border last:border-0 hover:cursor-pointer xl:py-5 xl:px-6'
+      className={`relative border-b-[1px] text-light-1 flex flex-col gap-4 w-full px-3 py-4 border-dark-1-border last:border-0 hover:cursor-pointer xl:py-5 xl:px-6 ${
+        searchParams.get('currentJobId') === _id ? 'md:bg-[#3d3c3c69]' : ''
+      }`}
     >
       <div className='w-full'>
         <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem] line-clamp-1 hover:underline'>
