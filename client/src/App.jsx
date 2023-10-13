@@ -3,7 +3,6 @@ import { Toaster } from 'sonner';
 import Home from './pages/Home';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppLayout from './pages/AppLayout';
-import Job from './pages/Job';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
@@ -18,17 +17,16 @@ import { ResendEmail } from './features/auth/ResendEmail';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import { NotFound } from './pages/NotFound';
 import { AuthProvider } from './context/AuthContext.jsx';
-import JobsAllInf from './features/jobs/JobsAllInf';
 import SearchJobs from './features/jobs/SearchJobs';
 import SearchUsers from './features/users/SearchUsers';
-import { JobPost } from './pages/JobPost';
 import { UserProfile } from './pages/UserProfile';
 import New from './pages/New';
 import ProfilePosts from './features/users/ProfilePosts';
 import ProfileSaved from './features/users/ProfileSaved';
 import ProfileInfo from './features/users/ProfileInfo';
 import Apply from './pages/Apply';
-import JobListSideBySide from './features/jobs/JobListSideBySide';
+import JobsAll from './features/jobs/JobsAll';
+import JobsRecommended from './features/jobs/JobsRecommended';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/jobs/all',
-        element: <JobsAllInf />,
+        element: <JobsAll />,
       },
       {
         element: <ProtectedRoutes />,
@@ -76,13 +74,8 @@ const router = createBrowserRouter([
             element: <SearchUsers />,
           },
           {
-            path: '/job/:id',
-            element: <JobPost />,
-          },
-          {
             path: '/jobs',
-            // element: <Job />,
-            element: <JobListSideBySide />,
+            element: <JobsRecommended />,
           },
           {
             path: '/apply/:jobId',
@@ -91,10 +84,6 @@ const router = createBrowserRouter([
           {
             path: '/user/:id',
             element: <UserProfile />,
-          },
-          {
-            path: '/notifications',
-            element: <Job />,
           },
         ],
       },
@@ -150,11 +139,7 @@ const App = () => {
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
-      <Toaster
-        position='bottom-center'
-        richColors
-        closeButton
-      />
+      <Toaster position='bottom-center' richColors closeButton />
     </QueryClientProvider>
   );
 };
