@@ -4,10 +4,10 @@ const IconCard = ({ icon, text, path }) => {
   return (
     <Link
       to={path}
-      className='px-3 bg-dark-2 h-32 rounded-md flex flex-col items-center justify-center border-[1px] border-dark-1-border'
+      className='px-3 h-20 rounded-md flex flex-col items-center justify-center [&>span]:hover:text-light-2 transition-colors'
     >
-      <span className='text-light-1 text-4xl'>{icon}</span>
-      <h2 className='text-light-1 text-lg'>{text}</h2>
+      <span className='text-secondary-1 text-4xl'>{icon}</span>
+      <span className='text-light-1 text-base'>{text}</span>
     </Link>
   );
 };

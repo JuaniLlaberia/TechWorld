@@ -42,11 +42,8 @@ const JobsForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='pt-4 pb-8 px-5 rounded-md bg-dark-2 mt-2 border border-dark-1-border'
+      className='pt-1 pb-8 px-3 rounded-md mt-2'
     >
-      <h1 className='text-light-1 text-xl font-semibold mt-2 xl:text-2xl'>
-        Create a new job
-      </h1>
       <InputWrapper
         error={errors?.name?.message}
         label='Position title'
@@ -96,11 +93,7 @@ const JobsForm = () => {
           })}
         >
           {filterExperience.map(el => (
-            <option
-              key={el}
-              className='bg-dark-1 text-light-1'
-              value={el}
-            >
+            <option key={el} className='bg-dark-1 text-light-1' value={el}>
               {el !== 'All' ? el : 'Select option'}
             </option>
           ))}
@@ -108,11 +101,7 @@ const JobsForm = () => {
       </InputWrapper>
 
       <div className='grid grid-cols-2 gap-2'>
-        <InputWrapper
-          error={errors?.type?.message}
-          label='Job type'
-          id='type'
-        >
+        <InputWrapper error={errors?.type?.message} label='Job type' id='type'>
           <Select
             id='type'
             register={register('type', {
@@ -120,10 +109,7 @@ const JobsForm = () => {
             })}
           >
             {filterJobType.map(el => (
-              <option
-                key={el}
-                className='bg-dark-1 text-light-1 '
-              >
+              <option key={el} className='bg-dark-1 text-light-1 '>
                 {el !== 'All' ? el : 'Select option'}
               </option>
             ))}
@@ -141,10 +127,7 @@ const JobsForm = () => {
             })}
           >
             {filterJobPlace.map(el => (
-              <option
-                key={el}
-                className='bg-dark-1 text-light-1 '
-              >
+              <option key={el} className='bg-dark-1 text-light-1 '>
                 {el !== 'All' ? el : 'Select option'}
               </option>
             ))}
@@ -176,11 +159,7 @@ const JobsForm = () => {
         />
       </div>
       {isChecked && (
-        <InputWrapper
-          error={errors?.url?.message}
-          label='Company URL'
-          id='url'
-        >
+        <InputWrapper error={errors?.url?.message} label='Company URL' id='url'>
           <Input
             placeholder='Your own application url'
             id='url'

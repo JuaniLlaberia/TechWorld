@@ -45,7 +45,7 @@ export const JobPost = () => {
       >
         <HiOutlineArrowLeft size={25} />
       </button>
-      <section className='py-2 px-4 rounded-md overflow-y-scroll pb-16 h-[90vh] md:pb-2'>
+      <section className='py-2 px-4 rounded-md overflow-y-scroll pb-16 h-[100vh] md:h-[90vh] md:pb-2'>
         <h1 className='text-light-1 text-2xl font-semibold mb-1 xl:text-4xl'>
           {name}
         </h1>
