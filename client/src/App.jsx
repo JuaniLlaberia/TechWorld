@@ -135,11 +135,21 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
       <AuthProvider>
         <RouterProvider router={router} />
+        <Toaster
+          position='bottom-right'
+          toastOptions={{
+            style: {
+              height: '70px',
+              fontSize: '1rem',
+            },
+          }}
+          richColors
+          closeButton
+        />
       </AuthProvider>
-      <Toaster position='bottom-center' richColors closeButton />
     </QueryClientProvider>
   );
 };
