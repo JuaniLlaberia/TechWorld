@@ -1,6 +1,6 @@
-import { useGetMySaved } from './useGetMySaved';
-import JobList from '../jobs/JobList';
+import JobPrevList from '../jobs/JobPrevList';
 import Card from '../../components/Card';
+import { useGetMySaved } from './useGetMySaved';
 
 const ProfileSaved = () => {
   const { jobs, isLoading } = useGetMySaved();
@@ -8,14 +8,11 @@ const ProfileSaved = () => {
   return (
     <>
       <Card>
-        <h1 className='text-light-2 text-lg font-semibold border-b border-light-3 pb-2 mb-1 xl:text-2xl xl:pb-5'>
-          Saved jobs
-        </h1>
-        <JobList
+        <JobPrevList
           jobs={jobs?.data?.savedPosts}
           isLoading={isLoading}
+          itemsLink='/jobs?currentJobId='
         />
-        <p className='text-light-1'>Add pagination or infinite scroll</p>
       </Card>
     </>
   );
