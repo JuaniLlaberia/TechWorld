@@ -1,10 +1,8 @@
-import React from 'react';
-
 const PostSkeleton = () => {
   return (
     <>
-      <div className='bg-dark-2 rounded-md p-4 w-full list-none my-3'>
-        <div className='animate-pulse flex space-x-4'>
+      <div className='bg-dark-2 rounded-md p-4 w-full list-none my-1 h-[100vh] md:h-fit'>
+        <div className='animate-pulse mt-6 flex space-x-4'>
           <div className='flex-1 mt-2 space-y-3 '>
             <div className='h-4 bg-[#464444] rounded'></div>
             <div className='h-4 bg-[#464444] rounded'></div>

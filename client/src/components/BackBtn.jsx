@@ -1,4 +1,4 @@
-import { HiOutlineChevronLeft } from 'react-icons/hi2';
+import { HiOutlineArrowLeft } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 
 const BackBtn = () => {
@@ -8,8 +8,7 @@ const BackBtn = () => {
       onClick={() => navigate(-1)}
       className='text-light-1 flex items-center gap-2 pb-2 pt-1'
     >
-      <HiOutlineChevronLeft size={20} />
-      <span>Go back</span>
+      <HiOutlineArrowLeft size={20} />
     </button>
   );
 };
