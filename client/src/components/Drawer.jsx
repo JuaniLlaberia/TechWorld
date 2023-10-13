@@ -1,6 +1,9 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { HiOutlineXMark } from 'react-icons/hi2';
+import {
+  HiOutlineAdjustmentsHorizontal,
+  HiOutlineXMark,
+} from 'react-icons/hi2';
 
 const DrawerContext = createContext();
 
@@ -17,15 +20,15 @@ export const Drawer = ({ children }) => {
   );
 };
 
-const Opener = ({ label, opens }) => {
+const Opener = ({ opens }) => {
   const { open } = useContext(DrawerContext);
 
   return (
     <button
       onClick={() => open(opens)}
-      className='bg-light-1 text-dark-1 text-lg font-semibold px-4 rounded-full'
+      className='bg-light-1 text-dark-1 text-lg p-1 rounded-md lg:text-xl xl:text-2xl'
     >
-      {label}
+      <HiOutlineAdjustmentsHorizontal size={30} />
     </button>
   );
 };

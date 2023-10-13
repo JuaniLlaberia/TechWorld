@@ -16,7 +16,7 @@ const items = [
 
 const Navigation = () => {
   return (
-    <nav className='fixed left-0 bottom-0 bg-dark-2 w-[100%] h-16 border-t-2 z-50 border-dark-1-border lg:h-[100%] lg:border-t-0 lg:border-r-2 lg:w-24 2xl:w-64'>
+    <nav className='fixed left-0 bottom-0 bg-dark-1 w-[100%] h-16 border-t-2 z-50 border-dark-1-border lg:h-[100%] lg:border-t-0 lg:border-r-2 lg:w-24 2xl:w-64'>
       <h1 className='hidden text-center mb-16 lg:block'>LOGO</h1>
       <ul className='flex justify-between px-8 items-center h-full text-white lg:flex-col lg:justify-center lg:gap-8 lg:h-fit 2xl:items-start'>
         {items.map((item, i) => (

@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/tailwind-datepicker-react/dist/**/*.js',
+  ],
   theme: {
     extend: {
       colors: {
@@ -9,8 +13,9 @@ export default {
         'light-1': 'rgba(245, 245, 245, 1)',
         'light-2': 'rgb(215, 215, 215, .8)',
         'light-3': 'rgba(209, 209, 209, 0.521)',
-        'dark-1-border': '#4040404b',
-        'dark-shadow': 'rgba(55, 55, 55, .2)',
+        'dark-1-border': '#333333',
+        'dark-shadow': '#5f5c5c38',
+        'secondary-1': '#936cf5',
       },
     },
   },
@@ -22,5 +27,6 @@ export default {
     'light-2',
     'light-3',
     'dark-1-border',
+    'secondary-1',
   ],
 };

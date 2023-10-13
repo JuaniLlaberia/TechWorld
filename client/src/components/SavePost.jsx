@@ -15,18 +15,14 @@ const SavePost = ({ id }) => {
 
   return (
     <button
-      className={`z-10 text-light-1 ${
+      className={`z-10 text-light-1 text-3xl xl:text-4xl ${
         isSaving || isUnSaving ? 'animate-pulse' : ''
       }`}
     >
       {isPostSave ? (
-        <HiBookmark
-          size={30}
-          onClick={() => unSave(id)}
-        />
+        <HiBookmark onClick={() => unSave(id)} />
       ) : (
         <HiOutlineBookmark
-          size={30}
           onClick={() =>
             !isAuth && !isPostSave ? navigate('/signup') : save(id)
           }

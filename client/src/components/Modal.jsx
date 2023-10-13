@@ -22,20 +22,22 @@ const Open = ({ children, opens }) => {
   return cloneElement(children, { onClick: () => open(opens) });
 };
 
-const Window = ({ children, windowName }) => {
+const Window = ({ children, windowName, title }) => {
   const { isOpen, close } = useContext(ModalContext);
 
   if (isOpen !== windowName) return null;
 
   return createPortal(
     <>
-      <div className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[300px] max-w-[650px] pt-6 p-3 rounded-sm min-h-[100px] z-50 shadow-md shadow-[#222121dc]'>
-        <button
-          onClick={close}
-          className='absolute right-2 top-2 text-xl lg:text-3xl'
-        >
-          <HiOutlineXMark />
-        </button>
+      <div className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[300px] max-w-[650px] pt- p-3 rounded-sm min-h-[100px] z-50 shadow-md shadow-[#222121dc]'>
+        <div className='flex justify-between items-center py-2 border-b-[1px] border-dark-1-border mb-3'>
+          <h1 className='text-light-2 text-lg font-semibold mb-3 lg:text-2xl'>
+            {title}
+          </h1>
+          <button onClick={close}>
+            <HiOutlineXMark size={30} />
+          </button>
+        </div>
         <div>{cloneElement(children, { onClose: close })}</div>
       </div>
       <div

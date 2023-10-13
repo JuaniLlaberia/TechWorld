@@ -7,12 +7,12 @@ const SearchUsers = () => {
   const queryData = useGetUsersInf();
 
   return (
-    <>
-      <h1 className='text-light-1 text-xl font-semibold mt-2 mb-6'>
+    <section className='bg-dark-2 rounded-md'>
+      <h1 className='text-light-1 text-lg font-semibold rounded-md mb-3 py-3 px-2 bg-secondary-1 xl:text-xl'>
         All users related to '{searchParams.get('searchQuery')}'
       </h1>
       <UserListInfinite queryData={queryData} />
-    </>
+    </section>
   );
 };
 

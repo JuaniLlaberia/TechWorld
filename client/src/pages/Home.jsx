@@ -1,14 +1,15 @@
-import JobPreviewList from '../features/jobs/JobPreviewList';
+import JobPreview from '../features/jobs/JobPreview';
 import HomeHeader from '../components/HomeHeader';
 import HomeCards from '../components/HomeCards';
+import { Searchbar } from '../components/Searchbar';
 
 const Home = () => {
   return (
     <>
       <HomeHeader />
+      <Searchbar />
       <HomeCards />
-      <h2 className='text-light-2 text-lg font-semibold mb-2'>Recent jobs</h2>
-      <JobPreviewList />
+      <JobPreview />
     </>
   );
 };
