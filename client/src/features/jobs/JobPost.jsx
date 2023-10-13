@@ -9,6 +9,7 @@ import PostSkeleton from '../../components/PostSkeleton';
 import defaultUserImg from '/default.jpg';
 import SavePost from '../../components/SavePost';
 import { useGetJob } from './useGetJob';
+import JobMap from '../../components/JobMap';
 
 export const JobPost = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,6 +34,7 @@ export const JobPost = () => {
     user,
     applicationUs,
     companyUrl,
+    locationMap,
   } = job.data.job;
 
   return (
@@ -43,14 +45,15 @@ export const JobPost = () => {
       >
         <HiOutlineArrowLeft size={25} />
       </button>
-
       <section className='py-2 px-4 rounded-md overflow-y-scroll pb-16 h-[90vh] md:pb-2'>
         <h1 className='text-light-1 text-2xl font-semibold mb-1 xl:text-4xl'>
           {name}
         </h1>
-        <h2 className='text-light-2 mb-2 xl:text-lg'>
-          {location} ({workPlace})
-        </h2>
+        <JobMap coordinates={locationMap.coordinates}>
+          <h2 className='text-light-2 mb-2 hover:underline xl:text-lg'>
+            {location} ({workPlace})
+          </h2>
+        </JobMap>
         <div className='flex items-center justify-start gap-2 mb-1'>
           <img
             src={defaultUserImg}
@@ -79,19 +82,19 @@ export const JobPost = () => {
         </h3>
         <ul className='text-light-1 '>
           <li className='flex items-center gap-1.5 mb-3 xl:text-xl'>
-            <span className='text-light-3'>
+            <span className='text-secondary-1'>
               <HiBriefcase size={30} />
             </span>
             {level}
           </li>
           <li className='flex items-center gap-1.5 mb-3 xl:text-xl'>
-            <span className='text-light-3'>
+            <span className='text-secondary-1'>
               <HiCalendarDays size={30} />
             </span>
             {type}
           </li>
           <li className='flex items-center gap-1.5 mb-3 xl:text-xl'>
-            <span className='text-light-3'>
+            <span className='text-secondary-1'>
               <HiBuildingOffice2 size={30} />
             </span>
             {workPlace}

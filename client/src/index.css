@@ -19,3 +19,8 @@
   left: 0;
   bottom: -52%;
 }
+
+.leaflet-container {
+  height: 400px;
+  border-radius: 4px;
+}
