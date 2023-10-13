@@ -7,12 +7,9 @@ const UserList = ({ users, isLoading }) => {
   return (
     <>
       {users?.length > 0 ? (
-        <ul className='last-of-type:border-0'>
+        <ul>
           {users.map(job => (
-            <UserItem
-              item={job}
-              key={job._id}
-            />
+            <UserItem item={job} key={job._id} />
           ))}
         </ul>
       ) : (
