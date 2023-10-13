@@ -1,4 +1,4 @@
-import JobPreviewList from '../features/jobs/JobPreviewList';
+import JobPreview from '../features/jobs/JobPreview';
 import HomeHeader from '../components/HomeHeader';
 import HomeCards from '../components/HomeCards';
 import { Searchbar } from '../components/Searchbar';
@@ -9,7 +9,7 @@ const Home = () => {
       <HomeHeader />
       <Searchbar />
       <HomeCards />
-      <JobPreviewList />
+      <JobPreview />
     </>
   );
 };
