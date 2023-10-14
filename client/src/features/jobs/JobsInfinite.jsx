@@ -25,7 +25,10 @@ const JobsInfinite = ({ queryData }) => {
 
   return (
     <>
-      <ul className='overflow-y-scroll h-[80vh] md:h-[87.5vh]' ref={listRef}>
+      <ul
+        className='overflow-y-scroll h-[80vh] md:h-[87.5vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1'
+        ref={listRef}
+      >
         <h2 className='px-3 pt-3 text-light-2'>
           Found {queryData.data?.pages[0].count} results
         </h2>
