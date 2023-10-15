@@ -3,6 +3,7 @@ import {
   HiBuildingOffice2,
   HiCalendarDays,
   HiOutlineArrowLeft,
+  HiOutlineArrowTopRightOnSquare,
 } from 'react-icons/hi2';
 import { Link, useSearchParams } from 'react-router-dom';
 import PostSkeleton from '../../components/PostSkeleton';
@@ -37,6 +38,8 @@ export const JobPost = () => {
     locationMap,
   } = job.data.job;
 
+  console.log(job.data.job);
+
   return (
     <section className='p-2 md:rounded-r-md'>
       <button
@@ -45,7 +48,7 @@ export const JobPost = () => {
       >
         <HiOutlineArrowLeft size={25} />
       </button>
-      <section className='py-2 px-4 rounded-md overflow-y-scroll pb-16 h-[100vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1 md:h-[90vh] md:pb-2'>
+      <section className='py-2 px-4 rounded-md overflow-y-scroll pb-32 h-[100vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1 md:h-[90vh] md:pb-2'>
         <h1 className='text-light-1 text-2xl font-semibold mb-1 xl:text-4xl'>
           {name}
         </h1>
@@ -72,7 +75,14 @@ export const JobPost = () => {
             to={applicationUs ? `/apply/${_id}` : companyUrl}
             className='bg-light-1 text-dark-1 py-1 px-4 rounded-md font-semibold lg:text-xl lg:py-2 lg:px-6'
           >
-            Apply now
+            {applicationUs ? (
+              'Apply now'
+            ) : (
+              <span className='flex items-center gap-2'>
+                Apply
+                <HiOutlineArrowTopRightOnSquare size={22} />
+              </span>
+            )}
           </Link>
           <SavePost id={_id} />
         </div>
