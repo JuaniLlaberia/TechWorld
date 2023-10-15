@@ -108,3 +108,16 @@ export const deleteJob = async id => {
 
   return data;
 };
+
+export const applyJob = async body => {
+  const response = await fetch(`http://localhost:8000/api/jobs/apply`, {
+    method: 'POST',
+    credentials: 'include',
+    body: body,
+  });
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));
+
+  return data;
+};

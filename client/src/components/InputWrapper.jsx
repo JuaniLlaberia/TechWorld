@@ -6,6 +6,7 @@ const InputWrapper = ({ children, id, label, error }) => {
         className='text-light-3 text-sm focus-within:text-light-1 xl:text-xl'
       >
         {label}
+        <br />
         {children}
       </label>
       {error ? (

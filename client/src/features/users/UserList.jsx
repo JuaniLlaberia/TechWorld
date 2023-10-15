@@ -14,8 +14,9 @@ const UserList = ({ users, isLoading }) => {
         </ul>
       ) : (
         <section>
-          <h2 className='text-light-1 mt-4'>
-            Could not find any user based on your search.
+          <h2 className='text-light-1 mt-4 pb-4'>
+            Could not find any user based on your search. Try searching another
+            keyword.
           </h2>
         </section>
       )}
