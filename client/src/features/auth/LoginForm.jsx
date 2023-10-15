@@ -7,7 +7,7 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useLogin } from './useLogin';
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
@@ -84,3 +84,5 @@ export const LoginForm = () => {
     </form>
   );
 };
+
+export default LoginForm;

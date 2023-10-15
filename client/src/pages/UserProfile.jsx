@@ -8,7 +8,7 @@ import ProfileSkeleton from '../components/ProfileSkeleton';
 import BackBtn from '../components/BackBtn';
 import { SkillItem } from '../features/users/SkillItem';
 
-export const UserProfile = () => {
+const UserProfile = () => {
   const { user, isLoading } = useGetUser();
 
   if (isLoading) return <ProfileSkeleton />;
@@ -114,3 +114,5 @@ export const UserProfile = () => {
     </section>
   );
 };
+
+export default UserProfile;

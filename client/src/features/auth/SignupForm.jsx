@@ -9,7 +9,7 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useSignup } from './useSignup';
 
-export const SignupForm = () => {
+const SignupForm = () => {
   const {
     register,
     handleSubmit,
@@ -133,3 +133,5 @@ export const SignupForm = () => {
     </div>
   );
 };
+
+export default SignupForm;
