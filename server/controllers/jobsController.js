@@ -1,5 +1,6 @@
 const Job = require('../models/jobsModel');
 const catchErrorAsync = require('../utils/catchErrorAsync');
+const Email = require('../utils/emails');
 const CustomError = require('../utils/error');
 
 exports.getAllJobs = catchErrorAsync(async (req, res) => {
@@ -132,4 +133,20 @@ exports.getJobsFromUser = catchErrorAsync(async (req, res) => {
 exports.getMyJobs = catchErrorAsync(async (req, res) => {
   const jobs = await Job.find({ user: req.user.id }).select('name');
   res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
+});
+
+exports.applyJob = catchErrorAsync(async (req, res) => {
+  const job = await Job.findById(req.body.jobId)
+    .populate('user', 'email')
+    .select('name');
+
+  new Email(
+    job.user,
+    `http://localhost:5173/user/${req.user.id}`,
+    req.file.buffer
+  ).applyJobEmail(job.name, req.body);
+
+  res
+    .status(200)
+    .json({ status: 'success', message: 'Application sent correctly.' });
 });

@@ -2,12 +2,14 @@ const nodemailer = require('nodemailer');
 const createWelcomeTemplate = require('../utils/emailTemplates/welcome');
 const createResetTemplate = require('../utils/emailTemplates/resetPassword');
 const createEmailConfirmTemplate = require('../utils/emailTemplates/confirmEmail');
+const createJobApplicationTemplate = require('../utils/emailTemplates/jobApplication');
 
 module.exports = class Email {
-  constructor(user, url) {
+  constructor(user, url, file) {
     this.to = user.email;
-    this.firstName = user.fullName.split(' ')[0];
+    this.firstName = user.fullName?.split(' ')[0];
     this.url = url;
+    this.file = file;
     this.from = 'Jobs-App <jobsapp@noreply.com>';
   }
 
@@ -43,6 +45,12 @@ module.exports = class Email {
       subject: subject,
       text: html,
       html: html,
+      attachments: [
+        {
+          filename: `application.pdf`,
+          content: this.file,
+        },
+      ],
     };
 
     //Send email
@@ -64,6 +72,13 @@ module.exports = class Email {
     this.sendEmail(
       'Reset your password (Valid for 10min.)',
       createResetTemplate(this.url)
+    );
+  }
+
+  applyJobEmail(jobName, data) {
+    this.sendEmail(
+      `New job application for '${jobName}'`,
+      createJobApplicationTemplate(jobName, data, this.url)
     );
   }
 };
