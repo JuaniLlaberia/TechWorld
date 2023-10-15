@@ -9,10 +9,10 @@ export const useVerifyEmail = () => {
 
   const { mutate: verify, error } = useMutation({
     mutationFn: token => verifyEmail(token),
-    onSuccess: () => {
-      queryClient.setQueriesData(['user'], user.data.user);
+    onSuccess: data => {
+      queryClient.setQueriesData(['user'], data.data.user);
       toast.success('Account verified');
-      navigate('/me');
+      navigate('/me/information');
     },
     onError: error => toast.error(error.message),
   });

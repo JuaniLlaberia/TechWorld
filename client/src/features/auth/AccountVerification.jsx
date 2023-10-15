@@ -8,7 +8,7 @@ export const AccountVerification = () => {
   const { token } = useParams();
   const { verify, error } = useVerifyEmail();
 
-  //FIX THIS IMPLEMENTATION
+  // FIX THIS IMPLEMENTATION
   useEffect(() => {
     verify(token);
   }, [token]);

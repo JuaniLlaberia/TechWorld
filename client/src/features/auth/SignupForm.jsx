@@ -14,6 +14,7 @@ export const SignupForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const { signup, isLoading } = useSignup();
@@ -26,7 +27,9 @@ export const SignupForm = () => {
     profession,
   }) => {
     const newUser = { email, fullName, password, passwordConfirm, profession };
-    signup(newUser);
+    signup(newUser, {
+      onSuccess: reset(),
+    });
   };
 
   return (
