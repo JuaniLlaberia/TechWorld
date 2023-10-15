@@ -78,7 +78,7 @@ const Search = () => {
             inputRef?.current?.value || searchParams.get('searchQuery')
           }`}
         >
-          <UserList users={users.data.users} />
+          <UserList users={users?.data?.users} />
         </SearchCard>
       ) : null}
     </section>

@@ -10,7 +10,7 @@ export const useCreateJob = () => {
     mutationFn: body => newJob(body),
     onSuccess: data => {
       toast.success('Job created');
-      navigate(`/job/${data.data.job._id}`);
+      navigate(`/jobs/all?currentJobId=${data.data.job._id}`);
     },
     onError: err => toast.error(err.message),
   });
