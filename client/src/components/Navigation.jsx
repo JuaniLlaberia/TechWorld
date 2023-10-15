@@ -7,8 +7,9 @@ import {
   HiBriefcase,
   HiMagnifyingGlass,
   HiPlusCircle,
+  HiUser,
+  HiOutlineUser,
 } from 'react-icons/hi2';
-import defaultUserImg from '/default.jpg';
 import NavItem from './NavItem';
 
 const items = [
@@ -36,6 +37,12 @@ const items = [
     path: '/new',
     text: 'Add job',
   },
+  {
+    iconActive: <HiUser />,
+    iconInactive: <HiOutlineUser />,
+    path: '/me/information',
+    text: 'Profile',
+  },
 ];
 
 const Navigation = () => {
@@ -52,19 +59,6 @@ const Navigation = () => {
             text={item.text}
           />
         ))}
-        <NavItem
-          iconActive={
-            <img
-              src={defaultUserImg}
-              className='w-8 rounded-full outline outline- outline-secondary-1'
-            />
-          }
-          iconInactive={
-            <img src={defaultUserImg} className='w-8 rounded-full' />
-          }
-          path='/me/information'
-          text='My profile'
-        />
       </ul>
     </nav>
   );
