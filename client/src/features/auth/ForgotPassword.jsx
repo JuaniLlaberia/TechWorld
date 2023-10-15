@@ -55,7 +55,7 @@ export const ForgotPassword = () => {
         Already registered?{' '}
         <Link
           to='/login'
-          className='text-light-1 font-semibold underline'
+          className='text-secondary-1 font-semibold underline'
         >
           Log in
         </Link>

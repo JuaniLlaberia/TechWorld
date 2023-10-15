@@ -21,7 +21,10 @@ const ListHead = ({ title, subTitle }) => {
         <h2 className='text-light-2 mb-3 xl:text-lg'>{subTitle}</h2>
       </div>
       <FilterBtn>
-        <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
+        <Drawer.Body
+          title='Filter & Sort'
+          windowName='filters-jobs'
+        >
           <JobFilters />
         </Drawer.Body>
       </FilterBtn>
@@ -31,7 +34,7 @@ const ListHead = ({ title, subTitle }) => {
 
 const List = ({ children }) => {
   return (
-    <section className='bg-dark-2 w-full md:w-[50vw] max-w-[450px] rounded-bl-md md:border-r md:border-dark-1-border'>
+    <section className='bg-dark-2 w-full md:w-[50vw] lg:max-w-[450px] rounded-bl-md md:border-r md:border-dark-1-border'>
       {children}
     </section>
   );
