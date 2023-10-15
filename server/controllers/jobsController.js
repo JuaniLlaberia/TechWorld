@@ -55,7 +55,9 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   // Get data from database
   const totalJobs = await Job.countDocuments(query._conditions);
 
-  const jobs = await query.populate('user', 'fullName');
+  const jobs = await query
+    .select('name user location workPlace')
+    .populate('user', 'fullName');
 
   //Return data
   res.status(200).json({

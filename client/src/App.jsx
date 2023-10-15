@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import Home from './pages/Home';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppLayout from './pages/AppLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Search from './pages/Search';
@@ -41,6 +40,10 @@ const router = createBrowserRouter([
         element: <JobsAll />,
       },
       {
+        path: '/search',
+        element: <Search />,
+      },
+      {
         element: <ProtectedRoutes />,
         children: [
           {
@@ -60,10 +63,6 @@ const router = createBrowserRouter([
               },
               { path: '/me/saved', element: <ProfileSaved /> },
             ],
-          },
-          {
-            path: '/search',
-            element: <Search />,
           },
           {
             path: '/jobs-search',
@@ -135,7 +134,6 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <ReactQueryDevtools /> */}
       <AuthProvider>
         <RouterProvider router={router} />
         <Toaster
