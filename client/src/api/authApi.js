@@ -83,8 +83,6 @@ export const verifyEmail = async token => {
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
 
-  console.log('api', data);
-
   return data;
 };
 

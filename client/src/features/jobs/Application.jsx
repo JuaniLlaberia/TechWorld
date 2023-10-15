@@ -15,7 +15,7 @@ const Application = () => {
     handleSubmit,
     formState: { isValid },
   } = useForm({
-    defaultValues: { name: user.data.fullName, email: user.data.email },
+    defaultValues: { name: user.data?.fullName, email: user.data?.email },
   });
   const { apply, isLoading } = useApplyJob();
 
@@ -49,10 +49,16 @@ const Application = () => {
         We just need some extra information
       </h3>
       <InputWrapper label='Full name'>
-        <Input disabled register={register('name')} />
+        <Input
+          disabled
+          register={register('name')}
+        />
       </InputWrapper>
       <InputWrapper label='Email address'>
-        <Input disabled register={register('email')} />
+        <Input
+          disabled
+          register={register('email')}
+        />
       </InputWrapper>
       <InputWrapper label='Reference URL'>
         <Input
@@ -86,7 +92,10 @@ const Application = () => {
         className='hidden'
       />
       <div className='flex justify-end mt-6'>
-        <Button disabled={!isValid} full={true}>
+        <Button
+          disabled={!isValid}
+          full={true}
+        >
           {isLoading ? 'Sending...' : 'Send'}
         </Button>
       </div>

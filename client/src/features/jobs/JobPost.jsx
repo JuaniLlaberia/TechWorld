@@ -38,8 +38,6 @@ export const JobPost = () => {
     locationMap,
   } = job.data.job;
 
-  console.log(job.data.job);
-
   return (
     <section className='p-2 md:rounded-r-md'>
       <button
