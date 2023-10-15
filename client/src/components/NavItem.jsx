@@ -11,12 +11,12 @@ const NavItem = ({ iconActive, iconInactive, path, text }) => {
           isActive ? (
             <>
               {iconActive}{' '}
-              <span className='hidden text-2xl 2xl:block'>{text}</span>
+              <span className='hidden text-xl 2xl:block'>{text}</span>
             </>
           ) : (
             <>
               {iconInactive}{' '}
-              <span className='hidden text-2xl 2xl:block'>{text}</span>
+              <span className='hidden text-xl 2xl:block'>{text}</span>
             </>
           )
         }
