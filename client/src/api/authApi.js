@@ -82,6 +82,8 @@ export const verifyEmail = async token => {
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
+
+  return data;
 };
 
 export const logout = async () => {

@@ -7,7 +7,7 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useLogin } from './useLogin';
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
@@ -27,7 +27,7 @@ export const LoginForm = () => {
       className='h-[70vh] w-[50vw] max-w-[650px] min-w-[300px] rounded-lg flex flex-col p-4'
     >
       <h1 className='text-light-1 font-bold text-xl 2xl:text-[2.5rem] 2xl:mb-7'>
-        Log in to TechWorld
+        Log into your account
       </h1>
       <InputWrapper
         label='Email address'
@@ -52,6 +52,7 @@ export const LoginForm = () => {
           Forgot?
         </Link>
         <Input
+          autoComplete='on'
           type='password'
           id='password'
           register={register('password', {
@@ -61,15 +62,27 @@ export const LoginForm = () => {
       </InputWrapper>
       <br />
       <Button>
-        {isLoading ? <ClipLoader size={17.5} color='#1F1F1F' /> : 'Log In'}
+        {isLoading ? (
+          <ClipLoader
+            size={17.5}
+            color='#1F1F1F'
+          />
+        ) : (
+          'Log In'
+        )}
       </Button>
 
       <p className='text-light-3 text-center mt-2 xl:text-xl'>
         Dont't have an account?{' '}
-        <Link to='/signup' className='text-secondary-1 font-semibold underline'>
+        <Link
+          to='/signup'
+          className='text-secondary-1 font-semibold underline'
+        >
           Click here
         </Link>
       </p>
     </form>
   );
 };
+
+export default LoginForm;

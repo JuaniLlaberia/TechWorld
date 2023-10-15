@@ -10,6 +10,7 @@ module.exports = class Email {
     this.firstName = user.fullName?.split(' ')[0];
     this.url = url;
     this.file = file;
+    this.hasFile = file?.lenght > 0;
     this.from = 'Jobs-App <jobsapp@noreply.com>';
   }
 

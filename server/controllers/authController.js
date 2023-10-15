@@ -87,7 +87,7 @@ exports.activateAccount = catchErrorAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //Send welcome email
-  new Email(user, `http://localhost:5173/me`).welcomeEmail();
+  new Email(user, `http://localhost:5173/me/information`).welcomeEmail();
 
   //Auth user or make them login?
   createSendToken(user, 201, res);

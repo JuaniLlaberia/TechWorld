@@ -35,14 +35,23 @@ const JobsInfinite = ({ queryData }) => {
         {data?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.data.jobs.map(job => (
-              <JobItem key={job._id} item={job} />
+              <JobItem
+                key={job._id}
+                item={job}
+              />
             ))}
           </React.Fragment>
         ))}
-        <div ref={ref} className='h-1'></div>
+        <div
+          ref={ref}
+          className='h-1'
+        ></div>
         {isFetchingNextPage && (
           <div className='flex justify-center items-center'>
-            <ClipLoader color='white' size={30} />
+            <ClipLoader
+              color='white'
+              size={30}
+            />
           </div>
         )}
       </ul>

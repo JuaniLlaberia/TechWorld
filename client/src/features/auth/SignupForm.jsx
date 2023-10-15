@@ -9,11 +9,12 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useSignup } from './useSignup';
 
-export const SignupForm = () => {
+const SignupForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const { signup, isLoading } = useSignup();
@@ -26,17 +27,19 @@ export const SignupForm = () => {
     profession,
   }) => {
     const newUser = { email, fullName, password, passwordConfirm, profession };
-    signup(newUser);
+    signup(newUser, {
+      onSuccess: reset(),
+    });
   };
 
   return (
     <div className='xl:flex gap-24'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className=' w-[50vw] max-w-[650px] min-w-[300px] rounded-lg flex flex-col p-4'
+        className='h-[70vh] w-[50vw] max-w-[650px] min-w-[300px] rounded-lg flex flex-col p-4'
       >
         <h1 className='text-light-1 font-bold text-xl 2xl:text-4xl 2xl:mb-7'>
-          Sign up to TechWorld
+          Let's create an account
         </h1>
         <InputWrapper
           label='Email address'
@@ -68,6 +71,7 @@ export const SignupForm = () => {
           id='password'
         >
           <Input
+            autoComplete='on'
             type='password'
             id='password'
             register={register('password', {
@@ -81,6 +85,7 @@ export const SignupForm = () => {
           id='passwordConfirm'
         >
           <Input
+            autoComplete='on'
             type='password'
             id='passwordConfirm'
             register={register('passwordConfirm', {
@@ -108,14 +113,14 @@ export const SignupForm = () => {
               color='#1F1F1F'
             />
           ) : (
-            'Create account'
+            'Create now'
           )}
         </Button>
         <p className='text-light-3 mt-2 xl:text-xl'>
           Have an account?{' '}
           <Link
             to='/login'
-            className='text-light-1 font-semibold underline'
+            className='text-secondary-1 font-semibold underline'
           >
             Log in
           </Link>
@@ -128,3 +133,5 @@ export const SignupForm = () => {
     </div>
   );
 };
+
+export default SignupForm;

@@ -3,6 +3,7 @@ const rateLimit = require('express-rate-limit');
 const userController = require('../controllers/userController');
 const jobsController = require('../controllers/jobsController');
 const authController = require('../controllers/authController');
+const multer = require('multer');
 
 //Limiting email confirmation resend to 1 per minute.
 const emailLimiter = rateLimit({
@@ -13,6 +14,8 @@ const emailLimiter = rateLimit({
 });
 
 const router = express.Router();
+const storage = multer.memoryStorage();
+const update = multer({ storage: storage });
 
 router.post('/signup', authController.signup);
 router.post('/verify/:token', authController.activateAccount);
@@ -24,7 +27,12 @@ router.post(
 router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 
-router.patch('/update-me', authController.protect, userController.updateMe);
+router.patch(
+  '/update-me',
+  authController.protect,
+  update.single('userImg'),
+  userController.updateMe
+);
 router.get('/me', authController.protect, userController.getMe);
 router.delete('/delete-me', authController.protect, userController.deleteMe);
 router.patch(
@@ -45,12 +53,12 @@ router.post(
 router.get('/saved-posts', authController.protect, userController.getSavedJobs);
 
 //Protected to auth - Should it be restricted? or do i want to be able to fetch the users
-router.route('/').get(authController.protect, userController.getUsers);
+router.route('/').get(userController.getUsers);
 
 router
   .route('/:id')
-  //User will be public so people can see who posts the jobs
-  .get(userController.getUser)
+  .get(authController.protect, userController.getUser)
+
   //This are only for admins (as users have their own '-me')
   .patch(
     authController.protect,

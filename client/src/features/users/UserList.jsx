@@ -9,12 +9,15 @@ const UserList = ({ users, isLoading }) => {
       {users?.length > 0 ? (
         <ul>
           {users.map(job => (
-            <UserItem item={job} key={job._id} />
+            <UserItem
+              item={job}
+              key={job._id}
+            />
           ))}
         </ul>
       ) : (
         <section>
-          <h2 className='text-light-1 mt-4 pb-4'>
+          <h2 className='text-light-2 mt-4 pb-4 lg:text-lg'>
             Could not find any user based on your search. Try searching another
             keyword.
           </h2>

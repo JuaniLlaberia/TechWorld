@@ -20,14 +20,14 @@ const Opener = ({ title, opens }) => {
       {open === opens ? (
         <div
           onClick={closeAccordion}
-          className='w-full flex items-center justify-between px-1 py-1.5 text-dark-1 lg:p-3 lg:text-xl xl:text-2xl'
+          className='w-full flex items-center justify-between px-1 py-1.5 text-dark-1 lg:p-3 lg:text-xl xl:text-2xl cursor-pointer'
         >
           <h6>{title}</h6>
           <p>-</p>
         </div>
       ) : (
         <div
-          className='w-full flex items-center justify-between px-1 py-1.5 text-dark-1 lg:p-3 lg:text-xl xl:text-2xl'
+          className='w-full flex items-center justify-between px-1 py-1.5 text-dark-1 lg:p-3 lg:text-xl xl:text-2xl cursor-pointer'
           onClick={() => openAccordion(opens)}
           style={{ borderBottom: 'var(--border-sm)' }}
         >
