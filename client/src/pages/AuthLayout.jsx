@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import { HiOutlineXMark } from 'react-icons/hi2';
+import logo from '/logo1.png';
 import Footer from '../components/Footer';
 
 const AuthLayout = () => {
@@ -14,9 +15,12 @@ const AuthLayout = () => {
         </Link>
         <Link
           to='/'
-          className='text-light-1 absolute left-50 top-2 font-bold text-2xl'
+          className='text-light-1 absolute left-50 top-4 lg:top-6 font-bold text-2xl'
         >
-          LOGO
+          <img
+            src={logo}
+            className='lg:scale-150'
+          />
         </Link>
         <Outlet />
       </main>
