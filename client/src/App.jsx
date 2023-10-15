@@ -1,31 +1,34 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import Home from './pages/Home';
-import AppLayout from './pages/AppLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Search from './pages/Search';
-import Profile from './pages/Profile';
+import { Suspense, lazy } from 'react';
 
+import AppLayout from './pages/AppLayout';
 import AuthLayout from './pages/AuthLayout';
-import { LoginForm } from './features/auth/LoginForm';
-import { SignupForm } from './features/auth/SignupForm';
-import { ForgotPassword } from './features/auth/ForgotPassword';
-import { ResetPassword } from './features/auth/ResetPassword';
-import { AccountVerification } from './features/auth/AccountVerification';
-import { ResendEmail } from './features/auth/ResendEmail';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
-import { NotFound } from './pages/NotFound';
-import { AuthProvider } from './context/AuthContext.jsx';
-import SearchJobs from './features/jobs/SearchJobs';
-import SearchUsers from './features/users/SearchUsers';
-import { UserProfile } from './pages/UserProfile';
-import New from './pages/New';
 import ProfilePosts from './features/users/ProfilePosts';
 import ProfileSaved from './features/users/ProfileSaved';
 import ProfileInfo from './features/users/ProfileInfo';
-import Apply from './pages/Apply';
-import JobsAll from './features/jobs/JobsAll';
-import JobsRecommended from './features/jobs/JobsRecommended';
+import FullScreenLoader from './components/FullScreenLoader';
+import { AccountVerification } from './features/auth/AccountVerification';
+import { AuthProvider } from './context/AuthContext.jsx';
+import { ResetPassword } from './features/auth/ResetPassword';
+
+const Home = lazy(() => import('./pages/Home'));
+const Search = lazy(() => import('./pages/Search'));
+const Profile = lazy(() => import('./pages/Profile'));
+const New = lazy(() => import('./pages/New'));
+const Apply = lazy(() => import('./pages/Apply'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const UserProfile = lazy(() => import('./pages/UserProfile'));
+const SearchJobs = lazy(() => import('./features/jobs/SearchJobs'));
+const SearchUsers = lazy(() => import('./features/users/SearchUsers'));
+const JobsAll = lazy(() => import('./features/jobs/JobsAll'));
+const JobsRecommended = lazy(() => import('./features/jobs/JobsRecommended'));
+const SignupForm = lazy(() => import('./features/auth/SignupForm'));
+const LoginForm = lazy(() => import('./features/auth/LoginForm'));
+const ResendEmail = lazy(() => import('./features/auth/ResendEmail'));
+const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
 
 const router = createBrowserRouter([
   {
@@ -135,7 +138,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <Suspense fallback={<FullScreenLoader />}>
+          <RouterProvider router={router} />
+        </Suspense>
         <Toaster
           position='bottom-right'
           toastOptions={{
