@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import BackBtn from '../components/BackBtn';
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <main className='bg-dark-1 h-[100vh] px-2 text-center'>
       <BackBtn />
@@ -20,3 +20,5 @@ export const NotFound = () => {
     </main>
   );
 };
+
+export default NotFound;
