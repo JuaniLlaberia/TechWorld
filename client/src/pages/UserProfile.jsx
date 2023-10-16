@@ -24,6 +24,7 @@ const UserProfile = () => {
           <img
             src={defaultUserImg}
             className='rounded-full w-28 lg:w-36'
+            alt='profile picture'
           />
           <div>
             <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>

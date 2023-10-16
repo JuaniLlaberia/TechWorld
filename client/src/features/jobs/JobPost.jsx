@@ -59,6 +59,7 @@ export const JobPost = () => {
           <img
             src={defaultUserImg}
             className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
+            alt='profile picture'
           />
           <Link
             to={`/user/${user?._id}`}

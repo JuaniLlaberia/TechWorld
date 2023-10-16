@@ -13,6 +13,7 @@ const UserItem = ({ item }) => {
         <img
           src={defaultUserImg}
           className='w-20 rounded-full mb-2 xl:w-24'
+          alt='profile picture'
         />
         <div className=' w-full'>
           <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem]'>

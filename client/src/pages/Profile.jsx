@@ -20,7 +20,11 @@ const Profile = () => {
     <section className='pb-16 md:pb-2'>
       <Modal>
         <Card position='horizontal'>
-          <img src={defaultUserImg} className='rounded-full w-28 lg:w-36' />
+          <img
+            src={defaultUserImg}
+            alt='profile picture'
+            className='rounded-full w-28 lg:w-36'
+          />
           <div>
             <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
               {fullName}

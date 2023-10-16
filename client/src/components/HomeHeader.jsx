@@ -17,6 +17,7 @@ const HomeHeader = () => {
             <img
               src={defaultUserImg}
               className='w-12 h-12 rounded-full border lg:w-16 lg:h-16'
+              alt='profile picture'
             />
             <div className='flex flex-col'>
               <h2 className='text-sm text-light-2 lg:text-xl'>Hello, </h2>

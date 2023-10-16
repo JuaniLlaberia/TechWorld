@@ -22,6 +22,7 @@ const JobItemLink = ({ item, link }) => {
           <img
             src={defaultUserImg}
             className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
+            alt='Profile picture'
           />
           <h4 className='text-light-2 text-sm font-semibold lg:text-base'>
             {user?.fullName}

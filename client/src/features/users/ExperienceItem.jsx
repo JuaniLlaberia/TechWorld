@@ -7,11 +7,12 @@ const ExperienceItem = ({ el, handleRemove }) => {
         className='lg:text-xl'
         href={el.reference}
         target='_blank'
+        rel='nofollow'
       >
         {el.position}
       </a>
-      <p className='text-light-3 font-thin text-sm lg:text-lg'>{el.company}</p>
-      <span className='text-light-3 font-thin text-sm lg:text-lg'>
+      <p className='text-light-2 font-thin text-sm lg:text-lg'>{el.company}</p>
+      <span className='text-light-2 font-thin text-sm lg:text-lg'>
         {new Date(el.from).toLocaleDateString()} -{' '}
         {!el.until ? 'Present' : new Date(el.until).toLocaleDateString()}
       </span>
