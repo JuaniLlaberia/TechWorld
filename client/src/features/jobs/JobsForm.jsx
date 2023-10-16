@@ -1,51 +1,15 @@
-import { useForm } from 'react-hook-form';
-import { ClipLoader } from 'react-spinners';
-import { useState } from 'react';
 import InputWrapper from '../../components/InputWrapper';
 import Input from '../../components/Input';
-import Button from '../../components/Button';
 import Select from '../../components/Select';
-import { useCreateJob } from './useCreateJob';
-import { useAuthContext } from '../../context/AuthContext';
 
-const JobsForm = () => {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors, isValid },
-  } = useForm();
-  const { createJob, isCreating } = useCreateJob();
-  const { user } = useAuthContext();
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  const onSubmit = data => {
-    createJob({
-      name: data.name,
-      position: data.position,
-      location: data.location,
-      level: data.level,
-      type: data.type,
-      workPlace: data.workPlace,
-      description: data.description,
-      applicationUs: !isChecked,
-      companyUrl: data.url,
-      user: user?.data._id,
-    });
-  };
-
+const JobsForm = ({ register, errors, isChecked, setIsChecked }) => {
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className='pt-1 pb-24 rounded-md mt-2 w-full lg:pb-10 lg:w-[40vw]'
-    >
-      <h1 className='text-light-1 text-4xl mt-2 lg:text-5xl'>
-        Let's set up a{' '}
-        <span className='text-secondary-1 uppercase font-semibold'>job</span>{' '}
-        offer
-      </h1>
-
-      <InputWrapper error={errors?.name?.message} label='Job title' id='name'>
+    <>
+      <InputWrapper
+        error={errors?.name?.message}
+        label='Job title'
+        id='name'
+      >
         <Input
           id='name'
           placeholder='The title the users will see'
@@ -94,7 +58,7 @@ const JobsForm = () => {
             },
           })}
         >
-          <option selected>Choose a level</option>
+          <option>Choose a level</option>
           <option value='Entry-level'>Entry-level</option>
           <option value='Mid-level'>Mid-level</option>
           <option value='Senior-level'>Senior-level</option>
@@ -103,7 +67,11 @@ const JobsForm = () => {
       </InputWrapper>
 
       <div className=''>
-        <InputWrapper error={errors?.type?.message} label='Job type' id='type'>
+        <InputWrapper
+          error={errors?.type?.message}
+          label='Job type'
+          id='type'
+        >
           <Select
             id='type'
             register={register('type', {
@@ -112,7 +80,7 @@ const JobsForm = () => {
               },
             })}
           >
-            <option selected>Choose a type</option>
+            <option>Choose a type</option>
             <option value='Full-time'>Full-time</option>
             <option value='Part-time'>Part-time</option>
             <option value='Intership'>Intership</option>
@@ -131,7 +99,7 @@ const JobsForm = () => {
               },
             })}
           >
-            <option selected>Choose a place</option>
+            <option>Choose a place</option>
             <option value='On-site'>On-site</option>
             <option value='Remote'>Remote</option>
             <option value='Hybrid'>Hybrid</option>
@@ -168,7 +136,11 @@ const JobsForm = () => {
       </p>
 
       {isChecked && (
-        <InputWrapper error={errors?.url?.message} label='Company URL' id='url'>
+        <InputWrapper
+          error={errors?.url?.message}
+          label='Company URL'
+          id='url'
+        >
           <Input
             placeholder='Your own application url'
             id='url'
@@ -178,13 +150,7 @@ const JobsForm = () => {
           />
         </InputWrapper>
       )}
-      <br />
-      <div className='flex justify-end'>
-        <Button full={true} disabled={isCreating || !isValid}>
-          {isCreating ? <ClipLoader size={20} /> : 'Create job'}
-        </Button>
-      </div>
-    </form>
+    </>
   );
 };
 
