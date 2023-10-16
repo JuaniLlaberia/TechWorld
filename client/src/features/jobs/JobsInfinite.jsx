@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useRef } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { useInView } from 'react-intersection-observer';
 import ItemSkeleton from '../../components/ItemSkeleton';
 import JobItem from './JobItem';
 import NoJobsCard from './NoJobsCard';
 
+//FIND A WAY TO NOT RE RENDER SO MUCH!!!!
+
 const JobsInfinite = ({ queryData }) => {
   const listRef = useRef();
 
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 0.5,
     root: listRef.current,
   });
 
@@ -59,4 +61,4 @@ const JobsInfinite = ({ queryData }) => {
   );
 };
 
-export default JobsInfinite;
+export default memo(JobsInfinite);

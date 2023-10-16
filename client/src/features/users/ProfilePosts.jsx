@@ -21,7 +21,7 @@ const ProfilePosts = () => {
           <ProfileJobCard
             key={job._id}
             id={job._id}
-            name={job.name}
+            job={job}
           />
         ))}
       </ul>

@@ -7,7 +7,7 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useForgotPassword } from './useForgotPassword';
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
@@ -63,3 +63,5 @@ export const ForgotPassword = () => {
     </form>
   );
 };
+
+export default ForgotPassword;
