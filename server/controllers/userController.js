@@ -71,8 +71,6 @@ exports.deleteUser = catchErrorAsync(async (req, res) => {
   });
 });
 
-//User interactions
-
 exports.getMe = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -89,6 +87,19 @@ exports.updateMe = catchErrorAsync(async (req, res, next) => {
         400
       )
     );
+
+  //We have image:
+  //PRE: Image optimization
+  //1) Upload to bucket
+  //2) Get link/url of that image
+  //3) Remove old image from bucket
+
+  if (req?.file?.buffer) {
+    console.log(req.file.buffer);
+  }
+
+  //Update the profile as usual
+  console.log(req.body);
 
   let filteredObj = { ...req.body };
   const fieldsToRemove = ['_id', 'role', 'savedPosts', 'passwordChangedAt'];
