@@ -8,15 +8,29 @@ export const getMe = async () => {
 };
 
 export const updateMe = async newData => {
-  const data = await fetch('http://localhost:8000/api/users/update-me', {
+  const isFormData = ['description', 'skills', 'experience'].some(el =>
+    newData.hasOwnProperty(el)
+  );
+
+  const optionsWithImage = {
     method: 'PATCH',
     credentials: 'include',
-    // body: newData,
+    body: newData,
+  };
+
+  const optionsRegular = {
+    method: 'PATCH',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(newData),
-  });
+  };
+
+  const data = await fetch(
+    'http://localhost:8000/api/users/update-me',
+    isFormData ? optionsRegular : optionsWithImage
+  );
 
   return data.json();
 };
