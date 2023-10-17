@@ -21,6 +21,7 @@ const New = lazy(() => import('./pages/New'));
 const Apply = lazy(() => import('./pages/Apply'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const SearchJobs = lazy(() => import('./features/jobs/SearchJobs'));
 const SearchUsers = lazy(() => import('./features/users/SearchUsers'));
 const JobsAll = lazy(() => import('./features/jobs/JobsAll'));
@@ -33,6 +34,7 @@ const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
