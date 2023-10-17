@@ -13,6 +13,12 @@ const emailLimiter = rateLimit({
     'You can only re-send the email confirmation every 60 seconds. Please wait and try again!',
 });
 
+const loginLimiter = rateLimit({
+  max: 3,
+  windowMs: 60 * 1000,
+  message: 'Too many attemps. Try later or reset your password.',
+});
+
 const router = express.Router();
 const storage = multer.memoryStorage();
 const update = multer({ storage: storage });
@@ -24,7 +30,7 @@ router.post(
   emailLimiter,
   authController.resendConfirmationEmail
 );
-router.post('/login', authController.login);
+router.post('/login', loginLimiter, authController.login);
 router.post('/logout', authController.logout);
 
 router.patch(

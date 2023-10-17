@@ -8,7 +8,10 @@ export const login = async (email, password) => {
     body: JSON.stringify({ email, password }),
   });
 
+  if (response.status === 429) throw new Error('Too many attemps');
+
   const data = await response.json();
+
   if (data.status === 'fail') throw new Error(data.message);
   return data;
 };
