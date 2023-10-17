@@ -56,7 +56,8 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
   image: {
     type: String,
-    default: 'default.png', //Will be a default image for all users until they change it
+    default:
+      'https://firebasestorage.googleapis.com/v0/b/jobsapp-2b306.appspot.com/o/default.jpg?alt=media&token=e16a0056-ee83-499e-896e-028df36182ea&_gl=1*1u2a0b9*_ga*MTgyNTUwNTc2OS4xNjk3NDk0NTQw*_ga_CW55HF8NVT*MTY5NzQ5NDU0MC4xLjEuMTY5NzQ5OTIyNC42MC4wLjA.',
   },
   description: { type: String },
   savedPosts: {

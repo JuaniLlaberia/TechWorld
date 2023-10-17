@@ -31,22 +31,22 @@ export const getJobs = async ({
   baseUrl = baseUrl + `page=${page}`;
 
   const data = await fetch(baseUrl);
-  const jobs = await data.json();
-  return jobs;
+
+  if (!data.ok) throw new Error('Not able to load jobs now');
+
+  return data.json();
 };
 
 export const getJob = async id => {
   const data = await fetch(`http://localhost:8000/api/jobs/${id}`);
-  const job = await data.json();
-  return job;
+  return data.json();
 };
 
 export const searchJobs = async query => {
   const data = await fetch(
     `http://localhost:8000/api/jobs?search=${query}&limit=3`
   );
-  const jobs = await data.json();
-  return jobs;
+  return data.json();
 };
 
 export const saveJob = async id => {
@@ -77,8 +77,7 @@ export const getMyJobs = async () => {
   const data = await fetch(`http://localhost:8000/api/jobs/my-jobs`, {
     credentials: 'include',
   });
-  const jobs = await data.json();
-  return jobs;
+  return data.json();
 };
 
 export const newJob = async body => {
@@ -114,6 +113,22 @@ export const applyJob = async body => {
     method: 'POST',
     credentials: 'include',
     body: body,
+  });
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));
+
+  return data;
+};
+
+export const updateJob = async body => {
+  const response = await fetch(`http://localhost:8000/api/jobs/${body._id}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
 
   const data = await response.json();

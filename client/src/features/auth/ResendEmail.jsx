@@ -7,7 +7,7 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useResendConf } from './useResendConf';
 
-export const ResendEmail = () => {
+const ResendEmail = () => {
   const {
     register,
     handleSubmit,
@@ -18,7 +18,7 @@ export const ResendEmail = () => {
   const { sendEmail, isLoading } = useResendConf();
 
   const onSubmit = ({ email }) => {
-    sendEmail(email, { onSettled: () => reset() });
+    sendEmail(email, { onSettled: reset() });
   };
 
   return (
@@ -63,3 +63,5 @@ export const ResendEmail = () => {
     </form>
   );
 };
+
+export default ResendEmail;

@@ -1,5 +1,4 @@
 import { useAuthContext } from '../context/AuthContext';
-import defaultUserImg from '/default.jpg';
 
 const HomeHeader = () => {
   const { user } = useAuthContext();
@@ -15,8 +14,9 @@ const HomeHeader = () => {
         <>
           <div className=' relative flex py-3 mb-3 items-start gap-3'>
             <img
-              src={defaultUserImg}
+              src={user?.data?.image}
               className='w-12 h-12 rounded-full border lg:w-16 lg:h-16'
+              alt='profile picture'
             />
             <div className='flex flex-col'>
               <h2 className='text-sm text-light-2 lg:text-xl'>Hello, </h2>

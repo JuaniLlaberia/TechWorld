@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import defaultUserImg from '/default.jpg';
 
 const UserItem = ({ item }) => {
   const { _id, fullName, image, profession, location } = item;
@@ -11,8 +10,9 @@ const UserItem = ({ item }) => {
         className='text-light-1 flex gap-4 py-2'
       >
         <img
-          src={defaultUserImg}
+          src={image}
           className='w-20 rounded-full mb-2 xl:w-24'
+          alt='profile picture'
         />
         <div className=' w-full'>
           <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem]'>

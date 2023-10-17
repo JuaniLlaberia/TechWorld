@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router-dom';
-import defaultUserImg from '/default.jpg';
 
 const JobItem = ({ item }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,8 +27,9 @@ const JobItem = ({ item }) => {
       </div>
       <div className='flex items-center gap-2 mb-1'>
         <img
-          src={defaultUserImg}
+          src={user?.image}
           className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
+          alt='profile picture'
         />
         <h4 className='text-light-2 text-sm font-semibold lg:text-base'>
           {user?.fullName}

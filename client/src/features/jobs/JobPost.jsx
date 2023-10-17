@@ -7,7 +7,6 @@ import {
 } from 'react-icons/hi2';
 import { Link, useSearchParams } from 'react-router-dom';
 import PostSkeleton from '../../components/PostSkeleton';
-import defaultUserImg from '/default.jpg';
 import SavePost from '../../components/SavePost';
 import { useGetJob } from './useGetJob';
 import JobMap from '../../components/JobMap';
@@ -57,8 +56,9 @@ export const JobPost = () => {
         </JobMap>
         <div className='flex items-center justify-start gap-2 mb-1'>
           <img
-            src={defaultUserImg}
+            src={user?.image}
             className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
+            alt='profile picture'
           />
           <Link
             to={`/user/${user?._id}`}

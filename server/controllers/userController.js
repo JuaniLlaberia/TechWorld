@@ -1,6 +1,13 @@
 const User = require('../models/userModel');
 const catchErrorAsync = require('../utils/catchErrorAsync');
 const CustomError = require('../utils/error');
+const firebase = require('../utils/firebase');
+const {
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} = require('firebase/storage');
+const sharp = require('sharp');
 
 exports.getUsers = catchErrorAsync(async (req, res) => {
   let query = User.find({
@@ -71,8 +78,6 @@ exports.deleteUser = catchErrorAsync(async (req, res) => {
   });
 });
 
-//User interactions
-
 exports.getMe = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -90,14 +95,38 @@ exports.updateMe = catchErrorAsync(async (req, res, next) => {
       )
     );
 
+  let imageLink = '';
+
+  if (req?.file?.buffer) {
+    //Optimize image
+    const imageToUpload = await sharp(req.file.buffer)
+      .resize(400, 400)
+      .toFormat('webp')
+      .webp({ quality: 90 })
+      .toBuffer();
+
+    //Upload image
+    const storageRef = ref(firebase.storage, `${req.user._id}`);
+    const snapshot = await uploadBytesResumable(storageRef, imageToUpload, {
+      contentType: 'image/webp',
+    });
+
+    imageLink = await getDownloadURL(snapshot.ref);
+  }
+
+  // Update the profile as usual
   let filteredObj = { ...req.body };
   const fieldsToRemove = ['_id', 'role', 'savedPosts', 'passwordChangedAt'];
   fieldsToRemove.forEach(el => delete filteredObj[el]);
 
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredObj, {
-    new: true,
-    runValidators: true,
-  });
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    { ...filteredObj, image: imageLink === '' ? req.body.image : imageLink },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   res.status(200).json({
     status: 'success',

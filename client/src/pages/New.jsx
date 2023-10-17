@@ -1,9 +1,9 @@
-import JobsForm from '../features/jobs/JobsForm';
+import CreateJob from '../features/jobs/CreateJob';
 
 const New = () => {
   return (
     <section className='flex flex-col items-center'>
-      <JobsForm />
+      <CreateJob />
     </section>
   );
 };

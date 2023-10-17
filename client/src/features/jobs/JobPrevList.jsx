@@ -4,7 +4,7 @@ import JobItemLink from './JobItemLink';
 const JobPrevList = ({ jobs, isLoading, itemsLink }) => {
   if (isLoading) return <ItemSkeleton amount={5} />;
 
-  if (jobs.length === 0)
+  if (jobs?.length === 0)
     return (
       <section>
         <h2 className='text-light-2 mt-4 pb-4 lg:text-lg'>
@@ -16,7 +16,7 @@ const JobPrevList = ({ jobs, isLoading, itemsLink }) => {
 
   return (
     <ul>
-      {jobs.map(job => (
+      {jobs?.map(job => (
         <JobItemLink
           item={job}
           key={job._id}

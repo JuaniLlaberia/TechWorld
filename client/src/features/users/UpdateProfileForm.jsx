@@ -4,9 +4,12 @@ import { useUpdateMe } from './useUpdateMe';
 import Input from '../../components/Input';
 import InputWrapper from '../../components/InputWrapper';
 import SaveBtn from '../../components/SaveBtn';
+import { useState } from 'react';
 
 const UpdateProfileForm = ({ onClose, current, image }) => {
   const { updateProfile, isUpdating } = useUpdateMe();
+  const [photo, setPhoto] = useState(image);
+  const [previewPhoto, setPreviewPhoto] = useState(image);
 
   const {
     register,
@@ -17,18 +20,26 @@ const UpdateProfileForm = ({ onClose, current, image }) => {
   });
 
   const onSubmit = data => {
-    updateProfile(data);
-    onClose();
+    const formData = new FormData();
+
+    formData.append('userImg', photo);
+    formData.append('fullName', data.fullName);
+    formData.append('profession', data.profession);
+    formData.append('location', data.location);
+
+    updateProfile(formData, { onSettled: onClose() });
   };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className='p-1'
+      encType='multipart/form-data'
     >
       <label htmlFor='profile-image'>
         <img
-          src={image}
-          className='rounded-full w-24 m-auto border-[1px] border-light-2 lg:w-40'
+          src={previewPhoto}
+          className='rounded-full object-cover object-center w-24 h-24 m-auto border-[1px] border-light-2 lg:w-40 lg:h-40'
+          alt='profile picture'
         />
       </label>
       <Input
@@ -36,6 +47,10 @@ const UpdateProfileForm = ({ onClose, current, image }) => {
         id='profile-image'
         type='file'
         className='hidden'
+        onChange={e => {
+          setPreviewPhoto(URL.createObjectURL(e.target.files[0]));
+          setPhoto(e.target.files[0]);
+        }}
       />
       <InputWrapper
         id='fullName'
