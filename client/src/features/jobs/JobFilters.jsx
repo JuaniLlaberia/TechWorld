@@ -30,27 +30,38 @@ const JobFilters = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='flex flex-col'
+    >
       <Accordion>
-        <Accordion.Opener title='Experience level' opens='level' />
+        <Accordion.Opener
+          title='Experience level'
+          opens='level'
+        />
         <Accordion.Body id='level'>
           <fieldset id='experience'>
             {filterExperience.map(el => (
               <FilterItem
                 key={el}
                 value={el}
+                id={el}
                 radioGroup='experience'
                 register={register('experience')}
               />
             ))}
           </fieldset>
         </Accordion.Body>
-        <Accordion.Opener title='Job type' opens='type' />
+        <Accordion.Opener
+          title='Job type'
+          opens='type'
+        />
         <Accordion.Body id='type'>
           <fieldset id='type'>
             {filterJobType.map(el => (
               <FilterItem
                 key={el}
+                id={el}
                 value={el}
                 radioGroup='type'
                 register={register('type')}
@@ -58,12 +69,16 @@ const JobFilters = ({ onClose }) => {
             ))}
           </fieldset>
         </Accordion.Body>
-        <Accordion.Opener title='Work place' opens='date' />
+        <Accordion.Opener
+          title='Work place'
+          opens='date'
+        />
         <Accordion.Body id='date'>
           <fieldset id='place'>
             {filterJobPlace.map(el => (
               <FilterItem
                 key={el}
+                id={el}
                 value={el}
                 radioGroup='place'
                 register={register('place')}
