@@ -22,16 +22,16 @@ const Profile = () => {
           <img
             src={image}
             alt='profile picture'
-            className='rounded-full w-28 h-28 lg:w-36 lg:h-36'
+            className='rounded-full w-24 h-24 lg:w-36 lg:h-36'
           />
           <div>
-            <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
+            <h1 className='text-light-1 text-lg font-bold lg:text-3xl'>
               {fullName}
             </h1>
-            <h2 className='text-light-2 font-semibold lg:text-xl'>
+            <h2 className='text-light-2 text-sm font-semibold lg:text-xl'>
               {profession}
             </h2>
-            <h2 className='text-light-2 text-sm lg:text-xl'>{location}</h2>
+            <h3 className='text-light-2 text-sm lg:text-xl'>{location}</h3>
           </div>
           <Modal.Open opens='personal-info-modal'>
             <EditBtn />

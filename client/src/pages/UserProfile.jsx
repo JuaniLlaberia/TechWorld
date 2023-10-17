@@ -29,14 +29,14 @@ const UserProfile = () => {
         <Card position='horizontal'>
           <img
             src={image}
-            className='rounded-full w-28 lg:w-36'
+            className='rounded-full w-24 h-24 lg:w-36'
             alt='profile picture'
           />
           <div>
-            <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
+            <h1 className='text-light-1 text-lg font-bold lg:text-3xl'>
               {fullName}
             </h1>
-            <h2 className='text-light-2 font-semibold lg:text-xl'>
+            <h2 className='text-light-2 font-semibold text-sm lg:text-xl'>
               {profession}
             </h2>
             <h2 className='text-light-2 text-sm lg:text-xl'>{location}</h2>
