@@ -30,6 +30,7 @@ const SignupForm = lazy(() => import('./features/auth/SignupForm'));
 const LoginForm = lazy(() => import('./features/auth/LoginForm'));
 const ResendEmail = lazy(() => import('./features/auth/ResendEmail'));
 const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
+const ChangePassword = lazy(() => import('./features/auth/ChangePassword'));
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,15 @@ const router = createBrowserRouter([
       {
         element: <ResetPassword />,
         path: '/reset-password/:token',
+      },
+      {
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: '/change-my-password',
+            element: <ChangePassword />,
+          },
+        ],
       },
     ],
   },
