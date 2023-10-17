@@ -10,6 +10,7 @@ const UserItem = ({ item }) => {
         className='text-light-1 flex gap-4 py-2'
       >
         <img
+          loading='lazy'
           src={image}
           className='w-20 rounded-full mb-2 xl:w-24'
           alt='profile picture'
