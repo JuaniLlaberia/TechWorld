@@ -25,6 +25,7 @@ const Opener = ({ opens }) => {
 
   return (
     <button
+      aria-label='open'
       onClick={() => open(opens)}
       className='bg-light-1 text-dark-1 text-lg p-1 rounded-md lg:text-xl xl:text-2xl'
     >

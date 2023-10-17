@@ -12,7 +12,7 @@ export default {
         'dark-2': '#1F1F1F',
         'light-1': 'rgba(245, 245, 245, 1)',
         'light-2': 'rgb(215, 215, 215, .8)',
-        'light-3': 'rgba(209, 209, 209, 0.521)',
+        'light-3': '#8d8d8d',
         'dark-1-border': '#333333',
         'dark-shadow': '#5f5c5c38',
         'secondary-1': '#936cf5',

@@ -122,8 +122,14 @@ const JobsForm = ({ register, errors, isChecked, setIsChecked }) => {
       </InputWrapper>
 
       <div className='flex gap-3 mb-1 items-center'>
-        <p className='text-light-1 xl:text-xl'>Custom application form?</p>
+        <label
+          className='text-light-1 xl:text-xl'
+          htmlFor='box'
+        >
+          Custom application form?
+        </label>
         <input
+          id='box'
           value={isChecked}
           checked={isChecked}
           onChange={() => setIsChecked(prev => !prev)}

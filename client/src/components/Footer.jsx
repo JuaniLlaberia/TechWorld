@@ -28,13 +28,13 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <div className='flex items-center lg:text-lg'>
+        <section className='flex items-center lg:text-lg'>
           <img
             src={logo}
             className='w-12 lg:w-16'
           />
           © {new Date().getFullYear()}
-        </div>
+        </section>
       </section>
     </footer>
   );

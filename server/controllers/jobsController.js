@@ -46,7 +46,7 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   //Pagination
   if (req.query.page) {
     const page = Number(req.query.page) || 1;
-    const limit = req.query.limit || 5;
+    const limit = req.query.limit || process.env.PAGE_SIZE;
     const skip = (page - 1) * limit;
 
     query.skip(skip).limit(limit);
@@ -63,7 +63,7 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   res.status(200).json({
     status: 'success',
     count: totalJobs,
-    pages: Math.ceil(totalJobs / 5),
+    pages: Math.ceil(totalJobs / process.env.PAGE_SIZE),
     data: {
       jobs,
     },

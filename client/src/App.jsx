@@ -21,6 +21,7 @@ const New = lazy(() => import('./pages/New'));
 const Apply = lazy(() => import('./pages/Apply'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const SearchJobs = lazy(() => import('./features/jobs/SearchJobs'));
 const SearchUsers = lazy(() => import('./features/users/SearchUsers'));
 const JobsAll = lazy(() => import('./features/jobs/JobsAll'));
@@ -29,10 +30,12 @@ const SignupForm = lazy(() => import('./features/auth/SignupForm'));
 const LoginForm = lazy(() => import('./features/auth/LoginForm'));
 const ResendEmail = lazy(() => import('./features/auth/ResendEmail'));
 const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
+const ChangePassword = lazy(() => import('./features/auth/ChangePassword'));
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
@@ -117,6 +120,15 @@ const router = createBrowserRouter([
       {
         element: <ResetPassword />,
         path: '/reset-password/:token',
+      },
+      {
+        element: <ProtectedRoutes />,
+        children: [
+          {
+            path: '/change-my-password',
+            element: <ChangePassword />,
+          },
+        ],
       },
     ],
   },
