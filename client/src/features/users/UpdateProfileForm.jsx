@@ -20,15 +20,14 @@ const UpdateProfileForm = ({ onClose, current, image }) => {
   });
 
   const onSubmit = data => {
-    // const formData = new FormData();
+    const formData = new FormData();
 
-    // formData.append('userImg', photo);
-    // formData.append('fullName', data.fullName);
-    // formData.append('profession', data.profession);
-    // formData.append('location', data.location);
+    formData.append('userImg', photo);
+    formData.append('fullName', data.fullName);
+    formData.append('profession', data.profession);
+    formData.append('location', data.location);
 
-    updateProfile(data);
-    onClose();
+    updateProfile(formData, { onSettled: onClose() });
   };
   return (
     <form
