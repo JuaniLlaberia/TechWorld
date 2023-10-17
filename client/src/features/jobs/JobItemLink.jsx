@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import defaultUserImg from '/default.jpg';
 
 const JobItemLink = ({ item, link }) => {
   const { _id, name, user, location, workPlace } = item;
@@ -20,7 +19,7 @@ const JobItemLink = ({ item, link }) => {
         </div>
         <div className='flex items-center gap-2 mb-1'>
           <img
-            src={defaultUserImg}
+            src={user?.image}
             className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
             alt='Profile picture'
           />

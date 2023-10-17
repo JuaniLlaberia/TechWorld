@@ -57,7 +57,6 @@ const ProfileInfo = () => {
           render={(el, i) => (
             <SkillItem
               el={el}
-              i={i}
               key={`${el}-${i}`}
             />
           )}

@@ -1,5 +1,4 @@
 import { useGetUser } from '../features/users/useGetUser';
-import defaultUserImg from '/default.jpg';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
 import ExperienceItem from '../features/users/ExperienceItem';
@@ -13,8 +12,15 @@ const UserProfile = () => {
 
   if (isLoading) return <ProfileSkeleton />;
 
-  const { fullName, profession, description, skills, experience, location } =
-    user.data.user;
+  const {
+    fullName,
+    profession,
+    description,
+    skills,
+    experience,
+    location,
+    image,
+  } = user.data.user;
 
   return (
     <section className='pb-16 md:pb-2'>
@@ -22,7 +28,7 @@ const UserProfile = () => {
       <Modal>
         <Card position='horizontal'>
           <img
-            src={defaultUserImg}
+            src={image}
             className='rounded-full w-28 lg:w-36'
             alt='profile picture'
           />
