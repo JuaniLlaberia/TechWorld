@@ -18,18 +18,19 @@ const signToken = id => {
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user.id);
-  
+
   const cookieOptions = {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 1000
     ),
     path: '/',
     httpOnly: true,
-    sameSite: 'none',
-    secure: true,
   };
 
- // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  if (process.env.NODE_ENV === 'production') {
+    cookieOptions.sameSite = 'none';
+    cookieOptions.secure = true;
+  }
 
   res.cookie('jwt', token, cookieOptions);
 
@@ -59,13 +60,12 @@ exports.signup = catchErrorAsync(async (req, res) => {
   //Send email with code //CHECK WHICH URL TO USE WHEN FRONT IS IMPLEMENTED
   new Email(
     user,
-    `http://localhost:5173/verify-email/${token}`
+    `https://techworld-jobs.vercel.app/verify-email/${token}`
   ).verifyAccount();
 
   res.status(200).json({
     status: 'success',
     message: 'Email sent.',
-    token, //UNTIL FRONT IS IMPLEMENTED
   });
 });
 
@@ -90,7 +90,10 @@ exports.activateAccount = catchErrorAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   //Send welcome email
-  new Email(user, `http://localhost:5173/me/information`).welcomeEmail();
+  new Email(
+    user,
+    `https://techworld-jobs.vercel.app/me/information`
+  ).welcomeEmail();
 
   //Auth user or make them login?
   createSendToken(user, 201, res);
@@ -124,7 +127,7 @@ exports.resendConfirmationEmail = catchErrorAsync(async (req, res, next) => {
 
   new Email(
     user,
-    `http://localhost:5173/verify-email/${token}`
+    `https://techworld-jobs.vercel.app/verify-email/${token}`
   ).verifyAccount();
 
   res.status(200).json({ status: 'success', message: 'Token sent to email.' });
@@ -152,10 +155,17 @@ exports.login = catchErrorAsync(async (req, res, next) => {
 });
 
 exports.logout = (req, res) => {
-  res.cookie('jwt', 'null', {
+  const cookieOptions = {
     expires: new Date(Date.now() - 10 * 1000),
     httpOnly: true,
-  });
+  };
+
+  if (process.env.NODE_ENV === 'production') {
+    cookieOptions.sameSite = 'none';
+    cookieOptions.secure = true;
+  }
+
+  res.cookie('jwt', 'null', cookieOptions);
 
   res.status(200).json({
     status: 'success',
@@ -238,7 +248,7 @@ exports.sendResetPasswordToken = catchErrorAsync(async (req, res, next) => {
   //Send token email
   new Email(
     user,
-    `http://localhost:5173/reset-password/${resetToken}`
+    `https://techworld-jobs.vercel.app/reset-password/${resetToken}`
   ).resetPasswordEmail();
 
   //Send token in res
