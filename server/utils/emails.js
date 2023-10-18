@@ -11,7 +11,7 @@ module.exports = class Email {
     this.url = url;
     this.file = file;
     this.hasFile = file?.lenght > 0;
-    this.from = 'Jobs-App <jobsapp@noreply.com>';
+    this.from = 'Jobs-App <juanillaberiayt@gmail.com>';
   }
 
   //Create transporter
@@ -33,6 +33,7 @@ module.exports = class Email {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
+        secure: true,
       });
     }
   }

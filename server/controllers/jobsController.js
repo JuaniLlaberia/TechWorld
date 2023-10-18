@@ -149,7 +149,7 @@ exports.applyJob = catchErrorAsync(async (req, res) => {
 
   new Email(
     job.user,
-    `http://localhost:5173/user/${req.user.id}`,
+    `https://techworld-jobs.vercel.app/user/${req.user.id}`,
     req.file.buffer
   ).applyJobEmail(job.name, req.body);
 
