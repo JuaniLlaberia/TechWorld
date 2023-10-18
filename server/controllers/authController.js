@@ -18,8 +18,6 @@ const signToken = id => {
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user.id);
-
-  console.log(token);
   
   const cookieOptions = {
     expires: new Date(
@@ -27,9 +25,8 @@ const createSendToken = (user, statusCode, res) => {
     ),
     path: '/',
     httpOnly: true,
+    sameSite: 'none',
   };
-
-  console.log(cookieOptions);
 
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
