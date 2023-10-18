@@ -22,7 +22,7 @@ const Opener = ({ title, opens }) => {
           onClick={closeAccordion}
           className='w-full flex items-center justify-between px-1 py-1.5 text-dark-1 lg:p-3 lg:text-xl xl:text-2xl cursor-pointer'
         >
-          <h6>{title}</h6>
+          <h2>{title}</h2>
           <p>-</p>
         </div>
       ) : (
@@ -31,7 +31,7 @@ const Opener = ({ title, opens }) => {
           onClick={() => openAccordion(opens)}
           style={{ borderBottom: 'var(--border-sm)' }}
         >
-          <h6>{title}</h6>
+          <h2>{title}</h2>
           <p>+</p>
         </div>
       )}

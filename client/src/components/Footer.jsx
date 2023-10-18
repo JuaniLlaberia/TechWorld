@@ -9,6 +9,7 @@ const Footer = () => {
         <ul className='flex items-center gap-2 text-3xl lg:text-4xl'>
           <li>
             <Link
+              rel='nofollow'
               to='https://github.com/JuaniLlaberia'
               target='_blank'
               className='hover:text-light-1'
@@ -18,6 +19,7 @@ const Footer = () => {
           </li>
           <li>
             <Link
+              rel='nofollow'
               to='https://www.linkedin.com/in/juan-ignacio-llaberia-241b351b3/'
               target='_blank'
               className='hover:text-light-1'
@@ -26,13 +28,13 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <div className='flex items-center lg:text-lg'>
+        <section className='flex items-center lg:text-lg'>
           <img
             src={logo}
             className='w-12 lg:w-16'
           />
           © {new Date().getFullYear()}
-        </div>
+        </section>
       </section>
     </footer>
   );

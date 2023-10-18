@@ -14,9 +14,7 @@ export const useLogin = () => {
       toast.success('Welcome back!');
       navigate('/');
     },
-    onError: err => {
-      toast.error(err.message);
-    },
+    onError: err => toast.error(err.message),
   });
 
   return { login, isLoading };

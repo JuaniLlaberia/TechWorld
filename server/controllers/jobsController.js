@@ -46,7 +46,7 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   //Pagination
   if (req.query.page) {
     const page = Number(req.query.page) || 1;
-    const limit = req.query.limit || 5;
+    const limit = req.query.limit || process.env.PAGE_SIZE;
     const skip = (page - 1) * limit;
 
     query.skip(skip).limit(limit);
@@ -57,13 +57,13 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
 
   const jobs = await query
     .select('name user location workPlace')
-    .populate('user', 'fullName');
+    .populate('user', 'fullName image');
 
   //Return data
   res.status(200).json({
     status: 'success',
     count: totalJobs,
-    pages: Math.ceil(totalJobs / 5),
+    pages: Math.ceil(totalJobs / process.env.PAGE_SIZE),
     data: {
       jobs,
     },
@@ -94,7 +94,10 @@ exports.getJobsArea = catchErrorAsync(async (req, res, next) => {
 });
 
 exports.getJob = catchErrorAsync(async (req, res) => {
-  const job = await Job.findById(req.params.id).populate('user', 'fullName');
+  const job = await Job.findById(req.params.id).populate(
+    'user',
+    'fullName image'
+  );
 
   res.status(200).json({
     status: 'success',
@@ -133,7 +136,9 @@ exports.getJobsFromUser = catchErrorAsync(async (req, res) => {
 
 //Get all the jobs posted by me
 exports.getMyJobs = catchErrorAsync(async (req, res) => {
-  const jobs = await Job.find({ user: req.user.id }).select('name');
+  const jobs = await Job.find({ user: req.user.id }).select(
+    'name position level type location description workPlace user'
+  );
   res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
 });
 

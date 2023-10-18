@@ -8,7 +8,10 @@ export const login = async (email, password) => {
     body: JSON.stringify({ email, password }),
   });
 
+  if (response.status === 429) throw new Error('Too many attemps');
+
   const data = await response.json();
+
   if (data.status === 'fail') throw new Error(data.message);
   return data;
 };
@@ -94,4 +97,21 @@ export const logout = async () => {
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
+};
+
+export const changepassword = async body => {
+  const response = await fetch(
+    `http://localhost:8000/api/users/update-my-password`,
+    {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    }
+  );
+
+  const data = await response.json();
+  if (data.status === 'fail') throw new Error(data.message);
+
+  return data;
 };

@@ -30,12 +30,12 @@ const Window = ({ children, windowName, title }) => {
   return createPortal(
     <>
       <div className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[300px] max-w-[650px] pt- p-3 rounded-sm min-h-[100px] z-[100] shadow-md shadow-[#222121dc]'>
-        <div className='flex justify-between items-center py-2 border-b-[1px] border-dark-1-border mb-3'>
-          <h1 className='text-light-2 text-lg font-semibold mb-3 lg:text-2xl'>
+        <div className='flex justify-between items-start py-0 border-b-[1px] border-dark-1-border mb-3'>
+          <h1 className='text-light-2 text-lg font-semibold mb-2 lg:text-2xl'>
             {title}
           </h1>
           <button onClick={close}>
-            <HiOutlineXMark size={30} />
+            <HiOutlineXMark size={25} />
           </button>
         </div>
         <div>{cloneElement(children, { onClose: close })}</div>

@@ -1,5 +1,4 @@
 import { useGetUser } from '../features/users/useGetUser';
-import defaultUserImg from '/default.jpg';
 import Card from '../components/Card';
 import Modal from '../components/Modal';
 import ExperienceItem from '../features/users/ExperienceItem';
@@ -13,8 +12,15 @@ const UserProfile = () => {
 
   if (isLoading) return <ProfileSkeleton />;
 
-  const { fullName, profession, description, skills, experience, location } =
-    user.data.user;
+  const {
+    fullName,
+    profession,
+    description,
+    skills,
+    experience,
+    location,
+    image,
+  } = user.data.user;
 
   return (
     <section className='pb-16 md:pb-2'>
@@ -22,14 +28,15 @@ const UserProfile = () => {
       <Modal>
         <Card position='horizontal'>
           <img
-            src={defaultUserImg}
-            className='rounded-full w-28 lg:w-36'
+            src={image}
+            className='rounded-full w-24 h-24 lg:w-36'
+            alt='profile picture'
           />
           <div>
-            <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
+            <h1 className='text-light-1 text-lg font-bold lg:text-3xl'>
               {fullName}
             </h1>
-            <h2 className='text-light-2 font-semibold lg:text-xl'>
+            <h2 className='text-light-2 font-semibold text-sm lg:text-xl'>
               {profession}
             </h2>
             <h2 className='text-light-2 text-sm lg:text-xl'>{location}</h2>
@@ -39,7 +46,7 @@ const UserProfile = () => {
           <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>About</h3>
           <p className='text-light-1 text-sm lg:text-xl'>{description}</p>
         </Card>
-        {experience.lenght > 1 && (
+        {experience.length > 1 && (
           <Card>
             <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>
               Experience & Projects
@@ -60,7 +67,7 @@ const UserProfile = () => {
             </Modal.Open>
           </Card>
         )}
-        {skills.lenght > 1 && (
+        {skills.length > 1 && (
           <Card>
             <h3 className='text-light-2 font-semibold mb-2 lg:text-2xl'>
               Skills
@@ -105,7 +112,7 @@ const UserProfile = () => {
             render={(el, i) => (
               <SkillItem
                 el={el}
-                i={i}
+                key={i}
               />
             )}
           />

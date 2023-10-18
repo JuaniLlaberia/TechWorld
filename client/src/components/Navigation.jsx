@@ -54,14 +54,17 @@ const Navigation = () => {
       <Link
         to='/'
         className='lg:flex lg:justify-center lg:py-6 lg:mb-10'
+        aria-label='Go home'
       >
         <img
           src={logo}
-          className='hidden 2xl:block'
+          className='hidden w-auto h-auto 2xl:block'
+          alt='Logo'
         />
         <img
           src={logo2}
-          className='hidden lg:block 2xl:hidden'
+          className='hidden w-auto h-auto lg:block 2xl:hidden'
+          alt='Logo'
         />
       </Link>
       <ul className='flex justify-between px-8 items-center h-full text-white lg:flex-col lg:justify-center lg:gap-8 lg:h-fit 2xl:items-start'>

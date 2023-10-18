@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import defaultUserImg from '/default.jpg';
 import Modal from '../components/Modal';
 import Card from '../components/Card';
 import UpdateProfileForm from '../features/users/UpdateProfileForm';
@@ -14,21 +13,25 @@ const Profile = () => {
   if (isLoading) return <PorfileSkeleton />;
   if (user.status === 'fail') return null;
 
-  const { fullName, profession, location } = user.data || user;
+  const { fullName, profession, location, image } = user.data || user;
 
   return (
     <section className='pb-16 md:pb-2'>
       <Modal>
         <Card position='horizontal'>
-          <img src={defaultUserImg} className='rounded-full w-28 lg:w-36' />
+          <img
+            src={image}
+            alt='profile picture'
+            className='rounded-full w-24 h-24 lg:w-36 lg:h-36'
+          />
           <div>
-            <h1 className='text-light-1 text-xl font-bold lg:text-3xl'>
+            <h1 className='text-light-1 text-lg font-bold lg:text-3xl'>
               {fullName}
             </h1>
-            <h2 className='text-light-2 font-semibold lg:text-xl'>
+            <h2 className='text-light-2 text-sm font-semibold lg:text-xl'>
               {profession}
             </h2>
-            <h2 className='text-light-2 text-sm lg:text-xl'>{location}</h2>
+            <h3 className='text-light-2 text-sm lg:text-xl'>{location}</h3>
           </div>
           <Modal.Open opens='personal-info-modal'>
             <EditBtn />
@@ -42,7 +45,7 @@ const Profile = () => {
         >
           <UpdateProfileForm
             current={{ fullName, profession, location }}
-            image={defaultUserImg}
+            image={image}
           />
         </Modal.Window>
       </Modal>

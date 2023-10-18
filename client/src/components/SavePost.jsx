@@ -15,6 +15,7 @@ const SavePost = ({ id }) => {
 
   return (
     <button
+      aria-label='save'
       className={`z-10 text-light-1 text-3xl xl:text-4xl ${
         isSaving || isUnSaving ? 'animate-pulse' : ''
       }`}

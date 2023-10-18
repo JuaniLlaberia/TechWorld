@@ -4,31 +4,42 @@ export const getMe = async () => {
     credentials: 'include',
   });
 
-  const user = await data.json();
-  return user;
+  return await data.json();
 };
 
 export const updateMe = async newData => {
-  const data = await fetch('http://localhost:8000/api/users/update-me', {
+  const isFormData = ['description', 'skills', 'experience'].some(el =>
+    newData.hasOwnProperty(el)
+  );
+
+  const optionsWithImage = {
+    method: 'PATCH',
+    credentials: 'include',
+    body: newData,
+  };
+
+  const optionsRegular = {
     method: 'PATCH',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(newData),
-  });
+  };
 
-  const user = await data.json();
-  return user;
+  const data = await fetch(
+    'http://localhost:8000/api/users/update-me',
+    isFormData ? optionsRegular : optionsWithImage
+  );
+
+  return data.json();
 };
 
 export const getUser = async id => {
   const data = await fetch(`http://localhost:8000/api/users/${id}`, {
     credentials: 'include',
   });
-  const user = await data.json();
-
-  return user;
+  return data.json();
 };
 
 export const getUsersByProfession = async ({ profession, limit, page }) => {
@@ -36,9 +47,7 @@ export const getUsersByProfession = async ({ profession, limit, page }) => {
     `http://localhost:8000/api/users?search=${profession}&limit=${limit}&page=${page}`,
     { credentials: 'include' }
   );
-  const users = await data.json();
-
-  return users;
+  return data.json();
 };
 
 export const getMySaved = async () => {
@@ -46,7 +55,5 @@ export const getMySaved = async () => {
     credentials: 'include',
   });
 
-  const users = await data.json();
-
-  return users;
+  return data.json();
 };

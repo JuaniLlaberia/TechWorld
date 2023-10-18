@@ -32,8 +32,6 @@ module.exports = (err, req, res, next) => {
   error.message = err.message;
   error.name = err.name;
 
-  console.log(error);
-
   if (error.code === 11000) error = handleDuplicateField(error);
   if (error.name === 'CastError') error = handleDuplicateIdError(error);
   if (error.name === 'ValidationError') error = handleValidationError(error);
