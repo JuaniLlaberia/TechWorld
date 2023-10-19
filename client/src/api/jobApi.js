@@ -6,7 +6,7 @@ export const getJobs = async ({
   page,
   location,
 }) => {
-  let baseUrl = `https://job-app-api-ten.vercel.app/api/jobs?`;
+  let baseUrl = `http://localhost:8000/api/jobs?`;
 
   if (query) {
     baseUrl = baseUrl + `search=${query}&`;
@@ -38,20 +38,20 @@ export const getJobs = async ({
 };
 
 export const getJob = async id => {
-  const data = await fetch(`https://job-app-api-ten.vercel.app/api/jobs/${id}`);
+  const data = await fetch(`http://localhost:8000/api/jobs/${id}`);
   return data.json();
 };
 
 export const searchJobs = async query => {
   const data = await fetch(
-    `https://job-app-api-ten.vercel.app/api/jobs?search=${query}&limit=3`
+    `http://localhost:8000/api/jobs?search=${query}&limit=3`
   );
   return data.json();
 };
 
 export const saveJob = async id => {
   const response = await fetch(
-    `https://job-app-api-ten.vercel.app/api/users/save-post/${id}`,
+    `http://localhost:8000/api/users/save-post/${id}`,
     {
       method: 'POST',
       credentials: 'include',
@@ -63,7 +63,7 @@ export const saveJob = async id => {
 
 export const unSaveJob = async id => {
   const response = await fetch(
-    `https://job-app-api-ten.vercel.app/api/users/unsave-post/${id}`,
+    `http://localhost:8000/api/users/unsave-post/${id}`,
     {
       method: 'POST',
       credentials: 'include',
@@ -74,17 +74,14 @@ export const unSaveJob = async id => {
 };
 
 export const getMyJobs = async () => {
-  const data = await fetch(
-    `https://job-app-api-ten.vercel.app/api/jobs/my-jobs`,
-    {
-      credentials: 'include',
-    }
-  );
+  const data = await fetch(`http://localhost:8000/api/jobs/my-jobs`, {
+    credentials: 'include',
+  });
   return data.json();
 };
 
 export const newJob = async body => {
-  const response = await fetch('https://job-app-api-ten.vercel.app/api/jobs', {
+  const response = await fetch('http://localhost:8000/api/jobs', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -100,13 +97,10 @@ export const newJob = async body => {
 };
 
 export const deleteJob = async id => {
-  const response = await fetch(
-    `https://job-app-api-ten.vercel.app/api/jobs/${id}`,
-    {
-      method: 'DELETE',
-      credentials: 'include',
-    }
-  );
+  const response = await fetch(`http://localhost:8000/api/jobs/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  });
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));
@@ -115,14 +109,11 @@ export const deleteJob = async id => {
 };
 
 export const applyJob = async body => {
-  const response = await fetch(
-    `https://job-app-api-ten.vercel.app/api/jobs/apply`,
-    {
-      method: 'POST',
-      credentials: 'include',
-      body: body,
-    }
-  );
+  const response = await fetch(`http://localhost:8000/api/jobs/apply`, {
+    method: 'POST',
+    credentials: 'include',
+    body: body,
+  });
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));
@@ -131,17 +122,14 @@ export const applyJob = async body => {
 };
 
 export const updateJob = async body => {
-  const response = await fetch(
-    `https://job-app-api-ten.vercel.app/api/jobs/${body._id}`,
-    {
-      method: 'PATCH',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  const response = await fetch(`http://localhost:8000/api/jobs/${body._id}`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message.split(': ').at(-1));

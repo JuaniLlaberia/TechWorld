@@ -20,7 +20,7 @@ const JobsInfinite = ({ queryData }) => {
     if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
   }, [inView]);
 
-  if (data?.pages[0].count < 1) return <NoJobsCard link='/jobs' />;
+  if (data?.pages[0].count < 1) return <NoJobsCard link='/jobs/all' />;
   if (status === 'loading') return <ItemSkeleton amount={5} />;
 
   return (

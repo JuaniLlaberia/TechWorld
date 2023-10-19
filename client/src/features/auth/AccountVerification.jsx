@@ -3,14 +3,23 @@ import { useVerifyEmail } from './useVerifyEmail';
 import { Link, useParams } from 'react-router-dom';
 import { HiOutlineExclamationTriangle } from 'react-icons/hi2';
 import Button from '../../components/Button';
+import { ClipLoader } from 'react-spinners';
 
 export const AccountVerification = () => {
   const { token } = useParams();
-  const { verify, error } = useVerifyEmail();
+  const { verify, error, isLoading } = useVerifyEmail();
 
   useEffect(() => {
     verify(token);
   }, [token]);
+
+  if (isLoading)
+    return (
+      <ClipLoader
+        size={25}
+        color='white'
+      />
+    );
 
   if (error)
     return (
