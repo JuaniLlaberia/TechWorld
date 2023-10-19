@@ -1,5 +1,5 @@
 export const login = async (email, password) => {
-  const response = await fetch('http://localhost:8000/api/users/login', {
+  const response = await fetch('https://job-app-api-ten.vercel.app/api/users/login', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -17,7 +17,7 @@ export const login = async (email, password) => {
 };
 
 export const signup = async values => {
-  const response = await fetch('http://localhost:8000/api/users/signup', {
+  const response = await fetch('https://job-app-api-ten.vercel.app/api/users/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const signup = async values => {
 
 export const forgotPassword = async email => {
   const response = await fetch(
-    'http://localhost:8000/api/users/forgot-password',
+    'https://job-app-api-ten.vercel.app/api/users/forgot-password',
     {
       method: 'POST',
       headers: {
@@ -47,7 +47,7 @@ export const forgotPassword = async email => {
 
 export const resetPassword = async (password, passwordConfirm, token) => {
   const response = await fetch(
-    `http://localhost:8000/api/users/reset-password/${token}`,
+    `https://job-app-api-ten.vercel.app/api/users/reset-password/${token}`,
     {
       method: 'POST',
       headers: {
@@ -62,7 +62,7 @@ export const resetPassword = async (password, passwordConfirm, token) => {
 };
 
 export const resendConfEmail = async email => {
-  const response = await fetch(`http://localhost:8000/api/users/resend-token`, {
+  const response = await fetch(`https://job-app-api-ten.vercel.app/api/users/resend-token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export const resendConfEmail = async email => {
 
 export const verifyEmail = async token => {
   const response = await fetch(
-    `http://localhost:8000/api/users/verify/${token}`,
+    `https://job-app-api-ten.vercel.app/api/users/verify/${token}`,
     {
       method: 'POST',
       credentials: 'include',
@@ -90,7 +90,7 @@ export const verifyEmail = async token => {
 };
 
 export const logout = async () => {
-  const response = await fetch(`http://localhost:8000/api/users/logout`, {
+  const response = await fetch(`https://job-app-api-ten.vercel.app/api/users/logout`, {
     method: 'POST',
     credentials: 'include',
   });
@@ -101,7 +101,7 @@ export const logout = async () => {
 
 export const changepassword = async body => {
   const response = await fetch(
-    `http://localhost:8000/api/users/update-my-password`,
+    `https://job-app-api-ten.vercel.app/api/users/update-my-password`,
     {
       method: 'PATCH',
       credentials: 'include',
