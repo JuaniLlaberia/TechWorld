@@ -7,7 +7,11 @@ export const useVerifyEmail = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: verify, error } = useMutation({
+  const {
+    mutate: verify,
+    error,
+    isLoading,
+  } = useMutation({
     mutationFn: token => verifyEmail(token),
     onSuccess: data => {
       queryClient.setQueriesData(['user'], data.data.user);
@@ -17,5 +21,5 @@ export const useVerifyEmail = () => {
     onError: error => toast.error(error.message),
   });
 
-  return { verify, error };
+  return { verify, error, isLoading };
 };
