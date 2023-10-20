@@ -3,8 +3,8 @@ const createWelcomeTemplate = require('../utils/emailTemplates/welcome');
 const createResetTemplate = require('../utils/emailTemplates/resetPassword');
 const createEmailConfirmTemplate = require('../utils/emailTemplates/confirmEmail');
 const createJobApplicationTemplate = require('../utils/emailTemplates/jobApplication');
-const Resend = require('resend');
-// import { Resend } from 'resend';
+// const Resend = require('resend');
+import { Resend } from 'resend';
 
 module.exports = class Email {
   constructor(user, url, file) {
@@ -35,7 +35,7 @@ module.exports = class Email {
     // };
 
     //Send email
-    await resend.emails.send({
+    resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'juanillaberia2002@gmail.com',
       subject: 'Hello World',
