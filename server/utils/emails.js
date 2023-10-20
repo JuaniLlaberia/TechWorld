@@ -15,28 +15,28 @@ module.exports = class Email {
   }
 
   //Create transporter
-  // newTransporter() {
-  //   if (process.env.NODE_ENV === 'development') {
-  //     return nodemailer.createTransport({
-  //       host: process.env.MAILTRAP_HOST,
-  //       port: process.env.MAILTRAP_PORT,
-  //       auth: {
-  //         user: process.env.MAILTRAP_USERNAME,
-  //         pass: process.env.MAILTRAP_PASSWORD,
-  //       },
-  //     });
-  //   } else {
-  //     return nodemailer.createTransport({
-  //       host: process.env.BREVO_HOST,
-  //       port: process.env.BREVO_PORT,
-  //       auth: {
-  //         user: process.env.BREVO_USERNAME,
-  //         pass: process.env.BREVO_PASSWORD,
-  //       },
-  //       secure: true,
-  //     });
-  //   }
-  // }
+  newTransporter() {
+    if (process.env.NODE_ENV === 'development') {
+      return nodemailer.createTransport({
+        host: process.env.MAILTRAP_HOST,
+        port: process.env.MAILTRAP_PORT,
+        auth: {
+          user: process.env.MAILTRAP_USERNAME,
+          pass: process.env.MAILTRAP_PASSWORD,
+        },
+      });
+    } else {
+      return nodemailer.createTransport({
+        host: process.env.BREVO_HOST,
+        port: process.env.BREVO_PORT,
+        auth: {
+          user: process.env.BREVO_USERNAME,
+          pass: process.env.BREVO_PASSWORD,
+        },
+        secure: true,
+      });
+    }
+  }
 
   //send email
   async sendEmail(subject, html) {
@@ -55,17 +55,8 @@ module.exports = class Email {
       ],
     };
 
-    const transporter = {
-      host: 'smtp.resend.com',
-      port: 465,
-      auth: {
-        user: 'resend',
-        pass: 're_L83tqndM_F1qRAERPoknh75QhSucH58L6',
-      },
-    };
-
     //Send email
-    await transporter.sendMail(emailOptions);
+    await this.newTransporter().sendMail(emailOptions);
   }
 
   verifyAccount() {
