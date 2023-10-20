@@ -9,6 +9,7 @@ export const getMe = async () => {
 
 export const updateMe = async newData => {
   const isFormData = ['description', 'skills', 'experience'].some(el =>
+    // eslint-disable-next-line no-prototype-builtins
     newData.hasOwnProperty(el)
   );
 

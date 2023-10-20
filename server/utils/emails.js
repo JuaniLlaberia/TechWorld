@@ -33,7 +33,6 @@ module.exports = class Email {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
-        secure: true,
       });
     }
   }

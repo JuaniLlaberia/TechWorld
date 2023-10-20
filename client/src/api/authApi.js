@@ -1,12 +1,15 @@
 export const login = async (email, password) => {
-  const response = await fetch('https://job-app-api-ten.vercel.app/api/users/login', {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  const response = await fetch(
+    'https://job-app-api-ten.vercel.app/api/users/login',
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    }
+  );
 
   if (response.status === 429) throw new Error('Too many attemps');
 
@@ -17,13 +20,16 @@ export const login = async (email, password) => {
 };
 
 export const signup = async values => {
-  const response = await fetch('https://job-app-api-ten.vercel.app/api/users/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(values),
-  });
+  const response = await fetch(
+    'https://job-app-api-ten.vercel.app/api/users/signup',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    }
+  );
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
@@ -62,13 +68,16 @@ export const resetPassword = async (password, passwordConfirm, token) => {
 };
 
 export const resendConfEmail = async email => {
-  const response = await fetch(`https://job-app-api-ten.vercel.app/api/users/resend-token`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-  });
+  const response = await fetch(
+    `https://job-app-api-ten.vercel.app/api/users/resend-token`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    }
+  );
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
@@ -90,10 +99,13 @@ export const verifyEmail = async token => {
 };
 
 export const logout = async () => {
-  const response = await fetch(`https://job-app-api-ten.vercel.app/api/users/logout`, {
-    method: 'POST',
-    credentials: 'include',
-  });
+  const response = await fetch(
+    `https://job-app-api-ten.vercel.app/api/users/logout`,
+    {
+      method: 'POST',
+      credentials: 'include',
+    }
+  );
 
   const data = await response.json();
   if (data.status === 'fail') throw new Error(data.message);
