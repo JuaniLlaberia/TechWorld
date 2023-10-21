@@ -33,33 +33,50 @@ module.exports = class Email {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
+        // secure: true,
       });
     }
   }
 
   //send email
   async sendEmail(subject, html) {
-    //Define options
-    const emailOptions = {
-      from: this.from,
-      to: this.to,
-      subject: subject,
-      text: html,
-      html: html,
-      attachments: [
-        {
-          filename: `application.pdf`,
-          content: this.file,
-        },
-      ],
-    };
+    // //Define options
+    // const emailOptions = {
+    //   from: this.from,
+    //   to: this.to,
+    //   subject: subject,
+    //   text: html,
+    //   html: html,
+    //   attachments: [
+    //     {
+    //       filename: `application.pdf`,
+    //       content: this.file,
+    //     },
+    //   ],
+    // };
 
-    //Send email
-    await this.newTransporter().sendMail(emailOptions);
+    // //Send email
+    // await this.newTransporter().sendMail(emailOptions);
+    const transport = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
+      },
+    });
+
+    return transport.sendMail({
+      subject: 'TEST',
+      bcc: ['juanillaberia2002@gmail.com'],
+      html: '<h1>TEST</h1>',
+    });
   }
 
-  verifyAccount() {
-    this.sendEmail('Confirm your email.', createEmailConfirmTemplate(this.url));
+  async verifyAccount() {
+    await this.sendEmail(
+      'Confirm your email.',
+      createEmailConfirmTemplate(this.url)
+    );
   }
 
   welcomeEmail() {
