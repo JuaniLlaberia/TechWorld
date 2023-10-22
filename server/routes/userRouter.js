@@ -4,7 +4,6 @@ const userController = require('../controllers/userController');
 const jobsController = require('../controllers/jobsController');
 const authController = require('../controllers/authController');
 const multer = require('multer');
-const nodemailer = require('nodemailer');
 
 //Limiting email confirmation resend to 1 per minute.
 const emailLimiter = rateLimit({
@@ -23,37 +22,6 @@ const loginLimiter = rateLimit({
 const router = express.Router();
 const storage = multer.memoryStorage();
 const update = multer({ storage: storage });
-
-router.get('/email-test', async (req, res) => {
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-      user: 'bernadine.senger@ethereal.email',
-      pass: 'asJFfRnNRtHUdEpAQv',
-    },
-  });
-
-  try {
-    await transporter.sendMail({
-      to: 'rojocif558@wisnick.com',
-      from: 'juanillaberiayt@gmail.com',
-      subject: `You got a new message from `,
-      text: `Thanks for the mail.`,
-    });
-
-    res
-      .status(200)
-      .json({ status: 'success', message: 'Successfully send your message!' });
-  } catch (error) {
-    console.log(error);
-
-    res.status(400).json({
-      status: 'failed',
-      message: 'You submit an incorrect mail address!',
-    });
-  }
-});
 
 router.post('/signup', authController.signup);
 router.post('/verify/:token', authController.activateAccount);
