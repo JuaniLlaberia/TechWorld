@@ -5,14 +5,14 @@ import { unSaveJob } from '../../api/jobApi';
 export const useUnSaveJob = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: unSave, isLoading: isUnSaving } = useMutation({
+  const { mutate: unSave } = useMutation({
     mutationFn: id => unSaveJob(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(['saved-jobs']);
-      queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries({ queryKey: ['saved-jobs'] });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: () => toast.error('Something went wrong'),
   });
 
-  return { unSave, isUnSaving };
+  return { unSave };
 };
