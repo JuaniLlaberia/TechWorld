@@ -15,73 +15,77 @@ module.exports = class Email {
   }
 
   //Create transporter
-  newTransporter() {
-    if (process.env.NODE_ENV === 'development') {
-      return nodemailer.createTransport({
-        host: process.env.MAILTRAP_HOST,
-        port: process.env.MAILTRAP_PORT,
-        auth: {
-          user: process.env.MAILTRAP_USERNAME,
-          pass: process.env.MAILTRAP_PASSWORD,
-        },
-      });
-    } else {
-      return nodemailer.createTransport({
-        host: process.env.BREVO_HOST,
-        port: process.env.BREVO_PORT,
-        auth: {
-          user: process.env.BREVO_USERNAME,
-          pass: process.env.BREVO_PASSWORD,
-        },
-        // secure: true,
-      });
-    }
-  }
+  // newTransporter() {
+  //   if (process.env.NODE_ENV === 'development') {
+  //     return nodemailer.createTransport({
+  //       host: process.env.MAILTRAP_HOST,
+  //       port: process.env.MAILTRAP_PORT,
+  //       auth: {
+  //         user: process.env.MAILTRAP_USERNAME,
+  //         pass: process.env.MAILTRAP_PASSWORD,
+  //       },
+  //     });
+  //   } else {
+  //     return nodemailer.createTransport({
+  //       host: process.env.BREVO_HOST,
+  //       port: process.env.BREVO_PORT,
+  //       auth: {
+  //         user: process.env.BREVO_USERNAME,
+  //         pass: process.env.BREVO_PASSWORD,
+  //       },
+  //       // secure: true,
+  //     });
+  //   }
+  // }
+
+  //Define options
+  // const emailOptions = {
+  //   from: this.from,
+  //   to: this.to,
+  //   subject: subject,
+  //   text: html,
+  //   html: html,
+  //   attachments: [
+  //     {
+  //       filename: `application.pdf`,
+  //       content: this.file,
+  //     },
+  //   ],
+  // };
+
+  //Send email
+  // await this.newTransporter().sendMail(emailOptions);
 
   //send email
   async sendEmail(subject, html) {
-    // //Define options
-    // const emailOptions = {
-    //   from: this.from,
-    //   to: this.to,
-    //   subject: subject,
-    //   text: html,
-    //   html: html,
-    //   attachments: [
-    //     {
-    //       filename: `application.pdf`,
-    //       content: this.file,
-    //     },
-    //   ],
-    // };
-
-    // //Send email
-    // await this.newTransporter().sendMail(emailOptions);
-    const transport = nodemailer.createTransport({
-      service: 'Gmail',
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: 'bernadine.senger@ethereal.email',
+        pass: 'asJFfRnNRtHUdEpAQv',
       },
     });
 
-    return transport.sendMail({
-      subject: 'TEST',
-      bcc: ['juanillaberia2002@gmail.com'],
-      html: '<h1>TEST</h1>',
-    });
+    try {
+      await transporter.sendMail({
+        from: 'techworld-jobs@no-reply.com',
+        to: 'juanillaberia2002@gmail.com',
+        subject: 'Please work',
+        html: '<h1>Please work</h1>',
+      });
+    } catch (err) {
+      throw new Error(err.message);
+    }
   }
 
-  async verifyAccount() {
-    await this.sendEmail(
-      'Confirm your email.',
-      createEmailConfirmTemplate(this.url)
-    );
+  verifyAccount() {
+    this.sendEmail('Confirm your email.', createEmailConfirmTemplate(this.url));
   }
 
   welcomeEmail() {
     this.sendEmail(
-      'Welcome to the X Family!',
+      'Welcome to the TechWolrd Family!',
       createWelcomeTemplate(this.firstName, this.url)
     );
   }
