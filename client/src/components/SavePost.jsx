@@ -7,13 +7,13 @@ import { useState } from 'react';
 
 const SavePost = ({ id }) => {
   const navigate = useNavigate();
-  const [optimisticUpdate, setOptimisticUpdate] = useState(false);
 
   const { user, isAuth } = useAuthContext();
   const { save } = useSaveJob();
   const { unSave } = useUnSaveJob();
 
   const isPostSave = user?.data?.savedPosts.includes(id);
+  const [optimisticUpdate, setOptimisticUpdate] = useState(isPostSave);
 
   const handleSave = () => {
     setOptimisticUpdate(true);
@@ -30,9 +30,9 @@ const SavePost = ({ id }) => {
       aria-label='save'
       className={`z-10 text-light-1 text-3xl xl:text-4xl`}
     >
-      {isPostSave || optimisticUpdate ? (
+      {optimisticUpdate ? (
         <HiBookmark onClick={() => handleUnSave(id)} />
-      ) : !isPostSave || !optimisticUpdate ? (
+      ) : !optimisticUpdate ? (
         <HiOutlineBookmark
           onClick={() =>
             !isAuth && !isPostSave ? navigate('/signup') : handleSave(id)
