@@ -10,15 +10,11 @@ const UpdateDescForm = ({ onClose, current }) => {
   });
 
   const onSubmit = data => {
-    updateProfile(data);
-    onClose();
+    updateProfile(data, { onSuccess: () => onClose() });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className='p-1'
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className='p-1'>
       <textarea
         placeholder='Description'
         {...register('description')}

@@ -33,8 +33,7 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   };
 
   const handleSave = () => {
-    updateProfile({ experience: items });
-    onClose();
+    updateProfile({ experience: items }, { onSuccess: () => onClose() });
   };
 
   //RENDER LIST
@@ -51,10 +50,7 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
             />
           )}
         />
-        <SaveBtn
-          isUpdating={isUpdating}
-          onClick={handleSave}
-        />
+        <SaveBtn isUpdating={isUpdating} onClick={handleSave} />
       </>
     );
 
@@ -93,11 +89,7 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
             />
           </InputWrapper>
           <div className='md:grid md:grid-cols-2 md:gap-2'>
-            <InputWrapper
-              error={errors?.from?.message}
-              label='From'
-              id='from'
-            >
+            <InputWrapper error={errors?.from?.message} label='From' id='from'>
               <Calendar
                 id='from'
                 handleChange={selected => setFrom(selected)}
