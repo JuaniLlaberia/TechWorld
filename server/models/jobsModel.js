@@ -31,15 +31,6 @@ const jobsSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A job must have a location'],
   },
-  locationMap: {
-    type: {
-      type: String,
-      enum: ['Point'],
-    },
-    coordinates: {
-      type: [Number],
-    },
-  },
   description: {
     required: [true, 'Must include a job description.'],
     type: String,
