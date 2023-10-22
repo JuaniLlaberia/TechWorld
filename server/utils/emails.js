@@ -15,68 +15,48 @@ module.exports = class Email {
   }
 
   //Create transporter
-  // newTransporter() {
-  //   if (process.env.NODE_ENV === 'development') {
-  //     return nodemailer.createTransport({
-  //       host: process.env.MAILTRAP_HOST,
-  //       port: process.env.MAILTRAP_PORT,
-  //       auth: {
-  //         user: process.env.MAILTRAP_USERNAME,
-  //         pass: process.env.MAILTRAP_PASSWORD,
-  //       },
-  //     });
-  //   } else {
-  //     return nodemailer.createTransport({
-  //       host: process.env.BREVO_HOST,
-  //       port: process.env.BREVO_PORT,
-  //       auth: {
-  //         user: process.env.BREVO_USERNAME,
-  //         pass: process.env.BREVO_PASSWORD,
-  //       },
-  //       // secure: true,
-  //     });
-  //   }
-  // }
-
-  //Define options
-  // const emailOptions = {
-  //   from: this.from,
-  //   to: this.to,
-  //   subject: subject,
-  //   text: html,
-  //   html: html,
-  //   attachments: [
-  //     {
-  //       filename: `application.pdf`,
-  //       content: this.file,
-  //     },
-  //   ],
-  // };
-
-  //Send email
-  // await this.newTransporter().sendMail(emailOptions);
+  newTransporter() {
+    if (process.env.NODE_ENV === 'development') {
+      return nodemailer.createTransport({
+        host: process.env.MAILTRAP_HOST,
+        port: process.env.MAILTRAP_PORT,
+        auth: {
+          user: process.env.MAILTRAP_USERNAME,
+          pass: process.env.MAILTRAP_PASSWORD,
+        },
+      });
+    } else {
+      return nodemailer.createTransport({
+        host: process.env.BREVO_HOST,
+        port: process.env.BREVO_PORT,
+        auth: {
+          user: process.env.BREVO_USERNAME,
+          pass: process.env.BREVO_PASSWORD,
+        },
+        // secure: true,
+      });
+    }
+  }
 
   //send email
   async sendEmail(subject, html) {
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      auth: {
-        user: 'bernadine.senger@ethereal.email',
-        pass: 'asJFfRnNRtHUdEpAQv',
-      },
-    });
+    //Define options
+    const emailOptions = {
+      from: this.from,
+      to: this.to,
+      subject: subject,
+      text: html,
+      html: html,
+      attachments: [
+        {
+          filename: `application.pdf`,
+          content: this.file,
+        },
+      ],
+    };
 
-    try {
-      await transporter.sendMail({
-        from: 'techworld-jobs@no-reply.com',
-        to: 'juanillaberia2002@gmail.com',
-        subject: 'Please work',
-        html: '<h1>Please work</h1>',
-      });
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    //Send email
+    await this.newTransporter().sendMail(emailOptions);
   }
 
   verifyAccount() {
