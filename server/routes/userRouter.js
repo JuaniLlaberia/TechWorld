@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const jobsController = require('../controllers/jobsController');
 const authController = require('../controllers/authController');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 
 //Limiting email confirmation resend to 1 per minute.
 const emailLimiter = rateLimit({
