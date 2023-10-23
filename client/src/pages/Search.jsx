@@ -5,7 +5,7 @@ import JobPrevList from '../features/jobs/JobPrevList';
 import UserList from '../features/users/UserList';
 import ItemSkeleton from '../components/ItemSkeleton';
 import SearchCard from '../components/SearchCard';
-import { useSearchByQuery } from '../features/users/useSearchByQuery';
+import { useSearchByQuery } from '../features/jobs/useSearchByQuery';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
