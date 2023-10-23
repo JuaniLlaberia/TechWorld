@@ -17,7 +17,7 @@ const HomeHeader = () => {
         <section className='relative flex py-3 mb-3 items-start gap-3'>
           <img
             src={user?.data?.image}
-            className='w-12 h-12 rounded-full border lg:w-16 lg:h-16'
+            className='w-12 h-12 rounded-full border lg:w-16 lg:h-16 bg-light-3'
             alt='profile picture'
           />
           <article className='flex flex-col'>
@@ -32,10 +32,7 @@ const HomeHeader = () => {
                 <HiOutlineEllipsisVertical />
               </button>
             </Modal.Open>
-            <Modal.Window
-              windowName='settings'
-              title='Settings'
-            >
+            <Modal.Window windowName='settings' title='Settings'>
               <SettingsModal />
             </Modal.Window>
           </Modal>

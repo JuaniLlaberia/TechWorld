@@ -22,7 +22,7 @@ const Profile = () => {
           <img
             src={image}
             alt='profile picture'
-            className='rounded-full w-24 h-24 lg:w-36 lg:h-36'
+            className='rounded-full w-24 h-24 bg-light-3 lg:w-36 lg:h-36'
           />
           <div>
             <h1 className='text-light-1 text-lg font-bold lg:text-3xl'>

@@ -21,7 +21,7 @@ const JobItemLink = ({ item, link }) => {
           <img
             loading='lazy'
             src={user?.image}
-            className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
+            className='w-8 h-8 rounded-full bg-light-3 xl:w-10 xl:h-10'
             alt='Profile picture'
           />
           <h4 className='text-light-2 text-sm font-semibold lg:text-base'>
