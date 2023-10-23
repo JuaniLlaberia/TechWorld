@@ -182,7 +182,7 @@ exports.getSavedJobs = catchErrorAsync(async (req, res) => {
     .select('savedPosts')
     .populate({
       path: 'savedPosts',
-      select: 'name user location workPlace',
+      select: 'name user location workPlace type level',
       populate: { path: 'user', select: 'fullName image' },
     });
 
