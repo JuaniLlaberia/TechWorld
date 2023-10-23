@@ -16,7 +16,11 @@ const JobPrevList = ({ jobs, isLoading, itemsLink }) => {
   return (
     <ul>
       {jobs?.map(job => (
-        <JobItemLink item={job} key={job._id} link={itemsLink} />
+        <JobItemLink
+          item={job}
+          key={job._id}
+          link={itemsLink}
+        />
       ))}
     </ul>
   );
