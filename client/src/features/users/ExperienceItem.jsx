@@ -11,7 +11,9 @@ const ExperienceItem = ({ el, handleRemove }) => {
       >
         {el.position}
       </a>
-      <p className='text-light-2 font-thin text-sm lg:text-lg'>{el.company}</p>
+      <p className='text-light-2 font-normal text-sm lg:text-lg'>
+        {el.company}
+      </p>
       <span className='text-light-2 font-thin text-sm lg:text-lg'>
         {new Date(el.from).toLocaleDateString()} -{' '}
         {!el.until ? 'Present' : new Date(el.until).toLocaleDateString()}

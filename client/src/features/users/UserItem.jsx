@@ -5,14 +5,17 @@ const UserItem = ({ item }) => {
 
   return (
     <li className='border-b-[1px] border-dark-1-border last:border-0 py-2 px-4'>
-      <Link to={`/user/${_id}`} className='text-light-1 flex gap-4 py-2'>
+      <Link
+        to={`/user/${_id}`}
+        className='text-light-1 flex gap-4 py-2'
+      >
         <img
           loading='lazy'
           src={image}
-          className='w-20 rounded-full mb-2 xl:w-24'
+          className='w-20 h-20 rounded-full mb-2 bg-light-2 xl:w-24 xl:h-24'
           alt='profile picture'
         />
-        <div className=' w-full'>
+        <div className='h-20 xl:h-20'>
           <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem]'>
             {fullName}
           </h3>
