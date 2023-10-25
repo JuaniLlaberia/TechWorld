@@ -6,6 +6,7 @@ const bcrpyt = require('bcrypt');
 const catchErrorAsync = require('../utils/catchErrorAsync');
 const User = require('../models/userModel');
 const Jobs = require('../models/jobsModel');
+const Article = require('../models/articleModel');
 const Email = require('../utils/emails');
 const Token = require('../models/tokenModel');
 const CustomError = require('../utils/error');
@@ -214,7 +215,26 @@ exports.postBelongsToUser = catchErrorAsync(async (req, res, next) => {
   if (req.user.role !== 'admin' && jobPost.user.id !== req.user.id) {
     next(
       new CustomError(
-        'This post does not belong to you. You can only delete your own jobs.',
+        'This post does not belong to you. You can only modify your own jobs.',
+        403
+      )
+    );
+  }
+
+  next();
+});
+
+exports.articleBelongsToUser = catchErrorAsync(async (req, res, next) => {
+  //CHECK THIS IMPLEMENTATION
+  const articles = await Article.findById(req.params.id).populate(
+    'author',
+    'id'
+  );
+
+  if (req.user.role !== 'admin' && articles.author.id !== req.user.id) {
+    next(
+      new CustomError(
+        'This article does not belong to you. You can only modify your own articles.',
         403
       )
     );
