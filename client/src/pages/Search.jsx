@@ -41,11 +41,11 @@ const Search = () => {
           defaultValue={searchParams.get('searchQuery')}
           placeholder='Search'
           ref={inputRef}
-          className='w-full max-w-[600px] h-10 py-2 px-4 rounded-l-full text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl xl:h-14'
+          className='w-full max-w-[600px] h-10 py-2 px-4 rounded-l-xl text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl xl:h-14'
         />
         <button
           aria-label='search'
-          className='flex items-center gap-2 h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-full lg:text-base xl:text-lg 2xl:text-2xl xl:h-14 xl:px-6'
+          className='flex items-center gap-2 h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-xl lg:text-base xl:text-lg 2xl:text-2xl xl:h-14 xl:px-6'
         >
           <HiOutlineMagnifyingGlass />{' '}
           <span className='hidden xl:block'>Search</span>

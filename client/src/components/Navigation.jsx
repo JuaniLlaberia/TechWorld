@@ -9,6 +9,8 @@ import {
   HiPlusCircle,
   HiUser,
   HiOutlineUser,
+  HiOutlineNewspaper,
+  HiNewspaper,
 } from 'react-icons/hi2';
 import NavItem from './NavItem';
 import logo from '/logo1.png';
@@ -28,17 +30,23 @@ const items = [
     path: '/jobs',
     text: 'Jobs',
   },
-  {
-    iconActive: <HiMagnifyingGlass />,
-    iconInactive: <HiOutlineMagnifyingGlass />,
-    path: '/search',
-    text: 'Search',
-  },
+  // {
+  //   iconActive: <HiMagnifyingGlass />,
+  //   iconInactive: <HiOutlineMagnifyingGlass />,
+  //   path: '/search',
+  //   text: 'Search',
+  // },
   {
     iconActive: <HiPlusCircle />,
     iconInactive: <HiOutlinePlusCircle />,
     path: '/new',
     text: 'Add job',
+  },
+  {
+    iconActive: <HiNewspaper />,
+    iconInactive: <HiOutlineNewspaper />,
+    path: '/articles',
+    text: 'Articles',
   },
   {
     iconActive: <HiUser />,
