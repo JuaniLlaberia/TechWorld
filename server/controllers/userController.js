@@ -12,6 +12,7 @@ const sharp = require('sharp');
 exports.getUsers = catchErrorAsync(async (req, res) => {
   let query = User.find({
     profession: { $regex: req.query.search || '', $options: 'i' },
+    verified: true,
   });
 
   if (req.query.page) {
@@ -24,6 +25,7 @@ exports.getUsers = catchErrorAsync(async (req, res) => {
 
   const totalUsers = await User.countDocuments({
     profession: { $regex: req.query.search || '', $options: 'i' },
+    verified: true,
   });
 
   const users = await query.select('_id profession fullName image location');
@@ -180,7 +182,7 @@ exports.getSavedJobs = catchErrorAsync(async (req, res) => {
     .select('savedPosts')
     .populate({
       path: 'savedPosts',
-      select: 'name user location workPlace',
+      select: 'name user location workPlace type level',
       populate: { path: 'user', select: 'fullName image' },
     });
 

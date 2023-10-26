@@ -26,7 +26,7 @@ const SignupForm = () => {
   }) => {
     const newUser = { email, fullName, password, passwordConfirm, profession };
     signup(newUser, {
-      onSuccess: reset(),
+      onSuccess: () => reset(),
     });
   };
 
@@ -49,11 +49,7 @@ const SignupForm = () => {
           register={register('email', { required: 'Must provide email' })}
         />
       </InputWrapper>
-      <InputWrapper
-        label='Full name'
-        error={errors.name?.message}
-        id='name'
-      >
+      <InputWrapper label='Full name' error={errors.name?.message} id='name'>
         <Input
           type='text'
           id='name'
@@ -104,21 +100,11 @@ const SignupForm = () => {
         />
       </InputWrapper>
       <Button>
-        {isLoading ? (
-          <ClipLoader
-            size={17.5}
-            color='#1F1F1F'
-          />
-        ) : (
-          'Create now'
-        )}
+        {isLoading ? <ClipLoader size={17.5} color='#1F1F1F' /> : 'Create now'}
       </Button>
       <p className='text-light-3 mt-2 xl:text-xl'>
         Have an account?{' '}
-        <Link
-          to='/login'
-          className='text-secondary-1 font-semibold underline'
-        >
+        <Link to='/login' className='text-secondary-1 font-semibold underline'>
           Log in
         </Link>
       </p>

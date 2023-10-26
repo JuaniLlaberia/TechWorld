@@ -1,5 +1,4 @@
 import JobPrevList from '../jobs/JobPrevList';
-import Card from '../../components/Card';
 import { useGetMySaved } from './useGetMySaved';
 
 const ProfileSaved = () => {
@@ -7,13 +6,13 @@ const ProfileSaved = () => {
 
   return (
     <>
-      <Card>
+      <section className='border border-dark-1-border rounded-sm px-2 bg-dark-2'>
         <JobPrevList
           jobs={jobs?.data?.savedPosts}
           isLoading={isLoading}
           itemsLink='/jobs?currentJobId='
         />
-      </Card>
+      </section>
     </>
   );
 };

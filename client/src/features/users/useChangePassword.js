@@ -10,7 +10,7 @@ export const useChangePassword = () => {
   const { mutate: changePassword, isLoading } = useMutation({
     mutationFn: body => changePasswordApi(body),
     onSuccess: () => {
-      queryClient.invalidateQueries(['user']);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
       navigate('/login');
       toast.success('Updated successfully');
     },

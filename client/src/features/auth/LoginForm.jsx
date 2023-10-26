@@ -62,22 +62,12 @@ const LoginForm = () => {
       </InputWrapper>
       <br />
       <Button>
-        {isLoading ? (
-          <ClipLoader
-            size={17.5}
-            color='#1F1F1F'
-          />
-        ) : (
-          'Log In'
-        )}
+        {isLoading ? <ClipLoader size={17.5} color='#1F1F1F' /> : 'Log In'}
       </Button>
 
       <p className='text-light-3 text-center mt-2 xl:text-xl'>
         Dont't have an account?{' '}
-        <Link
-          to='/signup'
-          className='text-secondary-1 font-semibold underline'
-        >
+        <Link to='/signup' className='text-secondary-1 font-semibold underline'>
           Click here
         </Link>
       </p>

@@ -1,7 +1,4 @@
 import { useAuthContext } from '../context/AuthContext';
-import { HiOutlineEllipsisVertical } from 'react-icons/hi2';
-import Modal from '../components/Modal';
-import { SettingsModal } from './SettingsModal';
 
 const HomeHeader = () => {
   const { user } = useAuthContext();
@@ -17,7 +14,7 @@ const HomeHeader = () => {
         <section className='relative flex py-3 mb-3 items-start gap-3'>
           <img
             src={user?.data?.image}
-            className='w-12 h-12 rounded-full border lg:w-16 lg:h-16'
+            className='w-12 h-12 rounded-full border lg:w-16 lg:h-16 bg-light-3'
             alt='profile picture'
           />
           <article className='flex flex-col'>
@@ -26,19 +23,6 @@ const HomeHeader = () => {
               {user?.data?.fullName}
             </h2>
           </article>
-          <Modal>
-            <Modal.Open opens='settings'>
-              <button className='text-light-1 text-3xl absolute top-5 right-0 lg:right-[-20%]'>
-                <HiOutlineEllipsisVertical />
-              </button>
-            </Modal.Open>
-            <Modal.Window
-              windowName='settings'
-              title='Settings'
-            >
-              <SettingsModal />
-            </Modal.Window>
-          </Modal>
         </section>
       )}
     </>

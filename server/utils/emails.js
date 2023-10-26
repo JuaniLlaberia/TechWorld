@@ -33,7 +33,7 @@ module.exports = class Email {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
-        secure: true,
+        // secure: true,
       });
     }
   }
@@ -78,7 +78,7 @@ module.exports = class Email {
 
   welcomeEmail() {
     this.sendEmail(
-      'Welcome to the X Family!',
+      'Welcome to the TechWolrd Family!',
       createWelcomeTemplate(this.firstName, this.url)
     );
   }

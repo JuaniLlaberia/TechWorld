@@ -27,7 +27,7 @@ const UpdateProfileForm = ({ onClose, current, image }) => {
     formData.append('profession', data.profession);
     formData.append('location', data.location);
 
-    updateProfile(formData, { onSettled: onClose() });
+    updateProfile(formData, { onSuccess: () => onClose() });
   };
   return (
     <form

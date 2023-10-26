@@ -11,6 +11,7 @@ const CustomError = require('./utils/error');
 const handleError = require('./controllers/errorController');
 const jobsRouter = require('./routes/jobsRouter');
 const userRouter = require('./routes/userRouter');
+const articleRouter = require('./routes/articleRouter');
 
 const app = express();
 app.use(cookieParser());
@@ -42,6 +43,7 @@ app.use(compression());
 //Routes
 app.use('/api/jobs', jobsRouter);
 app.use('/api/users', userRouter);
+app.use('/api/articles', articleRouter);
 
 //Not Found endpoints/routes
 app.all('*', (req, res, next) => {

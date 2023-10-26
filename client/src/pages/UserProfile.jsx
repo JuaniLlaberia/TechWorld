@@ -29,7 +29,7 @@ const UserProfile = () => {
         <Card position='horizontal'>
           <img
             src={image}
-            className='rounded-full w-24 h-24 lg:w-36'
+            className='rounded-full w-24 h-24 bg-light-3 lg:w-36'
             alt='profile picture'
           />
           <div>
@@ -53,12 +53,7 @@ const UserProfile = () => {
             </h3>
             <ItemsList
               items={experience?.slice(0, 3)}
-              render={el => (
-                <ExperienceItem
-                  el={el}
-                  key={el._id}
-                />
-              )}
+              render={el => <ExperienceItem el={el} key={el._id} />}
             />
             <Modal.Open opens='experience'>
               <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0 lg:text-xl lg:py-3'>
@@ -74,13 +69,7 @@ const UserProfile = () => {
             </h3>
             <ItemsList
               items={skills?.slice(0, 5)}
-              render={(el, i) => (
-                <SkillItem
-                  el={el}
-                  i={i}
-                  key={`${el}-${i}`}
-                />
-              )}
+              render={(el, i) => <SkillItem el={el} i={i} key={`${el}-${i}`} />}
             />
             <Modal.Open opens='skills'>
               <button className='bg-dark-2 text-light-2 border-t-[1px] py-1.5 font-semibol border-dark-1-border rounded-b-sm w-full absolute bottom-0 left-0 lg:text-xl lg:py-3'>
@@ -89,32 +78,16 @@ const UserProfile = () => {
             </Modal.Open>
           </Card>
         )}
-        <Modal.Window
-          windowName='experience'
-          title='Experiences'
-        >
+        <Modal.Window windowName='experience' title='Experiences'>
           <ItemsList
             items={experience}
-            render={el => (
-              <ExperienceItem
-                el={el}
-                key={el._id}
-              />
-            )}
+            render={el => <ExperienceItem el={el} key={el._id} />}
           />
         </Modal.Window>
-        <Modal.Window
-          windowName='skills'
-          title='Skills'
-        >
+        <Modal.Window windowName='skills' title='Skills'>
           <ItemsList
             items={skills}
-            render={(el, i) => (
-              <SkillItem
-                el={el}
-                key={i}
-              />
-            )}
+            render={(el, i) => <SkillItem el={el} key={i} />}
           />
         </Modal.Window>
       </Modal>

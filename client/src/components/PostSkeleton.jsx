@@ -12,6 +12,7 @@ const PostSkeleton = () => {
               <div className='h-2 bg-[#464444] rounded col-span-2'></div>
               <div className='h-2 bg-[#464444] rounded col-span-1'></div>
               <div className='h-32 bg-[#464444] rounded col-span-3'></div>
+              <div className='h-32 bg-[#464444] rounded col-span-3'></div>
             </div>
           </div>
         </div>

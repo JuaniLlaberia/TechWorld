@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavItem = ({ iconActive, iconInactive, path, text }) => {
   return (
-    <li className='text-light-2 relative hover:text-light-1 transition-colors'>
+    <li className='text-light-2 relative md:hover:text-light-1 transition-colors'>
       <NavLink
         aria-label={text}
         to={path}

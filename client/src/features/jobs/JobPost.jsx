@@ -9,7 +9,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import PostSkeleton from '../../components/PostSkeleton';
 import SavePost from '../../components/SavePost';
 import { useGetJob } from './useGetJob';
-import JobMap from '../../components/JobMap';
 
 export const JobPost = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,7 +33,6 @@ export const JobPost = () => {
     user,
     applicationUs,
     companyUrl,
-    locationMap,
   } = job.data.job;
 
   return (
@@ -49,15 +47,14 @@ export const JobPost = () => {
         <h1 className='text-light-1 text-2xl font-semibold mb-1 xl:text-4xl'>
           {name}
         </h1>
-        <JobMap coordinates={locationMap.coordinates}>
-          <h2 className='text-light-2 mb-2 hover:underline xl:text-lg'>
-            {location} ({workPlace})
-          </h2>
-        </JobMap>
+        <h2 className='text-light-2 mb-2 xl:text-lg'>
+          {location} ({workPlace})
+        </h2>
+
         <div className='flex items-center justify-start gap-2 mb-1'>
           <img
             src={user?.image}
-            className='w-8 h-8 rounded-full xl:w-10 xl:h-10'
+            className='w-8 h-8 rounded-full bg-light-3 xl:w-10 xl:h-10'
             alt='profile picture'
           />
           <Link

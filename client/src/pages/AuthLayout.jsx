@@ -17,10 +17,7 @@ const AuthLayout = () => {
           to='/'
           className='text-light-1 absolute left-50 top-4 lg:top-6 font-bold text-2xl'
         >
-          <img
-            src={logo}
-            className='lg:scale-150'
-          />
+          <img src={logo} className='lg:scale-150' />
         </Link>
         <Outlet />
       </main>

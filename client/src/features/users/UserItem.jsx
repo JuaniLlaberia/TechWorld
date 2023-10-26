@@ -12,10 +12,10 @@ const UserItem = ({ item }) => {
         <img
           loading='lazy'
           src={image}
-          className='w-20 rounded-full mb-2 xl:w-24'
+          className='w-20 h-20 rounded-full mb-2 bg-light-2 xl:w-24 xl:h-24'
           alt='profile picture'
         />
-        <div className=' w-full'>
+        <div className='h-20 xl:h-20'>
           <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem]'>
             {fullName}
           </h3>

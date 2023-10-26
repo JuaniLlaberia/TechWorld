@@ -13,12 +13,14 @@ import FullScreenLoader from './components/FullScreenLoader';
 import { AccountVerification } from './features/auth/AccountVerification';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ResetPassword } from './features/auth/ResetPassword';
+import ArticlePost from './pages/ArticlePost';
 
 const Home = lazy(() => import('./pages/Home'));
 const Search = lazy(() => import('./pages/Search'));
 const Profile = lazy(() => import('./pages/Profile'));
 const New = lazy(() => import('./pages/New'));
 const Apply = lazy(() => import('./pages/Apply'));
+const Articles = lazy(() => import('./pages/Articles'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
@@ -31,6 +33,7 @@ const LoginForm = lazy(() => import('./features/auth/LoginForm'));
 const ResendEmail = lazy(() => import('./features/auth/ResendEmail'));
 const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
 const ChangePassword = lazy(() => import('./features/auth/ChangePassword'));
+const CreateArticle = lazy(() => import('./features/articles/CreateArticle'));
 
 const router = createBrowserRouter([
   {
@@ -50,11 +53,23 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
+        path: '/articles',
+        element: <Articles />,
+      },
+      {
+        path: '/articles/:id',
+        element: <ArticlePost />,
+      },
+      {
         element: <ProtectedRoutes />,
         children: [
           {
             path: '/new',
             element: <New />,
+          },
+          {
+            path: '/articles/new',
+            element: <CreateArticle />,
           },
           {
             element: <Profile />,

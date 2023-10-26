@@ -5,19 +5,17 @@ import JobPrevList from '../features/jobs/JobPrevList';
 import UserList from '../features/users/UserList';
 import ItemSkeleton from '../components/ItemSkeleton';
 import SearchCard from '../components/SearchCard';
-import { useSearchJobs } from '../features/jobs/useSearchJobs';
-import { GetUsersByProfession } from '../features/users/useGetusersByProfession';
+import { useSearchByQuery } from '../features/jobs/useSearchByQuery';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef();
 
-  const { jobs, refetch, isRefetching } = useSearchJobs();
   const {
-    users,
-    refetch: refetchUsers,
-    isRefetching: isRefetchingUsers,
-  } = GetUsersByProfession();
+    data,
+    refetch: refetchTest,
+    isRefetching: isRefetcibgTest,
+  } = useSearchByQuery();
 
   const handleSearch = async e => {
     e.preventDefault();
@@ -28,9 +26,8 @@ const Search = () => {
 
     await new Promise(resolve => setTimeout(resolve, 0));
 
-    if (!isRefetching) {
-      refetch();
-      refetchUsers;
+    if (!isRefetcibgTest) {
+      refetchTest();
     }
   };
 
@@ -44,20 +41,20 @@ const Search = () => {
           defaultValue={searchParams.get('searchQuery')}
           placeholder='Search'
           ref={inputRef}
-          className='w-full max-w-[600px] h-10 py-2 px-4 rounded-l-full text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl xl:h-14'
+          className='w-full max-w-[600px] h-10 py-2 px-4 rounded-l-xl text-light-1 bg-transparent border-[1px] border-light-3 outline-1 outline-light-3 xl:text-lg 2xl:text-xl xl:h-14'
         />
         <button
           aria-label='search'
-          className='flex items-center gap-2 h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-full lg:text-base xl:text-lg 2xl:text-2xl xl:h-14 xl:px-6'
+          className='flex items-center gap-2 h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-xl lg:text-base xl:text-lg 2xl:text-2xl xl:h-14 xl:px-6'
         >
           <HiOutlineMagnifyingGlass />{' '}
           <span className='hidden xl:block'>Search</span>
         </button>
       </form>
 
-      {isRefetching || isRefetchingUsers ? <ItemSkeleton amount={5} /> : null}
+      {isRefetcibgTest ? <ItemSkeleton amount={5} /> : null}
 
-      {jobs && !isRefetching ? (
+      {data?.jobs && !isRefetcibgTest ? (
         <SearchCard
           title='Jobs'
           link={`/jobs-search?searchQuery=${
@@ -65,8 +62,8 @@ const Search = () => {
           }`}
         >
           <JobPrevList
-            isLoading={isRefetching}
-            jobs={jobs?.data?.jobs}
+            isLoading={isRefetcibgTest}
+            jobs={data?.jobs?.data?.jobs}
             itemsLink={`/jobs-search?searchQuery=${searchParams.get(
               'searchQuery'
             )}&currentJobId=`}
@@ -74,14 +71,14 @@ const Search = () => {
         </SearchCard>
       ) : null}
 
-      {users && !isRefetchingUsers ? (
+      {data?.users && !isRefetcibgTest ? (
         <SearchCard
           title='People'
           link={`/users-search?searchQuery=${
             inputRef?.current?.value || searchParams.get('searchQuery')
           }`}
         >
-          <UserList users={users?.data?.users} />
+          <UserList users={data?.users?.data?.users} />
         </SearchCard>
       ) : null}
     </section>

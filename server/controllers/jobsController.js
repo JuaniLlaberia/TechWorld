@@ -23,7 +23,10 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   let query = Job.find({
     ...JSON.parse(queryString),
     //Using search param we can query for jobs that contain str in name
-    name: { $regex: req.query.search || '', $options: 'i' },
+    $or: [
+      { name: { $regex: req.query.search || '', $options: 'i' } },
+      { position: { $regex: req.query.search || '', $options: 'i' } },
+    ],
     location: { $regex: req.query.location || '', $options: 'i' },
   });
 
@@ -56,7 +59,7 @@ exports.getAllJobs = catchErrorAsync(async (req, res) => {
   const totalJobs = await Job.countDocuments(query._conditions);
 
   const jobs = await query
-    .select('name user location workPlace')
+    .select('name user location workPlace type level')
     .populate('user', 'fullName image');
 
   //Return data

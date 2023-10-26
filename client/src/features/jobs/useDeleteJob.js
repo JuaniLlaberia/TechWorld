@@ -8,7 +8,7 @@ export const useDeleteJob = () => {
     mutationFn: id => deleteJobApi(id),
     onSuccess: () => {
       toast.success('Deleted successfully');
-      queryClient.invalidateQueries(['my-jobs']);
+      queryClient.invalidateQueries({ queryKey: ['my-jobs'] });
     },
   });
 

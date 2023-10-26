@@ -7,7 +7,7 @@ const JobPreview = ({ query, showAmount = 5 }) => {
 
   return (
     <>
-      <div className='flex items-center justify-between mb-3 mt-6'>
+      <section className='flex items-center justify-between mb-3 mt-6'>
         <h2 className='text-light-2 text-lg font-semibold xl:text-2xl'>
           Recent jobs
         </h2>
@@ -17,7 +17,7 @@ const JobPreview = ({ query, showAmount = 5 }) => {
         >
           View more
         </Link>
-      </div>
+      </section>
       <section className='border border-dark-1-border px-2.5 rounded-md mb-20'>
         <JobPrevList
           isLoading={isLoading}

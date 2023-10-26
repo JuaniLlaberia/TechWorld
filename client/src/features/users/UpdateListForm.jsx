@@ -6,7 +6,7 @@ import ItemsList from '../../components/ItemsList';
 import SaveBtn from '../../components/SaveBtn';
 import { SkillItem } from './SkillItem';
 
-const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
+const UpdateListForm = ({ onClose, current }) => {
   const { updateProfile, isUpdating } = useUpdateMe();
   const [items, setItems] = useState(current);
   const [itemToAdd, setItemToAdd] = useState('');
@@ -24,8 +24,7 @@ const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
   };
 
   const handleSave = () => {
-    updateProfile({ [field]: items });
-    onClose();
+    updateProfile({ skills: items }, { onSuccess: () => onClose() });
   };
 
   return (
@@ -46,17 +45,10 @@ const UpdateListForm = ({ onClose, current, field = 'skills' }) => {
       <ItemsList
         items={items}
         render={(el, i) => (
-          <SkillItem
-            el={el}
-            i={i}
-            handleRemoveItem={handleRemoveItem}
-          />
+          <SkillItem el={el} i={i} handleRemoveItem={handleRemoveItem} />
         )}
       />
-      <SaveBtn
-        isUpdating={isUpdating}
-        onClick={handleSave}
-      />
+      <SaveBtn isUpdating={isUpdating} onClick={handleSave} />
     </>
   );
 };

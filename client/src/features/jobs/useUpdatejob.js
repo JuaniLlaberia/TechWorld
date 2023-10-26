@@ -7,7 +7,7 @@ export const useUpdatejob = () => {
 
   const { mutate: updateJob, isLoading: isUpdating } = useMutation({
     mutationFn: body => updateJobApi(body),
-    onSuccess: () => queryClient.invalidateQueries(['my-jobs']),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['my-jobs'] }),
     onError: () => toast.error('Something went wrong!'),
   });
 
