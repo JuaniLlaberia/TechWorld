@@ -3,6 +3,8 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import { useState } from 'react';
 import ToolbarEditor from './ToolbarEditor';
 import Button from './Button';
+import InputWrapper from './InputWrapper';
+import Input from './Input';
 import { useCreateArticle } from '../features/articles/useCreateArticle';
 
 const Tiptap = () => {
@@ -14,10 +16,11 @@ const Tiptap = () => {
   const editor = useEditor({
     extensions: [StarterKit.configure()],
     content: content,
+    editable: !isCreating,
     editorProps: {
       attributes: {
         class:
-          'min-h-[80vh] mb-3 rounded-md bg-transparent text-light-1 border border-dark-1-border outline-none p-2 [&>pre]:bg-dark-2 [&>pre]:text-light-1 [&>pre]:text-[0.8rem] [&>pre]:rounded-md [&>pre]:p-2 [&>pre]:m-3 [&>h1]:text-3xl [&>h1]:font-semibold [&>h2]:text-xl [&>h2]:font-semibold [&>ul]:px-6',
+          'min-h-[80vh] mb-3 rounded-md bg-transparent text-light-1 outline-none py-2 [&>pre]:bg-dark-2 [&>pre]:text-light-1 [&>pre]:text-[0.8rem] [&>pre]:rounded-md [&>pre]:p-2 [&>pre]:m-3 [&>h1]:text-3xl [&>h1]:font-semibold [&>h2]:text-xl [&>h2]:font-semibold [&>ul]:px-6',
       },
     },
     onUpdate({ editor }) {
@@ -34,22 +37,46 @@ const Tiptap = () => {
     <>
       <ToolbarEditor editor={editor} />
       <form onSubmit={handleSubmit}>
-        <input
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          className='w-full bg-transparent text-light-1 text-xl py-5 outline-none placeholder:text-light-2 placeholder:text-2xl'
-          placeholder='Title'
-        />
-        <input
-          value={tag}
-          onChange={e => setTag(e.target.value)}
-          className='w-full bg-transparent text-light-1 text-lg py-1 mb-5 outline-none placeholder:text-light-2 placeholder:text-xl'
-          placeholder='Add a tag'
-        />
-        <EditorContent editor={editor} />
-        <section className='mb-20 flex justify-end gap-3'>
-          <Button color='inverted'>Save</Button>
-          <Button>Publish</Button>
+        <InputWrapper label='Title'>
+          <Input
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            placeholder='Your article heading'
+          />
+        </InputWrapper>
+        <InputWrapper label='Tag'>
+          <Input
+            value={tag}
+            onChange={e => setTag(e.target.value)}
+            placeholder='Add a search tag (e.g. JavaScript)'
+          />
+        </InputWrapper>
+        <br />
+        <label
+          className='text-light-3 text-xl focus-within:text-light-1 xl:text-2xl'
+          htmlFor='text-editor'
+        >
+          Write here
+          <EditorContent
+            editor={editor}
+            id='text-editor'
+          />
+        </label>
+
+        <section className='mb-24 flex flex-col md:flex-row md:justify-end gap-3 border-t border-dark-1-border pt-3'>
+          <Button
+            disabled={isCreating}
+            full={true}
+            color='inverted'
+          >
+            Save
+          </Button>
+          <Button
+            disabled={isCreating}
+            full={true}
+          >
+            Publish
+          </Button>
         </section>
       </form>
     </>
