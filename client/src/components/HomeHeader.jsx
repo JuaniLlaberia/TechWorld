@@ -1,7 +1,4 @@
 import { useAuthContext } from '../context/AuthContext';
-import { HiOutlineEllipsisVertical } from 'react-icons/hi2';
-import Modal from '../components/Modal';
-import { SettingsModal } from './SettingsModal';
 
 const HomeHeader = () => {
   const { user } = useAuthContext();
@@ -26,16 +23,6 @@ const HomeHeader = () => {
               {user?.data?.fullName}
             </h2>
           </article>
-          <Modal>
-            <Modal.Open opens='settings'>
-              <button className='text-light-1 text-3xl absolute top-5 right-0 lg:right-[-20%]'>
-                <HiOutlineEllipsisVertical />
-              </button>
-            </Modal.Open>
-            <Modal.Window windowName='settings' title='Settings'>
-              <SettingsModal />
-            </Modal.Window>
-          </Modal>
         </section>
       )}
     </>
