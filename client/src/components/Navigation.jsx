@@ -1,21 +1,18 @@
 import {
   HiOutlineHome,
   HiOutlineMagnifyingGlass,
-  HiOutlinePlusCircle,
   HiOutlineBriefcase,
   HiHome,
   HiBriefcase,
   HiMagnifyingGlass,
-  HiPlusCircle,
-  HiUser,
-  HiOutlineUser,
   HiOutlineNewspaper,
   HiNewspaper,
 } from 'react-icons/hi2';
+import { Link } from 'react-router-dom';
 import NavItem from './NavItem';
+import ProfileBtn from './ProfileBtn';
 import logo from '/logo1.png';
 import logo2 from '/logo2.png';
-import { Link } from 'react-router-dom';
 
 const items = [
   {
@@ -25,34 +22,22 @@ const items = [
     text: 'Home',
   },
   {
+    iconActive: <HiMagnifyingGlass />,
+    iconInactive: <HiOutlineMagnifyingGlass />,
+    path: '/search',
+    text: 'Search',
+  },
+  {
     iconActive: <HiBriefcase />,
     iconInactive: <HiOutlineBriefcase />,
     path: '/jobs',
     text: 'Jobs',
-  },
-  // {
-  //   iconActive: <HiMagnifyingGlass />,
-  //   iconInactive: <HiOutlineMagnifyingGlass />,
-  //   path: '/search',
-  //   text: 'Search',
-  // },
-  {
-    iconActive: <HiPlusCircle />,
-    iconInactive: <HiOutlinePlusCircle />,
-    path: '/new',
-    text: 'Add job',
   },
   {
     iconActive: <HiNewspaper />,
     iconInactive: <HiOutlineNewspaper />,
     path: '/articles',
     text: 'Articles',
-  },
-  {
-    iconActive: <HiUser />,
-    iconInactive: <HiOutlineUser />,
-    path: '/me/information',
-    text: 'Profile',
   },
 ];
 
@@ -85,6 +70,7 @@ const Navigation = () => {
             text={item.text}
           />
         ))}
+        <ProfileBtn />
       </ul>
     </nav>
   );
