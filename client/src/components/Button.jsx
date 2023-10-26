@@ -3,7 +3,7 @@ const Button = ({ children, color, full, ...props }) => {
     <button
       className={`transition duration-200 ease-in ${
         color === 'inverted'
-          ? 'bg-dark-2 text-light-1 outline outline-1 hover:bg-[#312f2f] outline-light-3'
+          ? 'bg-dark-2 text-light-1 outline outline-1 hover:bg-[#312f2f] outline-dark-1-border'
           : color === 'alert'
           ? 'bg-[#f03b3b]'
           : 'bg-light-1 text-dark-1 hover:bg-[#e6e5e5dd]'
