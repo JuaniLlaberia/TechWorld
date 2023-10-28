@@ -1,6 +1,6 @@
 const ItemSkeleton = ({ amount }) => {
   return (
-    <ul className='mt-4'>
+    <ul className='mt-4 w-full'>
       {Array(amount)
         .fill(0)
         .map((_, i) => (
