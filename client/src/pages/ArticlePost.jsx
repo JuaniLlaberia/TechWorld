@@ -1,7 +1,11 @@
 import { ArticlePostItem } from '../features/articles/ArticlePostItem';
 
 const ArticlePost = () => {
-  return <ArticlePostItem />;
+  return (
+    <section className='flex flex-col items-center'>
+      <ArticlePostItem />
+    </section>
+  );
 };
 
 export default ArticlePost;

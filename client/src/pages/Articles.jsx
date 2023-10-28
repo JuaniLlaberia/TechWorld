@@ -3,11 +3,10 @@ import ArticlesSearchbar from '../features/articles/ArticlesSearchbar';
 
 const Articles = () => {
   return (
-    <>
-      <h1 className='text-light-1 font-semibold text-3xl mb-6'>Articles</h1>
+    <section className='flex flex-col items-center'>
       <ArticlesSearchbar />
       <ArticleList />
-    </>
+    </section>
   );
 };
 
