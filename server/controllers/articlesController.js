@@ -49,6 +49,18 @@ exports.createArticle = catchErrorAsync(async (req, res) => {
   });
 });
 
+exports.getMyArticles = catchErrorAsync(async (req, res) => {
+  const articles = await Article.find({
+    author: req.user.id,
+    view: req.query.type === 'published',
+  }).select('title createdAt tag');
+
+  res.status(200).json({
+    status: 'success',
+    data: { articles },
+  });
+});
+
 exports.updateArticle = catchErrorAsync(async () => {});
 exports.deleteArticle = catchErrorAsync(async () => {});
 exports.likeArticle = catchErrorAsync(async () => {});
