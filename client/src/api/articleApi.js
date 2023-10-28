@@ -32,3 +32,13 @@ export const createArticle = async body => {
 
   return data;
 };
+
+export const getMyArticles = async published => {
+  const data = await fetch(
+    `http://localhost:8000/api/articles/my-articles?type=${published}`,
+    {
+      credentials: 'include',
+    }
+  );
+  return data.json();
+};
