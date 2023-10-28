@@ -12,7 +12,7 @@ import ToolbarItem from './ToolbarItem';
 
 const ToolbarEditor = ({ editor }) => {
   return (
-    <ul className='sticky top-2.5 z-50 flex gap-2 just bg-dark-2 py-2 my-3 justify-center rounded-lg border border-dark-1-border'>
+    <ul className='sticky top-2.5 z-50 flex gap-2 just bg-dark-2 py-2 my-3 justify-center rounded-lg border border-dark-1-border xl:gap-4 w-full lg:w-[70vw] xl:w-[40vw]'>
       <ToolbarItem
         method={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()}
         icon={<LuHeading1 />}

@@ -29,7 +29,7 @@ const ArticlesSearchbar = () => {
         className='flex items-center gap-2 h-10 bg-light-1 text-xl text-dark-1 px-3 rounded-r-xl lg:text-base xl:text-lg 2xl:text-2xl xl:h-14 xl:px-6'
       >
         <HiOutlineMagnifyingGlass />{' '}
-        <span className='hidden xl:block'>Search</span>
+        <span className='hidden text-lg xl:block'>Search</span>
       </button>
     </form>
   );

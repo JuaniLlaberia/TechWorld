@@ -22,7 +22,7 @@ const ArticleList = () => {
     return <h1 className='text-light-2 text-center'>No articles found</h1>;
 
   return (
-    <ul className='mb-16'>
+    <ul className='mb-16 w-full lg:w-[70vw] xl:w-[40vw]'>
       {articles?.pages.map((page, i) => (
         <React.Fragment key={i}>
           {page.data.articles.map(article => (
