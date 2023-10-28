@@ -6,9 +6,9 @@ const BackBtn = () => {
   return (
     <button
       onClick={() => navigate(-1)}
-      className='text-light-1 flex items-center gap-2 pb-2 pt-1'
+      className='text-light-1 flex items-center gap-2 pb-2 pt-1 text-xl lg:text-2xl 2xl:text-3xl'
     >
-      <HiOutlineArrowLeft size={20} />
+      <HiOutlineArrowLeft />
     </button>
   );
 };
