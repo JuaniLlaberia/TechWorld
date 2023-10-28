@@ -14,6 +14,9 @@ import { AccountVerification } from './features/auth/AccountVerification';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ResetPassword } from './features/auth/ResetPassword';
 import ArticlePost from './pages/ArticlePost';
+import MyArticles from './features/articles/MyArticles';
+import MyArticlesDraft from './features/articles/MyArticlesDraft';
+import MyArticlesPublic from './features/articles/MyArticlesPublic';
 
 const Home = lazy(() => import('./pages/Home'));
 const Search = lazy(() => import('./pages/Search'));
@@ -78,10 +81,6 @@ const router = createBrowserRouter([
                 path: '/me/information',
                 element: <ProfileInfo />,
               },
-              {
-                path: '/me/my-jobs',
-                element: <ProfilePosts />,
-              },
               { path: '/me/saved', element: <ProfileSaved /> },
             ],
           },
@@ -104,6 +103,13 @@ const router = createBrowserRouter([
           {
             path: '/user/:id',
             element: <UserProfile />,
+          },
+          {
+            element: <MyArticles />,
+            children: [
+              { path: '/me/articles/drafts', element: <MyArticlesDraft /> },
+              { path: '/me/articles/published', element: <MyArticlesPublic /> },
+            ],
           },
         ],
       },
