@@ -73,7 +73,7 @@ const Tiptap = () => {
             full={true}
             color='inverted'
           >
-            Save
+            Save draft
           </Button>
           <Button
             disabled={isCreating}

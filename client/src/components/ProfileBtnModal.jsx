@@ -7,6 +7,7 @@ import {
   HiOutlineCog8Tooth,
   HiOutlineArrowRightOnRectangle,
   HiOutlineSquare3Stack3D,
+  HiOutlineNewspaper,
 } from 'react-icons/hi2';
 import { useLogout } from '../features/auth/useLogout';
 
@@ -15,17 +16,22 @@ const items = [
     icon: <HiOutlineUser />,
     text: 'Profile',
     path: '/me/information',
-    hasDivider: true,
-  },
-  {
-    icon: <HiOutlineSquare3Stack3D />,
-    text: 'My posts',
-    path: '/me/my-jobs',
   },
   {
     icon: <HiOutlineBookmark />,
     text: 'Saved',
     path: '/me/saved',
+    hasDivider: true,
+  },
+  {
+    icon: <HiOutlineNewspaper />,
+    text: 'My articles',
+    path: '/me/articles/drafts',
+  },
+  {
+    icon: <HiOutlineSquare3Stack3D />,
+    text: 'My posts',
+    path: '/me/my-jobs',
   },
   {
     icon: <HiOutlinePencilSquare />,
