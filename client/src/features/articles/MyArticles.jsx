@@ -28,7 +28,7 @@ const MyArticles = () => {
           to='/me/articles/published'
           className='text-light-1 relative px-2'
         >
-          Public
+          Published
         </NavLink>
       </section>
       <Outlet />
