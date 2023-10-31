@@ -10,7 +10,7 @@ const DeleteModal = ({ onClose, onDelete }) => {
   return (
     <form>
       <p className='mb-6 lg:text-lg xl:text-xl xl:mb-8'>
-        Are you sure you want to delete this job? This action is permanent.
+        Are you sure you want to delete it? This action is permanent.
       </p>
       <div className='flex gap-2 justify-end'>
         <Button

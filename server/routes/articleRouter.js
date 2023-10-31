@@ -4,6 +4,12 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
+router.get(
+  '/my-articles',
+  authController.protect,
+  articlesController.getMyArticles
+);
+
 router
   .route('/')
   .get(articlesController.getArticles)

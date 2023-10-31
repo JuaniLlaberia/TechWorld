@@ -25,6 +25,7 @@ exports.getArticles = catchErrorAsync(async (req, res) => {
 
   res.status(200).json({
     status: 'success',
+    count: articles.length,
     pages: Math.ceil(totalArticles / process.env.PAGE_SIZE),
     data: { articles },
   });
@@ -49,7 +50,33 @@ exports.createArticle = catchErrorAsync(async (req, res) => {
   });
 });
 
-exports.updateArticle = catchErrorAsync(async () => {});
-exports.deleteArticle = catchErrorAsync(async () => {});
-exports.likeArticle = catchErrorAsync(async () => {});
-exports.unLikeArticle = catchErrorAsync(async () => {});
+exports.getMyArticles = catchErrorAsync(async (req, res) => {
+  const articles = await Article.find({
+    author: req.user.id,
+    view: req.query.type === 'published',
+  }).select('title createdAt tag');
+
+  res.status(200).json({
+    status: 'success',
+    count: articles.length,
+    data: { articles },
+  });
+});
+
+exports.updateArticle = catchErrorAsync(async (req, res) => {
+  let filteredObj = { ...req.body };
+  const fieldsToRemove = ['_id', 'createdAt', 'author'];
+  fieldsToRemove.forEach(el => delete filteredObj[el]);
+
+  const article = await Article.findByIdAndUpdate(req.params.id, filteredObj, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ status: 'success', data: { article } });
+});
+
+exports.deleteArticle = catchErrorAsync(async (req, res) => {
+  await Article.findByIdAndDelete(req.params.id);
+  res.status(200).json({ status: 'success', data: null });
+});

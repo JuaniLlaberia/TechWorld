@@ -9,10 +9,11 @@ import {
   LuAlignVerticalJustifyCenter,
 } from 'react-icons/lu';
 import ToolbarItem from './ToolbarItem';
+import { memo } from 'react';
 
 const ToolbarEditor = ({ editor }) => {
   return (
-    <ul className='sticky top-2.5 z-50 flex gap-2 just bg-dark-2 py-2 my-3 justify-center rounded-lg border border-dark-1-border'>
+    <ul className='sticky top-2.5 z-50 flex gap-2 just bg-dark-2 py-2 my-3 justify-center rounded-lg border border-dark-1-border xl:gap-4 w-full lg:w-[70vw] xl:w-[40vw]'>
       <ToolbarItem
         method={() => editor?.chain().focus().toggleHeading({ level: 1 }).run()}
         icon={<LuHeading1 />}
@@ -56,4 +57,4 @@ const ToolbarEditor = ({ editor }) => {
   );
 };
 
-export default ToolbarEditor;
+export default memo(ToolbarEditor);

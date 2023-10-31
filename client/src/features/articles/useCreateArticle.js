@@ -10,7 +10,7 @@ export const useCreateArticle = () => {
     mutationFn: body => createArticleApi(body),
     onSuccess: data => {
       toast.success('Successfully created');
-      navigate(`/articles/${data?.data._id}`);
+      navigate(`/articles/${data?.data.article._id}`);
     },
     onError: err => toast.error(err.message),
   });

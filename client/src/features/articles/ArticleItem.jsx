@@ -18,15 +18,15 @@ const ArticleItem = ({ article }) => {
               className='w-7 h-7 rounded-full bg-light-3 xl:w-10 xl:h-10'
               alt='Profile picture'
             />
-            <h1 className='text-light-2 text-sm lg:text-base'>
+            <h1 className='text-light-2 text-sm lg:text-lg'>
               {author?.fullName} · {formatDate(new Date(createdAt))}
             </h1>
           </div>
-          <h2 className='text-lg font-semibold break-keep mb-2 lg:text-xl 2xl:text-[1.35rem] line-clamp-2 hover:underline'>
+          <h2 className='text-lg font-semibold break-keep mb-2 lg:text-2xl 2xl:text-[1.35rem] line-clamp-2 hover:underline'>
             {title}
           </h2>
           <ul className='py-1 mt-5 flex gap-3'>
-            <li className='bg-dark-2 py-1 px-3 rounded-xl text-sm text-light-2'>
+            <li className='bg-dark-2 py-1 px-3 rounded-xl text-sm text-light-2 lg:text-base'>
               {tag}
             </li>
           </ul>

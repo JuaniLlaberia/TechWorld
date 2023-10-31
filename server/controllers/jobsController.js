@@ -118,7 +118,11 @@ exports.createJob = catchErrorAsync(async (req, res) => {
 });
 
 exports.updateJob = catchErrorAsync(async (req, res) => {
-  const job = await Job.findByIdAndUpdate(req.params.id, req.body, {
+  let filteredObj = { ...req.body };
+  const fieldsToRemove = ['_id', 'createAt', 'user'];
+  fieldsToRemove.forEach(el => delete filteredObj[el]);
+
+  const job = await Job.findByIdAndUpdate(req.params.id, filteredObj, {
     new: true,
     runValidators: true,
   });
@@ -140,7 +144,7 @@ exports.getJobsFromUser = catchErrorAsync(async (req, res) => {
 //Get all the jobs posted by me
 exports.getMyJobs = catchErrorAsync(async (req, res) => {
   const jobs = await Job.find({ user: req.user.id }).select(
-    'name position level type location description workPlace user'
+    'name position level type location description workPlace user createAt'
   );
   res.status(200).json({ status: 'success', count: jobs.length, data: jobs });
 });

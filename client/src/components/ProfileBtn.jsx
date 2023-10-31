@@ -43,13 +43,13 @@ const ProfileBtn = () => {
           )}
           <span className='hidden text-xl 2xl:block'>Account</span>
         </button>
+        {isOpen && isAuth && (
+          <ProfileBtnModal
+            reference={ref}
+            onClose={close}
+          />
+        )}
       </li>
-      {isOpen && isAuth && (
-        <ProfileBtnModal
-          reference={ref}
-          onClose={close}
-        />
-      )}
     </>
   );
 };

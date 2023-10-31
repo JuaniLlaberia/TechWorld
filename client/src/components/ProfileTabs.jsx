@@ -13,12 +13,6 @@ const ProfileTabs = () => {
         Information
       </NavLink>
       <NavLink
-        to='me/my-jobs'
-        className='relative px-2 xl:text-2xl xl:px-4'
-      >
-        My jobs
-      </NavLink>
-      <NavLink
         to='me/saved'
         className='relative px-2 xl:text-2xl xl:px-4'
       >

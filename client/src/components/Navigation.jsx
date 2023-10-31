@@ -43,7 +43,7 @@ const items = [
 
 const Navigation = () => {
   return (
-    <nav className='fixed bottom-0 mx-auto mb-2 rounded-2xl  bg-dark-1 w-[95%] shadow-lg shadow-[#4b4a4a67] h-16 border z-50 border-dark-1-border lg:left-0 lg:mb-0 lg:bottom-0 lg:rounded-none lg:rounded-r-xl lg:h-[100%] lg:border-t-0 lg:border-r-2 lg:w-24 2xl:w-64'>
+    <nav className='fixed bottom-0 mx-auto mb-2 rounded-2xl  bg-dark-1 w-[95%] shadow-lg shadow-[#4b4a4a67] h-16 border z-50 border-dark-1-border lg:left-0 lg:mb-0 lg:bottom-0 lg:rounded-none lg:h-[100%] lg:border-t-0 lg:border-r-2 lg:w-24 2xl:w-64'>
       <Link
         to='/'
         className='lg:flex lg:justify-center lg:py-6 lg:mb-10'
