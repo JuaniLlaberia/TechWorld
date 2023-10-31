@@ -33,7 +33,7 @@ const Window = ({ children, windowName, title }) => {
       <motion.div
         initial={{ y: '-100%', x: '-50%', opacity: 0 }}
         animate={{ y: '-40%', x: '-50%', opacity: 1 }}
-        className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[300px] max-w-[650px] pt- p-3 rounded-sm min-h-[100px] z-[100] shadow-md shadow-[#222121dc]'
+        className='bg-dark-1 text-light-1 fixed top-[40%] left-[50%] translate-x-[-50%] translate-y-[-40%] w-[50vw] min-w-[325px] max-w-[650px] p-3 rounded-sm min-h-[100px] z-[100] shadow-md shadow-[#222121dc]'
       >
         <div className='flex justify-between items-start py-0 border-b-[1px] border-dark-1-border mb-3'>
           <h1 className='text-light-2 text-lg font-semibold mb-2 lg:text-2xl'>

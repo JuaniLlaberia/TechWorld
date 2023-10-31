@@ -16,7 +16,7 @@ const DropDownOptMenu = ({ children }) => {
   );
 };
 
-const Menu = ({ children, menuId }) => {
+const Menu = ({ children, menuId, horizontal }) => {
   const { open, closeMenu } = useContext(DropDownContext);
 
   const ref = useRef();
@@ -35,12 +35,14 @@ const Menu = ({ children, menuId }) => {
   if (open !== menuId) return null;
 
   return (
-    <div
+    <ul
       ref={ref}
-      className='absolute right-2.5 bg-dark-2 py-2.5 px-3.5 rounded-md'
+      className={`${
+        !horizontal ? 'flex flex-col gap-3' : 'flex gap-3'
+      } absolute right-2.5 bg-dark-2 py-2.5 px-3.5 rounded-md z-50`}
     >
       {children}
-    </div>
+    </ul>
   );
 };
 
@@ -57,7 +59,7 @@ const Opener = ({ opensId }) => {
   );
 };
 
-const Item = ({ children, onClick }) => {
+const Item = ({ children, icon, onClick }) => {
   const { closeMenu } = useContext(DropDownContext);
 
   const handleClick = () => {
@@ -68,9 +70,10 @@ const Item = ({ children, onClick }) => {
   return (
     <li
       onClick={handleClick}
-      className='text-xl'
+      className='flex items-center gap-2'
     >
-      {children}
+      <span className='text-lg text-secondary-1'>{icon}</span>
+      <span className='text-light-1'>{children}</span>
     </li>
   );
 };

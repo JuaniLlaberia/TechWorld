@@ -10,6 +10,7 @@ import {
   HiOutlineNewspaper,
 } from 'react-icons/hi2';
 import { useLogout } from '../features/auth/useLogout';
+import React from 'react';
 
 const items = [
   {
@@ -31,7 +32,7 @@ const items = [
   {
     icon: <HiOutlineSquare3Stack3D />,
     text: 'My posts',
-    path: '/me/my-jobs',
+    path: '/me/jobs',
   },
   {
     icon: <HiOutlinePencilSquare />,
@@ -60,11 +61,8 @@ const ProfileBtnModal = ({ reference, onClose }) => {
       className='bg-dark-2 border border-dark-1-border w-48 2xl:w-52 shadow-sm shadow-light-3 absolute translate-y-[-120%] translate-x-[-67.5%] lg:translate-y-[-100%] lg:translate-x-[27.5%] 2xl:translate-x-[75%] py-4 rounded-md z-[1000] flex flex-col gap-2'
     >
       {items.map(item => (
-        <>
-          <li
-            key={item.text}
-            onClick={onClose}
-          >
+        <React.Fragment key={item.text}>
+          <li onClick={onClose}>
             <Link
               to={item.path}
               className='flex items-center gap-3.5 lg:hover:bg-dark-1-border lg:py-1 text-secondary-1 px-6 text-2xl 2xl:text-3xl'
@@ -78,7 +76,7 @@ const ProfileBtnModal = ({ reference, onClose }) => {
           {item.hasDivider && (
             <div className='border-b border-dark-1-border my-2'></div>
           )}
-        </>
+        </React.Fragment>
       ))}
       <li
         key='logout'
