@@ -8,7 +8,7 @@ const ArticleItem = ({ article }) => {
     <li className='relative border-b border-dark-1-border'>
       <Link
         to={`/articles/${_id}`}
-        className=' text-light-1 flex flex-col gap-4 px-3 py-4 xl:py-5 xl:px-6'
+        className=' text-light-1 flex flex-col gap-4 px-1 py-4 xl:py-5 xl:px-6'
       >
         <section className='w-full'>
           <div className='flex items-center gap-2 mb-2'>

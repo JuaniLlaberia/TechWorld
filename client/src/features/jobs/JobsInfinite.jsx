@@ -18,7 +18,7 @@ const JobsInfinite = ({ queryData }) => {
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (data?.pages[0].count < 1) return <NoJobsCard link='/jobs/all' />;
   if (status === 'loading') return <ItemSkeleton amount={5} />;
@@ -35,25 +35,14 @@ const JobsInfinite = ({ queryData }) => {
         {data?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.data.jobs.map(job => (
-              <JobItem
-                key={job._id}
-                item={job}
-              />
+              <JobItem key={job._id} item={job} />
             ))}
           </React.Fragment>
         ))}
-        {hasNextPage && (
-          <li
-            ref={ref}
-            className='h-1'
-          ></li>
-        )}
+        {hasNextPage && <li ref={ref} className='h-1'></li>}
         {isFetchingNextPage && (
           <li className='flex justify-center items-center'>
-            <ClipLoader
-              color='white'
-              size={30}
-            />
+            <ClipLoader color='white' size={30} />
           </li>
         )}
       </ul>

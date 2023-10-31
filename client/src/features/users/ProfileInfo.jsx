@@ -14,7 +14,6 @@ const ProfileInfo = () => {
 
   const {
     description,
-    // image,
     skills,
     experience,
   } = user.data;

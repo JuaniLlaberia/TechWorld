@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineUser } from 'react-icons/hi2';
 import ProfileBtnModal from './ProfileBtnModal';
@@ -10,11 +10,10 @@ const ProfileBtn = () => {
   const { isAuth, user } = useAuthContext();
 
   const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+  const close = useCallback(() => setIsOpen(false), [setIsOpen]);
 
   const ref = useRef();
 
-  //With this use effect we listen to clicks outside the reference
   useEffect(() => {
     const handleClick = e => {
       if (ref.current && !ref.current.contains(e.target)) {
@@ -44,10 +43,7 @@ const ProfileBtn = () => {
           <span className='hidden text-xl 2xl:block'>Account</span>
         </button>
         {isOpen && isAuth && (
-          <ProfileBtnModal
-            reference={ref}
-            onClose={close}
-          />
+          <ProfileBtnModal reference={ref} onClose={close} />
         )}
       </li>
     </>

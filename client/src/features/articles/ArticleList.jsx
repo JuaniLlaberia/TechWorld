@@ -15,7 +15,7 @@ const ArticleList = () => {
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (status === 'loading') return <ItemSkeleton amount={5} />;
   if (articles.pages[0].pages === 0)
@@ -26,25 +26,14 @@ const ArticleList = () => {
       {articles?.pages.map((page, i) => (
         <React.Fragment key={i}>
           {page.data.articles.map(article => (
-            <ArticleItem
-              article={article}
-              key={article._id}
-            />
+            <ArticleItem article={article} key={article._id} />
           ))}
         </React.Fragment>
       ))}
-      {hasNextPage && (
-        <li
-          ref={ref}
-          className='h-1'
-        ></li>
-      )}
+      {hasNextPage && <li ref={ref} className='h-1'></li>}
       {isFetchingNextPage && (
         <li className='flex justify-center items-center'>
-          <ClipLoader
-            color='white'
-            size={30}
-          />
+          <ClipLoader color='white' size={30} />
         </li>
       )}
     </ul>
