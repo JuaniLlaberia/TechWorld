@@ -1,10 +1,14 @@
-import Tiptap from '../../components/Tiptap';
+import BackBtn from '../../components/BackBtn';
+import ArticleForm from './ArticleForm';
 
 const CreateArticle = () => {
   return (
-    <section className='flex flex-col items-center'>
-      <Tiptap />
-    </section>
+    <>
+      <BackBtn />
+      <section className='flex flex-col items-center'>
+        <ArticleForm />
+      </section>
+    </>
   );
 };
 
