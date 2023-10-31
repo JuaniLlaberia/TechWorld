@@ -13,7 +13,6 @@ import MyArticlesDraft from './features/articles/MyArticlesDraft';
 import MyArticlesPublic from './features/articles/MyArticlesPublic';
 import { AccountVerification } from './features/auth/AccountVerification';
 import { AuthProvider } from './context/AuthContext.jsx';
-import { ResetPassword } from './features/auth/ResetPassword';
 
 const Home = lazy(() => import('./pages/Home'));
 const Search = lazy(() => import('./pages/Search'));
@@ -38,6 +37,7 @@ const CreateArticle = lazy(() => import('./features/articles/CreateArticle'));
 const MyArticles = lazy(() => import('./features/articles/MyArticles'));
 const MyJobs = lazy(() => import('./features/jobs/MyJobs'));
 const UpdateArticle = lazy(() => import('./features/articles/UpdateArticle'));
+const ResetPassword = lazy(() => import('./features/auth/ResetPassword'));
 
 const router = createBrowserRouter([
   {
