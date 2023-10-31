@@ -10,8 +10,8 @@ const MyJobs = () => {
   if (isLoading) return <ItemSkeleton amount={5} />;
 
   return (
-    <>
-      <header className='flex justify-between mb-5'>
+    <main className='flex flex-col items-center'>
+      <header className='flex justify-between mb-5 w-full lg:w-[70vw] xl:w-[40vw]'>
         <h1 className='text-light-1 text-2xl'>Your jobs</h1>
         <Link
           to='/new'
@@ -22,13 +22,9 @@ const MyJobs = () => {
         </Link>
       </header>
       {myJobs.count > 0 ? (
-        <ul>
+        <ul className='w-full lg:w-[70vw] xl:w-[40vw]'>
           {myJobs.data.map(job => (
-            <MyJobCard
-              key={job._id}
-              id={job._id}
-              job={job}
-            />
+            <MyJobCard key={job._id} id={job._id} job={job} />
           ))}
         </ul>
       ) : (
@@ -36,7 +32,7 @@ const MyJobs = () => {
           You have no jobs. You can start creating new ones.
         </h1>
       )}
-    </>
+    </main>
   );
 };
 

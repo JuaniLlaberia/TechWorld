@@ -49,16 +49,10 @@ const Application = () => {
         We just need some extra information
       </h3>
       <InputWrapper label='Full name'>
-        <Input
-          disabled
-          register={register('name')}
-        />
+        <Input disabled register={register('name')} />
       </InputWrapper>
       <InputWrapper label='Email address'>
-        <Input
-          disabled
-          register={register('email')}
-        />
+        <Input disabled register={register('email')} />
       </InputWrapper>
       <InputWrapper label='Reference URL'>
         <Input
@@ -81,7 +75,7 @@ const Application = () => {
         <span>
           <HiOutlineArrowUpTray size={25} />
         </span>
-        Upload your curriculum (CV)
+        Upload your resume (CV)
       </label>
       <input
         {...register('cv')}
@@ -92,10 +86,7 @@ const Application = () => {
         className='hidden'
       />
       <div className='flex justify-end mt-6'>
-        <Button
-          disabled={!isValid}
-          full={true}
-        >
+        <Button disabled={!isValid} full={true}>
           {isLoading ? 'Sending...' : 'Send'}
         </Button>
       </div>

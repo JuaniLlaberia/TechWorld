@@ -3,8 +3,8 @@ import { HiOutlinePencilSquare } from 'react-icons/hi2';
 
 const MyArticles = () => {
   return (
-    <>
-      <header className='flex justify-between mb-3'>
+    <main className='flex flex-col items-center'>
+      <header className='flex justify-between mb-3 w-full lg:w-[70vw] xl:w-[40vw]'>
         <h1 className='text-light-1 text-2xl'>Your articles</h1>
         <Link
           to='/articles/new'
@@ -15,7 +15,7 @@ const MyArticles = () => {
       </header>
 
       <section
-        className='text-light-3 flex gap-8 border-b border-dark-1-border py-3 mb-4 xl:py-4'
+        className='text-light-3 w-full lg:w-[70vw] xl:w-[40vw] flex gap-8 border-b border-dark-1-border py-3 mb-4 xl:py-4'
         id='articles-nav'
       >
         <NavLink
@@ -32,7 +32,7 @@ const MyArticles = () => {
         </NavLink>
       </section>
       <Outlet />
-    </>
+    </main>
   );
 };
 

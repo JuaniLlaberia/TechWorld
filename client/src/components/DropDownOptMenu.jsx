@@ -50,10 +50,7 @@ const Opener = ({ opensId }) => {
   const { openMenu } = useContext(DropDownContext);
 
   return (
-    <button
-      onClick={() => openMenu(opensId)}
-      className='text-light-2 text-2xl'
-    >
+    <button onClick={() => openMenu(opensId)} className='text-light-2 text-2xl'>
       <HiOutlineEllipsisVertical />
     </button>
   );
@@ -70,7 +67,7 @@ const Item = ({ children, icon, onClick }) => {
   return (
     <li
       onClick={handleClick}
-      className='flex items-center gap-2'
+      className='flex items-center gap-2 hover:cursor-pointer'
     >
       <span className='text-lg text-secondary-1'>{icon}</span>
       <span className='text-light-1'>{children}</span>

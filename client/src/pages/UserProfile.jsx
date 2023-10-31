@@ -29,7 +29,7 @@ const UserProfile = () => {
         <Card position='horizontal'>
           <img
             src={image}
-            className='rounded-full w-24 h-24 bg-light-3 lg:w-36'
+            className='rounded-full w-24 h-24 bg-light-3 lg:w-36 lg:h-36'
             alt='profile picture'
           />
           <div>
