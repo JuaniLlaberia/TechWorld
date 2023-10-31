@@ -9,6 +9,7 @@ import {
   LuAlignVerticalJustifyCenter,
 } from 'react-icons/lu';
 import ToolbarItem from './ToolbarItem';
+import { memo } from 'react';
 
 const ToolbarEditor = ({ editor }) => {
   return (
@@ -56,4 +57,4 @@ const ToolbarEditor = ({ editor }) => {
   );
 };
 
-export default ToolbarEditor;
+export default memo(ToolbarEditor);
