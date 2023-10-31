@@ -6,17 +6,14 @@ import { Suspense, lazy } from 'react';
 import AppLayout from './pages/AppLayout';
 import AuthLayout from './pages/AuthLayout';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
-import ProfilePosts from './features/users/ProfilePosts';
 import ProfileSaved from './features/users/ProfileSaved';
 import ProfileInfo from './features/users/ProfileInfo';
 import FullScreenLoader from './components/FullScreenLoader';
+import MyArticlesDraft from './features/articles/MyArticlesDraft';
+import MyArticlesPublic from './features/articles/MyArticlesPublic';
 import { AccountVerification } from './features/auth/AccountVerification';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ResetPassword } from './features/auth/ResetPassword';
-import ArticlePost from './pages/ArticlePost';
-import MyArticles from './features/articles/MyArticles';
-import MyArticlesDraft from './features/articles/MyArticlesDraft';
-import MyArticlesPublic from './features/articles/MyArticlesPublic';
 
 const Home = lazy(() => import('./pages/Home'));
 const Search = lazy(() => import('./pages/Search'));
@@ -26,6 +23,7 @@ const Apply = lazy(() => import('./pages/Apply'));
 const Articles = lazy(() => import('./pages/Articles'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
+const ArticlePost = lazy(() => import('./pages/ArticlePost'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const SearchJobs = lazy(() => import('./features/jobs/SearchJobs'));
 const SearchUsers = lazy(() => import('./features/users/SearchUsers'));
@@ -37,6 +35,9 @@ const ResendEmail = lazy(() => import('./features/auth/ResendEmail'));
 const ForgotPassword = lazy(() => import('./features/auth/ForgotPassword'));
 const ChangePassword = lazy(() => import('./features/auth/ChangePassword'));
 const CreateArticle = lazy(() => import('./features/articles/CreateArticle'));
+const MyArticles = lazy(() => import('./features/articles/MyArticles'));
+const MyJobs = lazy(() => import('./features/jobs/MyJobs'));
+const UpdateArticle = lazy(() => import('./features/articles/UpdateArticle'));
 
 const router = createBrowserRouter([
   {
@@ -105,11 +106,19 @@ const router = createBrowserRouter([
             element: <UserProfile />,
           },
           {
+            path: '/me/jobs',
+            element: <MyJobs />,
+          },
+          {
             element: <MyArticles />,
             children: [
               { path: '/me/articles/drafts', element: <MyArticlesDraft /> },
               { path: '/me/articles/published', element: <MyArticlesPublic /> },
             ],
+          },
+          {
+            path: '/me/articles/edit/:id',
+            element: <UpdateArticle />,
           },
         ],
       },
