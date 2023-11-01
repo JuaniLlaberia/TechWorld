@@ -50,7 +50,11 @@ const Opener = ({ opensId }) => {
   const { openMenu } = useContext(DropDownContext);
 
   return (
-    <button onClick={() => openMenu(opensId)} className='text-light-2 text-2xl'>
+    <button
+      aria-label='open'
+      onClick={() => openMenu(opensId)}
+      className='text-light-2 text-2xl'
+    >
       <HiOutlineEllipsisVertical />
     </button>
   );

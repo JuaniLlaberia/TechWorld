@@ -1,6 +1,5 @@
 import { createContext, useContext } from 'react';
 import { useGetMe } from '../features/users/useGetMe';
-import { ClipLoader } from 'react-spinners';
 import { createPortal } from 'react-dom';
 import FullScreenLoader from '../components/FullScreenLoader';
 
