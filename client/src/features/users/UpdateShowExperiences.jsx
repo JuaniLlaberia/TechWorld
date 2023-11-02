@@ -17,7 +17,6 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
   } = useForm();
   const [items, setItems] = useState(current);
 
-  //Handle state from custom calendar
   const [from, setFrom] = useState('');
   const [until, setUntil] = useState('');
 
@@ -36,7 +35,6 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
     updateProfile({ experience: items }, { onSuccess: () => onClose() });
   };
 
-  //RENDER LIST
   if (type === 'view')
     return (
       <>
@@ -54,7 +52,6 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
       </>
     );
 
-  //RENDER FORM
   if (type === 'form')
     return (
       <>
@@ -88,25 +85,18 @@ const UpdateShowExperiences = ({ onClose, current, type = 'view' }) => {
               })}
             />
           </InputWrapper>
-          <div className='md:grid md:grid-cols-2 md:gap-2'>
-            <InputWrapper error={errors?.from?.message} label='From' id='from'>
-              <Calendar
-                id='from'
-                handleChange={selected => setFrom(selected)}
-              />
-            </InputWrapper>
-            <InputWrapper
-              error={errors?.until?.message}
-              label='Until'
+
+          <InputWrapper error={errors?.from?.message} label='From' id='from'>
+            <Calendar id='from' handleChange={selected => setFrom(selected)} />
+          </InputWrapper>
+          <InputWrapper error={errors?.until?.message} label='Until' id='until'>
+            <Calendar
               id='until'
-            >
-              <Calendar
-                id='until'
-                handleChange={selected => setUntil(selected)}
-              />
-            </InputWrapper>
-          </div>
-          <p className='text-light-3 text-sm lg:text-lg'>
+              handleChange={selected => setUntil(selected)}
+            />
+          </InputWrapper>
+
+          <p className='text-light-3 text-sm mb-3 lg:text-lg'>
             (Empty 'Until' means present)
           </p>
           <InputWrapper

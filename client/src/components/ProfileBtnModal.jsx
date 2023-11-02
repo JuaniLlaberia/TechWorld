@@ -58,7 +58,7 @@ const ProfileBtnModal = ({ reference, onClose }) => {
   return (
     <ul
       ref={reference}
-      className='bg-dark-2 border border-dark-1-border w-48 2xl:w-52 shadow-sm shadow-light-3 absolute translate-y-[-120%] translate-x-[-67.5%] lg:translate-y-[-100%] lg:translate-x-[27.5%] 2xl:translate-x-[75%] py-4 rounded-md z-[1000] flex flex-col gap-2'
+      className='bg-dark-2 border border-dark-1-border w-48 2xl:w-52 shadow-sm shadow-light-3 absolute translate-y-[-120%] translate-x-[-67.5%] lg:translate-y-[-70%] lg:translate-x-[27.5%] 2xl:translate-x-[80%] py-4 rounded-md z-[1000] flex flex-col gap-2'
     >
       {items.map(item => (
         <React.Fragment key={item.text}>

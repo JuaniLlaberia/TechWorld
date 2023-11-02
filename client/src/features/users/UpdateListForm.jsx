@@ -36,6 +36,7 @@ const UpdateListForm = ({ onClose, current }) => {
           onChange={e => setItemToAdd(e.target.value)}
         />
         <button
+          aria-label='add'
           onClick={handleAddItem}
           className='bg-light-1 text-dark-1 rounded-md p-2.5 mt-1.5'
         >

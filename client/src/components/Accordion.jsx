@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from 'react';
+import { HiChevronDown, HiChevronUp } from 'react-icons/hi2';
+
 const AccordionContext = createContext();
 
 const Accordion = ({ children }) => {
@@ -23,7 +25,9 @@ const Opener = ({ title, opens }) => {
           className='w-full flex items-center justify-between px-1 py-1.5 text-dark-1 lg:p-3 lg:text-xl xl:text-2xl cursor-pointer'
         >
           <h2>{title}</h2>
-          <p>-</p>
+          <p>
+            <HiChevronUp />
+          </p>
         </div>
       ) : (
         <div
@@ -32,7 +36,9 @@ const Opener = ({ title, opens }) => {
           style={{ borderBottom: 'var(--border-sm)' }}
         >
           <h2>{title}</h2>
-          <p>+</p>
+          <p>
+            <HiChevronDown />
+          </p>
         </div>
       )}
     </>

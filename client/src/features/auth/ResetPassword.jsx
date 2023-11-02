@@ -6,7 +6,7 @@ import InputWrapper from '../../components/InputWrapper';
 import Button from '../../components/Button';
 import { useResetPassword } from './useResetPassword';
 
-export const ResetPassword = () => {
+const ResetPassword = () => {
   const {
     register,
     handleSubmit,
@@ -55,15 +55,10 @@ export const ResetPassword = () => {
         />
       </InputWrapper>
       <Button>
-        {isLoading ? (
-          <ClipLoader
-            size={17.5}
-            color='#1F1F1F'
-          />
-        ) : (
-          'Submit'
-        )}
+        {isLoading ? <ClipLoader size={17.5} color='#1F1F1F' /> : 'Submit'}
       </Button>
     </form>
   );
 };
+
+export default ResetPassword;

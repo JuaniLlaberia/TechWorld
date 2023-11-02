@@ -5,8 +5,6 @@ export const getArticles = async ({ searchQuery, page }) => {
 
   url = url + `page=${page}`;
 
-  console.log(url);
-
   const data = await fetch(url);
   return data.json();
 };

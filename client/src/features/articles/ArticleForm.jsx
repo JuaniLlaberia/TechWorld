@@ -41,7 +41,10 @@ const ArticleForm = ({ articleToEdit = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className='w-full lg:w-[70vw] xl:w-[40vw]'
+    >
       <InputWrapper label='Title'>
         <Input
           defaultValue={articleToEdit.title}

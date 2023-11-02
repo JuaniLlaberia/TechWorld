@@ -11,15 +11,9 @@ export const AccountVerification = () => {
 
   useEffect(() => {
     verify(token);
-  }, [token]);
+  }, [token, verify]);
 
-  if (isLoading)
-    return (
-      <ClipLoader
-        size={25}
-        color='white'
-      />
-    );
+  if (isLoading) return <ClipLoader size={25} color='white' />;
 
   if (error)
     return (
@@ -34,10 +28,7 @@ export const AccountVerification = () => {
           The token has expired or is invalid. Try to confirm the email again or
           resend it.
         </h2>
-        <Button
-          to='/'
-          as={<Link />}
-        >
+        <Button to='/' as={<Link />}>
           Resend email
         </Button>
       </section>

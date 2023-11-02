@@ -6,6 +6,7 @@ export const SkillItem = ({ el, handleRemoveItem }) => {
       {el}
       {handleRemoveItem ? (
         <button
+          aria-label='delete'
           className='bg-[#58575775] p-1 rounded-full'
           onClick={() => handleRemoveItem(el)}
         >

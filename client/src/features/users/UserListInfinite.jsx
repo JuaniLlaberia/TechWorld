@@ -14,7 +14,7 @@ const UserListInfinite = ({ queryData }) => {
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (status === 'loading') return <ItemSkeleton amount={5} />;
 
@@ -27,19 +27,13 @@ const UserListInfinite = ({ queryData }) => {
         {users?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.data.users.map(user => (
-              <UserItem
-                key={user._id}
-                item={user}
-              />
+              <UserItem key={user._id} item={user} />
             ))}
           </React.Fragment>
         ))}
         {isFetchingNextPage && (
           <div className='flex justify-center items-center'>
-            <ClipLoader
-              color='white'
-              size={30}
-            />
+            <ClipLoader color='white' size={30} />
           </div>
         )}
       </ul>
