@@ -1,12 +1,12 @@
 const ItemSkeleton = ({ amount }) => {
   return (
-    <ul className='mt-4 w-full max-w-[750px]'>
+    <ul className='mt-4 w-full'>
       {Array(amount)
         .fill(0)
         .map((_, i) => (
           <li
             key={i}
-            className='bg-dark-2 rounded-md p-4 w-full list-none mb-3'
+            className='bg-dark-2 rounded-md p-4 w-full list-none mb-3 h-32'
           >
             <div className='animate-pulse flex space-x-4'>
               <div className='rounded-full bg-[#464444] h-16 w-16'></div>
