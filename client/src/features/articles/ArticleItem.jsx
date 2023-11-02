@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDates';
+import Tag from '../../components/Tag';
 
 const ArticleItem = ({ article }) => {
   const { author, tag, title, _id, createdAt } = article;
@@ -26,9 +27,7 @@ const ArticleItem = ({ article }) => {
             {title}
           </h2>
           <ul className='py-1 mt-5 flex gap-3'>
-            <li className='bg-dark-2 py-1 px-3 rounded-xl text-sm text-light-2 lg:text-base'>
-              {tag}
-            </li>
+            <Tag>{tag}</Tag>
           </ul>
         </section>
       </Link>

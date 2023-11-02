@@ -1,7 +1,7 @@
 import ItemSkeleton from '../../components/ItemSkeleton';
 import JobItemLink from './JobItemLink';
 
-const JobPrevList = ({ jobs, isLoading, itemsLink }) => {
+const JobPrevList = ({ jobs, isLoading, itemsLink, tagBg }) => {
   if (isLoading) return <ItemSkeleton amount={5} />;
 
   if (jobs?.length === 0)
@@ -20,6 +20,7 @@ const JobPrevList = ({ jobs, isLoading, itemsLink }) => {
           item={job}
           key={job._id}
           link={itemsLink}
+          tagBg={tagBg}
         />
       ))}
     </ul>

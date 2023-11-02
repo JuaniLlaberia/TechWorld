@@ -11,6 +11,7 @@ const ProfileSaved = () => {
           jobs={jobs?.data?.savedPosts}
           isLoading={isLoading}
           itemsLink='/jobs?currentJobId='
+          tagBg='dark'
         />
       </section>
     </>

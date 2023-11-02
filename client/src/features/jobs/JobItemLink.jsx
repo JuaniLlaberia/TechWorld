@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import SavePost from '../../components/SavePost';
+import Tag from '../../components/Tag';
 
-const JobItemLink = ({ item, link }) => {
+const JobItemLink = ({ item, link, tagBg }) => {
   const { _id, name, user, location, workPlace, level, type } = item;
 
   return (
@@ -27,15 +28,9 @@ const JobItemLink = ({ item, link }) => {
             </h3>
           </div>
           <ul className='py-5 flex gap-3'>
-            <li className='bg-dark-2 py-1 px-3 rounded-xl text-sm text-light-2'>
-              {type}
-            </li>
-            <li className='bg-dark-2 py-1 px-3 rounded-xl text-sm text-light-2'>
-              {level}
-            </li>
-            <li className='bg-dark-2 py-1 px-3 rounded-xl text-sm text-light-2'>
-              {workPlace}
-            </li>
+            <Tag bg={tagBg}>{type}</Tag>
+            <Tag bg={tagBg}>{level}</Tag>
+            <Tag bg={tagBg}>{workPlace}</Tag>
           </ul>
           <h4 className='flex items-center gap-1 text-light-2 text-sm lg:text-base xl:text-lg'>
             <HiOutlineMapPin size={20} />
