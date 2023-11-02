@@ -40,9 +40,9 @@ const Body = ({ children, title, windowName }) => {
   return createPortal(
     <>
       <div
-        className={`fixed z-50 bottom-0 left-[50%] translate-x-[-50%] p-3 pt-4 bg-light-1 w-full rounded-t-lg ${
+        className={`fixed z-[100] bottom-0 left-[50%] translate-x-[-50%] p-3 pt-4 bg-light-1 w-full rounded-t-lg ${
           isOpen === windowName ? 'translate-y-0' : 'translate-y-full'
-        } transition-all ease-in-out duration-300 max-w-[1024px]`}
+        } transition-all ease-in-out duration-300 max-w-[800px]`}
       >
         <h1 className='text-lg font-semibold lg:text-2xl'>{title}</h1>
         {cloneElement(children, { onClose: close })}
@@ -55,7 +55,7 @@ const Body = ({ children, title, windowName }) => {
       {isOpen === windowName ? (
         <div
           onClick={close}
-          className='fixed top-0 left-0 h-full w-full bg-[#5f5d5d34] backdrop-blur-[1.5px]'
+          className='fixed top-0 z-50 left-0 h-full w-full bg-[#5f5d5d34] backdrop-blur-[1.5px]'
         ></div>
       ) : (
         ''

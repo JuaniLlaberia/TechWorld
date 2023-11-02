@@ -4,18 +4,18 @@ import Drawer from '../../components/Drawer';
 import JobFilters from './JobFilters';
 
 export const JobListInfo = ({ children }) => {
-  return <main className='flex md:px-8'>{children}</main>;
+  return <main className='flex md:px-6 lg:px-0'>{children}</main>;
 };
 
 const Page = ({ children }) => {
-  return <main className='flex md:px-8'>{children}</main>;
+  return <>{children}</>;
 };
 
 const ListHead = ({ title, subTitle }) => {
   return (
     <header className='bg-secondary-1 py-2 px-4 rounded-md md:rounded-none md:rounded-tl flex items-center justify-between'>
       <div>
-        <h1 className='text-light-1 text-xl font-semibold xl:text-3xl'>
+        <h1 className='text-light-1 text-xl font-semibold xl:text-2xl'>
           {title}
         </h1>
         <h2 className='text-light-2 mb-3 xl:text-lg'>{subTitle}</h2>
@@ -34,7 +34,7 @@ const ListHead = ({ title, subTitle }) => {
 
 const List = ({ children }) => {
   return (
-    <section className='bg-dark-2 w-full md:w-[50vw] lg:max-w-[450px] rounded-bl-md md:border-r md:border-dark-1-border'>
+    <section className='bg-dark-2 w-full lg:max-w-[550px] rounded-bl-md md:border-r md:border-dark-1-border'>
       {children}
     </section>
   );

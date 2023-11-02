@@ -14,7 +14,7 @@ export const ArticlePostItem = () => {
 
   return (
     <>
-      <header className='w-full lg:w-[70vw] xl:w-[40vw]'>
+      <header>
         <BackBtn />
         <h1 className='text-light-1 text-3xl xl:text-4xl font-semibold py-1 my-5 xl:mb-8'>
           {title}

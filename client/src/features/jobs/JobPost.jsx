@@ -36,14 +36,14 @@ export const JobPost = () => {
   } = job.data.job;
 
   return (
-    <section className='p-2 md:rounded-r-md'>
+    <section className='p-2 md:rounded-r-md w-full lg:w-[40vw] xl:w-[25vw]'>
       <button
         className='text-light-1 block pb-2 bg-transparent md:hidden'
         onClick={handleClose}
       >
         <HiOutlineArrowLeft size={25} />
       </button>
-      <section className='py-2 px-4 rounded-md overflow-y-scroll pb-32 h-[100vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1 md:h-[90vh] md:pb-2'>
+      <section className='py-2 px-2 rounded-md overflow-y-scroll pb-32 h-[100vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1 md:h-[90vh] md:pb-2'>
         <h1 className='text-light-1 text-2xl font-semibold mb-1 xl:text-4xl'>
           {name}
         </h1>
@@ -68,7 +68,7 @@ export const JobPost = () => {
         <div className='flex justify-end items-center gap-3 my-3 mt-6'>
           <Link
             to={applicationUs ? `/apply/${_id}` : companyUrl}
-            className='bg-light-1 text-dark-1 py-1 px-4 rounded-md font-semibold lg:text-xl lg:py-2 lg:px-6'
+            className='bg-light-1 text-dark-1 py-1 px-4 rounded-md font-semibold lg:py-2 lg:px-6'
           >
             {applicationUs ? (
               'Apply now'

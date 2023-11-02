@@ -4,7 +4,7 @@ import Navigation from '../components/Navigation';
 const AppLayout = () => {
   return (
     <div className='bg-dark-1 min-h-[100vh] flex justify-center'>
-      <main className='px-4 pt-2 lg:ml-24 2xl:ml-64 max-w-[1500px] w-[100vw]'>
+      <main className='pt-2 px-2 lg:ml-24 2xl:ml-48 lg:px-0 w-full lg:w-[72.5vw] xl:w-[60vw] 2xl:w-[45vw]'>
         <Outlet />
       </main>
       <Navigation />

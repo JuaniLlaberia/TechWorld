@@ -39,7 +39,7 @@ const Application = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full lg:w-[40vw] lg:mt-3'
+      className='lg:mt-3  mb-20 lg:mb-2'
       encType='multipart/form-data'
     >
       <h1 className='text-light-1 text-3xl lg:text-4xl 2xl:text-5xl'>

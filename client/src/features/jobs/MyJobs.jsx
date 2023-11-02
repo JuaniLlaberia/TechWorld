@@ -11,14 +11,14 @@ const MyJobs = () => {
 
   return (
     <>
-      <header className='flex justify-between mb-5'>
-        <h1 className='text-light-1 text-2xl'>Your jobs</h1>
+      <header className='flex justify-between mb-5 mt-2'>
+        <h1 className='text-light-1 text-2xl xl:text-4xl'>Your jobs</h1>
         <Link
           to='/new'
           className='flex items-center text-light-1 gap-1 bg-secondary-1 border border-dark-1-border rounded-md py-1 px-3 text-xl'
         >
           <HiOutlinePlus />
-          <span className='text-base'>New</span>
+          <span className='text-base lg:text-lg xl:text-xl'>New</span>
         </Link>
       </header>
       {myJobs.count > 0 ? (

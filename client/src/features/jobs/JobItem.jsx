@@ -14,7 +14,7 @@ const JobItem = ({ item }) => {
   return (
     <li
       onClick={handleClick}
-      className={`relative border-b-[1px] text-light-1 flex flex-col gap-4 w-full px-3 py-4 border-dark-1-border hover:cursor-pointer xl:py-5 xl:px-6 ${
+      className={`relative border-b text-light-1 flex flex-col gap-4 w-full px-3 py-4 border-dark-1-border hover:cursor-pointer xl:py-5 xl:px-6 ${
         searchParams.get('currentJobId') === _id ? 'md:bg-[#3d3c3c69]' : ''
       }`}
     >
@@ -22,7 +22,7 @@ const JobItem = ({ item }) => {
         <h3 className='text-lg font-semibold break-keep lg:text-xl 2xl:text-[1.35rem] line-clamp-1 hover:underline'>
           {name}
         </h3>
-        <h4 className='flex items-center gap-1 py-1 text-light-2 text-sm lg:text-base xl:text-lg'>
+        <h4 className='flex items-center gap-1 py-1 text-light-2 text-sm lg:text-base'>
           <span>
             <HiOutlineMapPin size={20} />
           </span>

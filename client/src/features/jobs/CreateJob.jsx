@@ -28,7 +28,7 @@ const CreateJob = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='pt-1 pb-24 rounded-md mt-2 w-full lg:pb-10 lg:w-[40vw]'
+      className='pt-1 pb-24 mt-2 lg:pb-10'
     >
       <h1 className='text-light-1 text-4xl mt-2 lg:text-5xl'>
         Let's set up a{' '}
