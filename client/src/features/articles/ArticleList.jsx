@@ -15,36 +15,25 @@ const ArticleList = () => {
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (status === 'loading') return <ItemSkeleton amount={5} />;
   if (articles.pages[0].pages === 0)
     return <h1 className='text-light-2 text-center'>No articles found</h1>;
 
   return (
-    <ul className='mb-16 w-full lg:w-[70vw] xl:w-[40vw]'>
+    <ul className='mb-16'>
       {articles?.pages.map((page, i) => (
         <React.Fragment key={i}>
           {page.data.articles.map(article => (
-            <ArticleItem
-              article={article}
-              key={article._id}
-            />
+            <ArticleItem article={article} key={article._id} />
           ))}
         </React.Fragment>
       ))}
-      {hasNextPage && (
-        <li
-          ref={ref}
-          className='h-1'
-        ></li>
-      )}
+      {hasNextPage && <li ref={ref} className='h-1'></li>}
       {isFetchingNextPage && (
         <li className='flex justify-center items-center'>
-          <ClipLoader
-            color='white'
-            size={30}
-          />
+          <ClipLoader color='white' size={30} />
         </li>
       )}
     </ul>

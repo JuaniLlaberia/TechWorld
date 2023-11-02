@@ -15,7 +15,7 @@ const options = {
     icons: 'dark:bg-transparent dark:text-lg',
     disabledText: 'dark:text-[#afaeae4b]',
     input:
-      'py-2 h-10 2xl:h-14 text-base dark:bg-transparent dark:border dark:border-light-3 dark:placeholder:text-light-2 dark:focus:outline dark:focus:outline-light-1 dark:focus:outline-1',
+      'py-2 h-10 2xl:h-14 mb-2 text-base dark:bg-transparent dark:border dark:border-light-3 dark:placeholder:text-light-2 dark:focus:outline dark:focus:outline-light-1 dark:focus:outline-1',
     inputIcon: 'dark:text-light-3',
     selected: 'bg-[#db4dff]',
   },
@@ -31,7 +31,7 @@ const options = {
       </span>
     ),
   },
-  datepickerClassNames: 'top-[-300%] left-[50%] translate-x-[-50%]',
+  datepickerClassNames: 'top-[10%] left-[50%] translate-x-[-50%]',
   defaultDate: false,
   language: 'en',
 };

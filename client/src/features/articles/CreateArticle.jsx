@@ -5,9 +5,7 @@ const CreateArticle = () => {
   return (
     <>
       <BackBtn />
-      <section className='flex flex-col items-center'>
-        <ArticleForm />
-      </section>
+      <ArticleForm />
     </>
   );
 };

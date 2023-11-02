@@ -40,34 +40,46 @@ const LoginForm = () => {
           register={register('email', { required: 'Must provide email' })}
         />
       </InputWrapper>
-      <InputWrapper
-        label='Password'
-        error={errors.password?.message}
-        id='password'
-      >
+      <div className='relative'>
+        <InputWrapper
+          label='Password'
+          error={errors.password?.message}
+          id='password'
+        >
+          <Input
+            autoComplete='on'
+            type='password'
+            id='password'
+            register={register('password', {
+              required: 'Must provide password',
+            })}
+          />
+        </InputWrapper>
         <Link
-          className='text-secondary-1 mt-2 xl:text-xl absolute top-[-5%] right-2'
+          className='text-secondary-1 mt-2 xl:text-xl absolute top-[-7.5%] right-1'
           to='/forgot-password'
         >
           Forgot?
         </Link>
-        <Input
-          autoComplete='on'
-          type='password'
-          id='password'
-          register={register('password', {
-            required: 'Must provide password',
-          })}
-        />
-      </InputWrapper>
+      </div>
       <br />
       <Button>
-        {isLoading ? <ClipLoader size={17.5} color='#1F1F1F' /> : 'Log In'}
+        {isLoading ? (
+          <ClipLoader
+            size={17.5}
+            color='#1F1F1F'
+          />
+        ) : (
+          'Log In'
+        )}
       </Button>
 
       <p className='text-light-3 text-center mt-2 xl:text-xl'>
         Dont't have an account?{' '}
-        <Link to='/signup' className='text-secondary-1 font-semibold underline'>
+        <Link
+          to='/signup'
+          className='text-secondary-1 font-semibold underline'
+        >
           Click here
         </Link>
       </p>

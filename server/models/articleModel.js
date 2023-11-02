@@ -33,7 +33,6 @@ const articleSchema = new mongoose.Schema({
   },
 });
 
-//Perform cleaning => LEAVE IT IN THE BACK OR MOVE IT TO FRONT????
 articleSchema.pre('save', function (next) {
   if (this.content && typeof this.content === 'string') {
     const cleanContent = DOMPurify.sanitize(this.content);

@@ -12,10 +12,7 @@ const ProfileTabs = () => {
       >
         Information
       </NavLink>
-      <NavLink
-        to='me/saved'
-        className='relative px-2 xl:text-2xl xl:px-4'
-      >
+      <NavLink to='me/saved' className='relative px-2 xl:text-2xl xl:px-4'>
         Saved
       </NavLink>
     </section>

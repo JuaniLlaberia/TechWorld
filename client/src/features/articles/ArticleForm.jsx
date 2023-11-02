@@ -15,7 +15,6 @@ const ArticleForm = ({ articleToEdit = {} }) => {
   const titleRef = useRef();
   const tagRef = useRef();
 
-  //TEMP SOLUTION
   const [view, setView] = useState(false);
 
   const { createArticle, isCreating } = useCreateArticle();
@@ -65,7 +64,7 @@ const ArticleForm = ({ articleToEdit = {} }) => {
         handleContent={setContent}
       />
 
-      <section className='mb-24 flex flex-col md:flex-row md:justify-end gap-3 border-t border-dark-1-border pt-3'>
+      <section className='mb-24 lg:mb-3 flex flex-col md:flex-row md:justify-end gap-3 border-t border-dark-1-border pt-3'>
         <Button
           onClick={() => setView(false)}
           disabled={isCreating || isLoading}

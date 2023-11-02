@@ -18,42 +18,31 @@ const JobsInfinite = ({ queryData }) => {
 
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage && inView) fetchNextPage();
-  }, [inView]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (data?.pages[0].count < 1) return <NoJobsCard link='/jobs/all' />;
   if (status === 'loading') return <ItemSkeleton amount={5} />;
 
   return (
     <>
-      <h2 className='px-3 pt-3 text-light-2'>
+      <h2 className='px-3 py-3 text-light-2'>
         Found {queryData.data?.pages[0].count} results
       </h2>
       <ul
-        className='overflow-y-scroll h-[75vh] md:h-[87.5vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1'
+        className='overflow-y-scroll overflow-x-hidden h-[72.5vh] lg:h-[85.5vh] scrollbar-thin scrollbar-thumb-light-2 scrollbar-track-transparent hover:scrollbar-thumb-light-1'
         ref={listRef}
       >
         {data?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.data.jobs.map(job => (
-              <JobItem
-                key={job._id}
-                item={job}
-              />
+              <JobItem key={job._id} item={job} />
             ))}
           </React.Fragment>
         ))}
-        {hasNextPage && (
-          <li
-            ref={ref}
-            className='h-1'
-          ></li>
-        )}
+        {hasNextPage && <li ref={ref} className='h-1'></li>}
         {isFetchingNextPage && (
           <li className='flex justify-center items-center'>
-            <ClipLoader
-              color='white'
-              size={30}
-            />
+            <ClipLoader color='white' size={30} />
           </li>
         )}
       </ul>

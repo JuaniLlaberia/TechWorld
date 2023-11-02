@@ -18,17 +18,13 @@ const MyJobs = () => {
           className='flex items-center text-light-1 gap-1 bg-secondary-1 border border-dark-1-border rounded-md py-1 px-3 text-xl'
         >
           <HiOutlinePlus />
-          <span className='text-base'>New</span>
+          <span className='text-base lg:text-lg xl:text-xl'>New</span>
         </Link>
       </header>
       {myJobs.count > 0 ? (
-        <ul>
+        <ul className='w-full lg:w-[70vw] xl:w-[40vw]'>
           {myJobs.data.map(job => (
-            <MyJobCard
-              key={job._id}
-              id={job._id}
-              job={job}
-            />
+            <MyJobCard key={job._id} id={job._id} job={job} />
           ))}
         </ul>
       ) : (
@@ -36,7 +32,7 @@ const MyJobs = () => {
           You have no jobs. You can start creating new ones.
         </h1>
       )}
-    </>
+    </main>
   );
 };
 
