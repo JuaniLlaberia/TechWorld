@@ -27,6 +27,7 @@ module.exports = class Email {
       });
     } else {
       return nodemailer.createTransport({
+        name: 'techworld@noreply.com',
         host: process.env.BREVO_HOST,
         port: process.env.BREVO_PORT,
         auth: {
