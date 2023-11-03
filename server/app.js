@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use(
   cors({
-    // origin: 'https://techworld-jobs.vercel.app',
-    origin: 'http://localhost:5173',
+    origin: 'https://techworld-jobs.vercel.app',
+    // origin: 'http://localhost:5173',
     credentials: true,
   })
 );
