@@ -58,9 +58,21 @@ module.exports = class Email {
 
     //Send email
 
-    const transporter = this.newTransporter();
+    const send = () => {
+      return new Promise((resolve, reject) => {
+        const transporter = this.newTransporter();
 
-    transporter.sendMail(emailOptions);
+        transporter.sendMail(emailOptions, (error, info) => {
+          if (error) {
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+        });
+      });
+    };
+
+    await send();
   }
 
   verifyAccount() {
