@@ -11,7 +11,7 @@ module.exports = class Email {
     this.url = url;
     this.file = file;
     this.hasFile = file?.lenght > 0;
-    this.from = 'Jobs-App <juanillaberiayt@gmail.com>';
+    this.from = 'Tech World <techworld@noreply.com>';
   }
 
   //Create transporter
