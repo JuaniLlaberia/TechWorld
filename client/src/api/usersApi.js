@@ -1,5 +1,5 @@
 export const getMe = async () => {
-  const data = await fetch('https://techworld-jobs.vercel.app/api/users/me', {
+  const data = await fetch('https://job-app-api-ten.vercel.app/api/users/me', {
     method: 'GET',
     credentials: 'include',
   });
@@ -29,7 +29,7 @@ export const updateMe = async newData => {
   };
 
   const data = await fetch(
-    'https://techworld-jobs.vercel.app/api/users/update-me',
+    'https://job-app-api-ten.vercel.app/api/users/update-me',
     isFormData ? optionsRegular : optionsWithImage
   );
 
@@ -38,7 +38,7 @@ export const updateMe = async newData => {
 
 export const getUser = async id => {
   const data = await fetch(
-    `https://techworld-jobs.vercel.app/api/users/${id}`,
+    `https://job-app-api-ten.vercel.app/api/users/${id}`,
     {
       credentials: 'include',
     }
@@ -48,7 +48,7 @@ export const getUser = async id => {
 
 export const getUsersByProfession = async ({ profession, limit, page }) => {
   const data = await fetch(
-    `https://techworld-jobs.vercel.app/api/users?search=${profession}&limit=${limit}&page=${page}`,
+    `https://job-app-api-ten.vercel.app/api/users?search=${profession}&limit=${limit}&page=${page}`,
     { credentials: 'include' }
   );
   return data.json();
@@ -56,7 +56,7 @@ export const getUsersByProfession = async ({ profession, limit, page }) => {
 
 export const getMySaved = async () => {
   const data = await fetch(
-    'https://techworld-jobs.vercel.app/api/users/saved-posts',
+    'https://job-app-api-ten.vercel.app/api/users/saved-posts',
     {
       credentials: 'include',
     }

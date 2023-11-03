@@ -1,5 +1,5 @@
 export const getArticles = async ({ searchQuery, page }) => {
-  let url = 'https://techworld-jobs.vercel.app/api/articles?';
+  let url = 'https://job-app-api-ten.vercel.app/api/articles?';
 
   if (searchQuery) url = url + `search=${searchQuery}&`;
 
@@ -11,14 +11,14 @@ export const getArticles = async ({ searchQuery, page }) => {
 
 export const getArticle = async id => {
   const data = await fetch(
-    `https://techworld-jobs.vercel.app/api/articles/${id}`
+    `https://job-app-api-ten.vercel.app/api/articles/${id}`
   );
   return data.json();
 };
 
 export const createArticle = async body => {
   const response = await fetch(
-    'https://techworld-jobs.vercel.app/api/articles',
+    'https://job-app-api-ten.vercel.app/api/articles',
     {
       method: 'POST',
       credentials: 'include',
@@ -38,7 +38,7 @@ export const createArticle = async body => {
 
 export const getMyArticles = async published => {
   const data = await fetch(
-    `https://techworld-jobs.vercel.app/api/articles/my-articles?type=${published}`,
+    `https://job-app-api-ten.vercel.app/api/articles/my-articles?type=${published}`,
     {
       credentials: 'include',
     }
@@ -48,7 +48,7 @@ export const getMyArticles = async published => {
 
 export const deleteArticle = async id => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/articles/${id}`,
+    `https://job-app-api-ten.vercel.app/api/articles/${id}`,
     {
       method: 'DELETE',
       credentials: 'include',
@@ -63,7 +63,7 @@ export const deleteArticle = async id => {
 
 export const updateArticle = async ({ id, newObj }) => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/articles/${id}`,
+    `https://job-app-api-ten.vercel.app/api/articles/${id}`,
     {
       method: 'PATCH',
       credentials: 'include',

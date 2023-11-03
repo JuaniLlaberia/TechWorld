@@ -1,6 +1,6 @@
 export const login = async (email, password) => {
   const response = await fetch(
-    'https://techworld-jobs.vercel.app/api/users/login',
+    'https://job-app-api-ten.vercel.app/api/users/login',
     {
       method: 'POST',
       credentials: 'include',
@@ -21,7 +21,7 @@ export const login = async (email, password) => {
 
 export const signup = async values => {
   const response = await fetch(
-    'https://techworld-jobs.vercel.app/api/users/signup',
+    'https://job-app-api-ten.vercel.app/api/users/signup',
     {
       method: 'POST',
       headers: {
@@ -37,7 +37,7 @@ export const signup = async values => {
 
 export const forgotPassword = async email => {
   const response = await fetch(
-    'https://techworld-jobs.vercel.app/api/users/forgot-password',
+    'https://job-app-api-ten.vercel.app/api/users/forgot-password',
     {
       method: 'POST',
       headers: {
@@ -53,7 +53,7 @@ export const forgotPassword = async email => {
 
 export const resetPassword = async (password, passwordConfirm, token) => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/users/reset-password/${token}`,
+    `https://job-app-api-ten.vercel.app/api/users/reset-password/${token}`,
     {
       method: 'POST',
       headers: {
@@ -69,7 +69,7 @@ export const resetPassword = async (password, passwordConfirm, token) => {
 
 export const resendConfEmail = async email => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/users/resend-token`,
+    `https://job-app-api-ten.vercel.app/api/users/resend-token`,
     {
       method: 'POST',
       headers: {
@@ -85,7 +85,7 @@ export const resendConfEmail = async email => {
 
 export const verifyEmail = async token => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/users/verify/${token}`,
+    `https://job-app-api-ten.vercel.app/api/users/verify/${token}`,
     {
       method: 'POST',
       credentials: 'include',
@@ -100,7 +100,7 @@ export const verifyEmail = async token => {
 
 export const logout = async () => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/users/logout`,
+    `https://job-app-api-ten.vercel.app/api/users/logout`,
     {
       method: 'POST',
       credentials: 'include',
@@ -113,7 +113,7 @@ export const logout = async () => {
 
 export const changepassword = async body => {
   const response = await fetch(
-    `https://techworld-jobs.vercel.app/api/users/update-my-password`,
+    `https://job-app-api-ten.vercel.app/api/users/update-my-password`,
     {
       method: 'PATCH',
       credentials: 'include',
