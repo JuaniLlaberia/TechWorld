@@ -34,6 +34,7 @@ module.exports = class Email {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
+        secure: true,
       });
     }
   }
@@ -56,7 +57,7 @@ module.exports = class Email {
     };
 
     //Send email
-    this.newTransporter().sendMail(emailOptions, err => console.log(err));
+    await this.newTransporter().sendMail(emailOptions);
   }
 
   verifyAccount() {
