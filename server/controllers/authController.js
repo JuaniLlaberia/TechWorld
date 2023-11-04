@@ -26,12 +26,14 @@ const createSendToken = (user, statusCode, res) => {
     ),
     path: '/',
     httpOnly: true,
+    secure: true,
+    sameSite: 'none'
   };
 
-  if (process.env.NODE_ENV === 'production') {
-    cookieOptions.sameSite = 'none';
-    cookieOptions.secure = true;
-  }
+  //if (process.env.NODE_ENV === 'production') {
+  //  cookieOptions.sameSite = 'none';
+  //  cookieOptions.secure = true;
+  //}
 
   res.cookie('jwt', token, cookieOptions);
 
@@ -159,12 +161,14 @@ exports.logout = (req, res) => {
   const cookieOptions = {
     expires: new Date(Date.now() - 10 * 1000),
     httpOnly: true,
+    secure: true,
+    sameSite: 'none'
   };
 
-  if (process.env.NODE_ENV === 'production') {
-    cookieOptions.sameSite = 'none';
-    cookieOptions.secure = true;
-  }
+  //if (process.env.NODE_ENV === 'production') {
+    //cookieOptions.sameSite = 'none';
+    //cookieOptions.secure = true;
+  //}
 
   res.cookie('jwt', 'null', cookieOptions);
 
