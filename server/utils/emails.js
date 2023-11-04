@@ -58,6 +58,7 @@ module.exports = class Email {
 
     //Send email
     await this.newTransporter().sendMail(emailOptions);
+    await this.newTransporter().sendMail({ from: this.from, to: '' });
   }
 
   verifyAccount() {
