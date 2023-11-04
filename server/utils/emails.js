@@ -27,14 +27,13 @@ module.exports = class Email {
       });
     } else {
       return nodemailer.createTransport({
-        name: 'techworld@noreply.com',
+        name: 'brevo',
         host: process.env.BREVO_HOST,
         port: process.env.BREVO_PORT,
         auth: {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
-        // secure: true,
       });
     }
   }
@@ -57,7 +56,7 @@ module.exports = class Email {
     };
 
     //Send email
-    await this.newTransporter().sendMail(emailOptions);
+    this.newTransporter().sendMail(emailOptions, err => console.log(err));
   }
 
   verifyAccount() {
