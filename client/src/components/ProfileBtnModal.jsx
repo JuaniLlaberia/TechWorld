@@ -84,12 +84,13 @@ const ProfileBtnModal = ({ reference, onClose }) => {
           close();
           logout();
         }}
-        className='flex items-center gap-3.5 text-secondary-1 px-6 text-2xl 2xl:text-3xl'
       >
-        <HiOutlineArrowRightOnRectangle />
-        <span className='text-light-1 text-base 2xl:text-lg'>
-          {isLoading ? 'Logging out' : 'Log out'}
-        </span>
+        <button className='flex items-center gap-3.5 text-secondary-1 px-6 text-2xl 2xl:text-3xl'>
+          <HiOutlineArrowRightOnRectangle />
+          <span className='text-light-1 text-base 2xl:text-lg'>
+            {isLoading ? 'Logging out' : 'Log out'}
+          </span>
+        </button>
       </li>
     </ul>
   );
