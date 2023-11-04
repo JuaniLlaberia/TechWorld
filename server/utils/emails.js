@@ -56,6 +56,7 @@ module.exports = class Email {
     };
 
     //Send email
+
     await this.newTransporter().sendMail(emailOptions);
   }
 
