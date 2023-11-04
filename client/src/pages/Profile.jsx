@@ -16,7 +16,7 @@ const Profile = () => {
   const { fullName, profession, location, image } = user.data || user;
 
   return (
-    <section className='pb-16 md:pb-2'>
+    <section className='pb-20 lg:pb-2'>
       <Modal>
         <Card position='horizontal'>
           <img

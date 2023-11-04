@@ -19,7 +19,9 @@ const ArticleList = () => {
 
   if (status === 'loading') return <ItemSkeleton amount={5} />;
   if (articles.pages[0].pages === 0)
-    return <h1 className='text-light-2 text-center'>No articles found</h1>;
+    return (
+      <h1 className='text-light-2 text-center xl:text-xl'>No articles found</h1>
+    );
 
   return (
     <ul className='mb-16'>

@@ -21,10 +21,7 @@ const ListHead = ({ title, subTitle }) => {
         <h2 className='text-light-2 mb-3 xl:text-lg'>{subTitle}</h2>
       </div>
       <FilterBtn>
-        <Drawer.Body
-          title='Filter & Sort'
-          windowName='filters-jobs'
-        >
+        <Drawer.Body title='Filter & Sort' windowName='filters-jobs'>
           <JobFilters />
         </Drawer.Body>
       </FilterBtn>

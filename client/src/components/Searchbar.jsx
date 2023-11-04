@@ -16,12 +16,9 @@ export const Searchbar = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className='relative flex justify-center items-center mb-6 w-full h-10 lg:w-auto lg:min-w-[600px] lg:py-4 lg:h-14 lg:mt-2'
+      className='relative flex justify-center items-center mb-6 w-full h-10 lg:w-auto lg:min-w-[500px] lg:py-4 lg:h-14 lg:mt-2'
     >
-      <label
-        className='absolute text-light-3 left-4'
-        htmlFor='searchbar'
-      >
+      <label className='absolute text-light-3 left-4' htmlFor='searchbar'>
         <HiOutlineMagnifyingGlass size={25} />
       </label>
       <input
