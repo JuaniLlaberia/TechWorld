@@ -16,6 +16,7 @@ Using the famous MERN tack I developed TechWorld, a job searching web applicatio
 ### Data Storage
  - All user and jobs data is store in our MongoDB database (atlas cloud service).
  - Data models with mongoose that include type check and validation to ensure that data is correct.
+ - Data pagination to boost performance.
  - Profile images are optimize before being uploaded to our cloud bucket.
  - The images are store in the **Firebase cloud storage** service.
 
@@ -31,6 +32,7 @@ Using the famous MERN tack I developed TechWorld, a job searching web applicatio
  - Implemented a variety of React design patterns for the development of this application (e.g. Compound components, render props, etc.).
  - Used a system based on **custom hooks** and **react query** to handle all client side async operation. 
  - Modern and responsive design using **Tailwind CSS**.
+ - Smooth infinite scrolling to handle API pagination in the client side.
 
 ## Technologies
 #### Front-End
