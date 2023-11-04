@@ -27,6 +27,11 @@ Using the famous MERN tack I developed TechWorld, a job searching web applicatio
  - Apply for jobs. Send your information and CV file to the employer just by submitting a form. The API handles the rest, validating data and sending everything via email to the job owner.
  - Create and publish your own jobs for everyone to see.
 
+### Front-End
+ - Implemented a variety of React design patterns for the development of this application (e.g. Compound components, render props, etc.).
+ - Used a system based on **custom hooks** and **react query** to handle all client side async operation. 
+ - Modern and responsive design using **Tailwind CSS**.
+
 ## Technologies
 #### Front-End
 ![React JS](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
