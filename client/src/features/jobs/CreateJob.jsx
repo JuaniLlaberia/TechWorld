@@ -30,7 +30,7 @@ const CreateJob = () => {
       onSubmit={handleSubmit(onSubmit)}
       className='pt-1 pb-24 mt-2 lg:pb-10'
     >
-      <h1 className='text-light-1 text-4xl mt-2 lg:text-5xl'>
+      <h1 className='text-light-1 text-4xl my-2 lg:text-5xl'>
         Let's set up a{' '}
         <span className='text-secondary-1 uppercase font-semibold'>job</span>{' '}
         offer
@@ -42,10 +42,7 @@ const CreateJob = () => {
         setIsChecked={setIsChecked}
       />
       <div className='flex justify-end mt-6'>
-        <Button
-          full={true}
-          disabled={isCreating || !isValid}
-        >
+        <Button full={true} disabled={isCreating || !isValid}>
           {isCreating ? <ClipLoader size={20} /> : 'Create job'}
         </Button>
       </div>

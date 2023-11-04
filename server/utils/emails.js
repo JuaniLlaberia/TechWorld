@@ -11,7 +11,7 @@ module.exports = class Email {
     this.url = url;
     this.file = file;
     this.hasFile = file?.lenght > 0;
-    this.from = 'Jobs-App <juanillaberiayt@gmail.com>';
+    this.from = 'Tech World <techworld@noreply.com>';
   }
 
   //Create transporter
@@ -27,13 +27,13 @@ module.exports = class Email {
       });
     } else {
       return nodemailer.createTransport({
+        name: 'brevo',
         host: process.env.BREVO_HOST,
         port: process.env.BREVO_PORT,
         auth: {
           user: process.env.BREVO_USERNAME,
           pass: process.env.BREVO_PASSWORD,
         },
-        // secure: true,
       });
     }
   }

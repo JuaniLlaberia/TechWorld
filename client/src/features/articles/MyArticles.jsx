@@ -33,7 +33,7 @@ const MyArticles = () => {
         </NavLink>
       </section>
       <Outlet />
-    </main>
+    </>
   );
 };
 

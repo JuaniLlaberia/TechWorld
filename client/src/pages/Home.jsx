@@ -5,7 +5,7 @@ import { Searchbar } from '../components/Searchbar';
 const Home = () => {
   return (
     <>
-      <section className='lg:flex lg:items-center lg:justify-between lg:mb-8'>
+      <section className='lg:flex lg:items-center lg:gap-7 lg:justify-between lg:mb-8'>
         <HomeHeader />
         <Searchbar />
       </section>

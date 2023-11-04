@@ -32,7 +32,7 @@ const MyJobs = () => {
           You have no jobs. You can start creating new ones.
         </h1>
       )}
-    </main>
+    </>
   );
 };
 
